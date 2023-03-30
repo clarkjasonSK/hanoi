@@ -1,53 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
 {
-    public static UIManager Instance;
-
-    [SerializeField] private Slider slider;
-    [SerializeField] private TextMeshProUGUI textRingCount;
-    [SerializeField] private TextMeshProUGUI txtMoveCount;
-
-    private int ringCount;
-    private int moveCount;
-
-    void Start()
+    #region Singleton Variables
+    private bool isDone = false;
+    public bool IsDoneInitializing
     {
-        Instance = this;
+        get { return isDone; }
+    }
+    #endregion
 
-        moveCount = 0;
-        slider.onValueChanged.AddListener((sliderChange) =>
-        {
-            ringCount = (int)sliderChange;
-            textRingCount.text = "Rings: " + sliderChange.ToString();
-        });
+    public void Initialize()
+    {
+        AddEventObservers();
 
-        txtMoveCount.text = "Moves: 0";
+        isDone = true;
     }
 
-    // Update is called once per frame
-    public void incrementCounter()
+    public void AddEventObservers()
     {
-        moveCount++;
-        txtMoveCount.text = "Moves: " + moveCount;
-    }
-    public void resetCounter()
-    {
-        moveCount = 0;
-        txtMoveCount.text = "Moves: " + moveCount;
+        EventBroadcaster.Instance.AddObserver(EventKeys.PLAY_PRESSED, OnPlayPressed);
     }
 
-    public void resetGame()
+    public void StartGame()
     {
-        // Debug.Log("sup " + ringCount);
-        resetCounter();
-        GameManager.Instance.setRingAmount(ringCount);
-        GameManager.Instance.resetGame();
+        EventBroadcaster.Instance.PostEvent(EventKeys.START_GAME, null);
     }
 
-    
+    #region Event Broadcaster Notifications
+    public void OnPlayPressed(EventParameters param)
+    {
+    }
+
+    #endregion
+
 }
