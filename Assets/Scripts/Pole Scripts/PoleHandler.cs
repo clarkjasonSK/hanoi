@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
+public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 {
-    #region Singleton Variables
+    #region ISingleton Variables
     private bool isDone = false;
     public bool IsDoneInitializing
     {
@@ -14,23 +14,27 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
 
     public void Initialize()
     {
+       
         AddEventObservers();
 
         isDone = true;
     }
-
     public void AddEventObservers()
     {
-       // EventBroadcaster.Instance.AddObserver(EventKeys.PLAY_PRESSED, OnPlayPressed);
+        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_PRESS, OnPolePress);
     }
 
 
     #region Event Broadcaster Notifications
-    public void OnPlayPressed(EventParameters param)
+
+    public void OnGameStart(EventParameters param = null)
     {
 
     }
+    public void OnPolePress(EventParameters param = null)
+    {
 
+    }
     #endregion
-
 }

@@ -62,11 +62,11 @@ public abstract class Singleton : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        _shutting_down = true;
+       // _shutting_down = true;
     }
 
     private void OnDestroy()
     {
-        _shutting_down = true;
+        //_shutting_down = true;
     }
 }

@@ -33,6 +33,15 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     }
     #endregion
 
+    [SerializeField] private GameValues _game_values;
+    public GameValues GameValues
+    {
+        get { return _game_values; }
+    }
+
+    [SerializeField] private GameData _game_data;
+    
+
     public void Initialize()
     {
         _game_state_handler = new StateHandler<GameState>();
@@ -45,19 +54,21 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     }
     public void AddEventObservers()
     {
-        EventBroadcaster.Instance.AddObserver(EventKeys.START_MENU, OnStartMenu);
+        EventBroadcaster.Instance.AddObserver(EventKeys.MENU_START, OnMenuStart);
+        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
+        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_PAUSE, OnGamePause);
     }
     
 
     #region Event Broadcaster Notifications
-    public void OnStartMenu(EventParameters param=null)
+    public void OnMenuStart(EventParameters param=null)
     {
         _game_state_handler.Initialize(GameState.MAIN_MENU);
     }
     public void OnGameStart(EventParameters param = null)
     {
         _game_state_handler.Initialize(GameState.INGAME);
-        SceneManager.LoadScene(SceneNames.GAME_SCENE);
+
 
     }
     public void OnGamePause(EventParameters param = null)

@@ -10,11 +10,15 @@ public class SceneBootup : MonoBehaviour, IBootstrapper
     }
     public void LoadSingletonsAndDependencies()
     {
+        RingHandler.Instance.Initialize();
+        PoleHandler.Instance.Initialize();
 
-        if (true)
+
+        if (RingHandler.Instance.IsDoneInitializing &&
+            PoleHandler.Instance.IsDoneInitializing)
         {
-            Debug.Log(SceneNames.GAME_SCENE + " initialized!");
-            //EventBroadcaster.Instance.PostEvent(EventKeys.START_GAME, null);
+            Debug.Log("Game Scene initialized!");
+            EventBroadcaster.Instance.PostEvent(EventKeys.GAME_START, null);
         }
     }
 }

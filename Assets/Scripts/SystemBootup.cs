@@ -16,8 +16,8 @@ public static class SystemBootup
             GameManager.Instance.IsDoneInitializing &&
             UIManager.Instance.IsDoneInitializing)
         {
-            Debug.Log(SceneNames.MAIN_MENU + " initialized!");
-            EventBroadcaster.Instance.PostEvent(EventKeys.START_MENU, null);
+            Debug.Log("System initialized!");
+            EventBroadcaster.Instance.PostEvent(EventKeys.MENU_START, null);
         }
     }
 
