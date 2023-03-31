@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class RingLifetime : MonoBehaviour
 {
-
     [SerializeField] ObjectPooling _obj_pool;
+    [SerializeField] List<GameObject> _ring_templates;
+    [SerializeField] Transform _ring_spawn_transform;
 
-    [SerializeField] GameObject _ring_a_template;
-    [SerializeField] GameObject _ring_b_template;
-    [SerializeField] GameObject _ring_c_template;
-    [SerializeField] GameObject _ring_d_template;
-    [SerializeField] GameObject _ring_e_template;
-    [SerializeField] GameObject _ring_f_template;
-    [SerializeField] GameObject _ring_g_template;
+    public Ring GetNewRing(int ringIndex)
+    {
+        _obj_pool.ObjectTransform = _ring_spawn_transform;
+        return getRing(_ring_templates[ringIndex]).GetComponent<Ring>();
+    }
 
+    private GameObject getRing(GameObject ringObject)
+    {
+        _obj_pool.ObjectTemplate = ringObject;
+
+        return _obj_pool.GameObjectPool.Get();
+    }
+
+    private void releaseRing(GameObject gameobject)
+    {
+        _obj_pool.GameObjectPool.Release(gameObject);
+    }
 }

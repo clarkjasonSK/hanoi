@@ -32,7 +32,7 @@ public class StateHandler<T>
         prevStateExit?.Invoke();*/
 
         _current_state = nextState;
-        Debug.Log("Current state: " + _current_state);
+        //Debug.Log("Current state: " + _current_state);
         /*
         if (_on_state_enter_default_action != null &&
             _on_state_enter_default_action.ContainsKey(_current_state))

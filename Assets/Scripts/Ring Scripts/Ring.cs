@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ring : Poolable
 {
+    [SerializeField] private GameValues _game_values;
+
     #region Ring Variables
     [SerializeField] private RingData _ring_data;
     [SerializeField] private RingController _ring_contrlr;
@@ -14,10 +16,32 @@ public class Ring : Poolable
 
     #endregion
 
-    [SerializeField] private GameValues _game_values;
+    void Start()
+    {
+        _ring_data.Reset();
+    }
 
+    public void FloatRing(float floatHeight)
+    {
+        _ring_contrlr.Reset();
+        _ring_data.RingStateHandler.SwitchState(RingState.FLOATING);
+        _ring_contrlr.StartFloating(floatHeight, _game_values.RingFloatSpeed);
 
-    private void Start()
+    }
+
+    public void MoveRing(float moveLocation)
+    {
+        _ring_contrlr.StartMoving(moveLocation, _game_values.RingTravelSpeed);
+    }
+
+    public void DropRing(float endLocation)
+    {
+        _ring_data.RingStateHandler.SwitchState(RingState.STACKED);
+        _ring_contrlr.StopMoving(endLocation);
+        _ring_contrlr.StopFloating();
+    }
+
+    public override void OnInstantiate()
     {
         if (_ring_data is null)
         {
@@ -34,18 +58,13 @@ public class Ring : Poolable
         }
     }
 
-    public override void OnInstantiate()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void OnActivate()
     {
-        throw new System.NotImplementedException();
+        transform.localPosition += new Vector3(0, (.5f * _ring_data.RingSize), 0);
     }
 
     public override void OnDeactivate()
     {
-        throw new System.NotImplementedException();
+        _ring_data.Reset();
     }
 }

@@ -40,12 +40,20 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     }
 
     [SerializeField] private GameData _game_data;
+    public int RingAmount
+    {
+        get { return _game_data.RingsAmount; }
+        set { _game_data.RingsAmount = value; }
+    }
     
 
     public void Initialize()
     {
         _game_state_handler = new StateHandler<GameState>();
         _game_state_handler.Initialize(GameState.PROGRAM_START);
+
+        _game_values = ScriptableObjectsHelper.GetSO<GameValues>(FileNames.GAME_VALUES);
+        _game_data = ScriptableObjectsHelper.GetSO<GameData>(FileNames.GAME_DATA);
 
         AddEventObservers();
 

@@ -32,9 +32,32 @@ public class Pole : Poolable
         }
         poleParams = new EventParameters();
         poleParams.AddParameter(EventParamKeys.SELECTED_POLE, this);
+
+        if(_pole_data.PolePosition == 1)
+        {
+            //_pole_data.AddRing(RingHandler.Get);
+        }
     }
 
-    private void OnMouseOver()
+    public void AddRingToPole(Ring ring)
+    {
+        _pole_data.AddRing(ring);
+    }
+
+    public Ring BorrowTopRing()
+    {
+        return _pole_data.TopRing;
+    }
+    public Ring RemoveTopRing()
+    {
+        return _pole_data.RemoveTopRing();
+    }
+    public int GetRingCount()
+    {
+        return _pole_data.StackCount;
+    }
+
+    private void OnMouseEnter()
     {
         if (_pole_data.IsHovering)
             return;

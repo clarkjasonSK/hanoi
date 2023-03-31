@@ -90,6 +90,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 946575567026704689, guid: 8ec3fa630749e8f4a8b21e4ccc50ccc4, type: 3}
+      propertyPath: _ring_size
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7542911933513312674, guid: 8ec3fa630749e8f4a8b21e4ccc50ccc4, type: 3}
       propertyPath: m_Name
       value: RingG

@@ -18,17 +18,13 @@ public class PoleData : MonoBehaviour
         set { _is_hovering = value; }
     }
 
-    [SerializeField] private Stack<Ring> _ring_stack;
+    private Stack<Ring> _ring_stack = new Stack<Ring>();
 
-    public Ring GetRemoveTopRing
-    {
-        get { return _ring_stack.Pop(); }
-    }
-    public Ring GetTopRing
+    public Ring TopRing
     {
         get { return _ring_stack.Peek(); }
     }
-    public int GetStackCount
+    public int StackCount
     {
         get { return _ring_stack.Count; }
     }
@@ -36,6 +32,10 @@ public class PoleData : MonoBehaviour
     public void AddRing(Ring ring)
     {
         _ring_stack.Push(ring);
+    }
+    public Ring RemoveTopRing()
+    {
+        return _ring_stack.Pop();
     }
     public void DepleteStack()
     {

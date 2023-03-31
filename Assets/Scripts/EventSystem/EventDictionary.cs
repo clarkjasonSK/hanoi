@@ -27,5 +27,6 @@ public class EventKeys{
 public class EventParamKeys
 {
     public const string SELECTED_POLE = "SELECTED_POLE";
+    public const string SELECTED_RING = "SELECTED_RING";
 
 }

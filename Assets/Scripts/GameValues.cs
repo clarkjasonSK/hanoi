@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameValues", menuName = "ScriptableObjects/GameValues")]
 public class GameValues : ScriptableObject
 {
-    public float RingPickSpeed;
+    public float RingFloatSpeed;
     public float RingTravelSpeed;
 
     public float PoleMoveSpeed;
