@@ -23,7 +23,7 @@ public class Ring : Poolable
 
     public void FloatRing(float floatHeight)
     {
-        _ring_contrlr.Reset();
+        _ring_contrlr.ResetForces();
         _ring_data.RingStateHandler.SwitchState(RingState.FLOATING);
         _ring_contrlr.StartFloating(floatHeight, _game_values.RingFloatSpeed);
 
@@ -65,6 +65,8 @@ public class Ring : Poolable
 
     public override void OnDeactivate()
     {
+        transform.localPosition = Vector3.zero;
         _ring_data.Reset();
+        _ring_contrlr.Reset();
     }
 }

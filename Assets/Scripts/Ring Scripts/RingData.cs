@@ -31,7 +31,7 @@ public class RingData : MonoBehaviour
 
     public void Reset()
     {
-        _ring_size = 10 - _ring_size;
+        //_ring_size = 10 - _ring_size;
         _is_top_ring = false;
         _ring_state_handler.SwitchState(RingState.STACKED);
     }

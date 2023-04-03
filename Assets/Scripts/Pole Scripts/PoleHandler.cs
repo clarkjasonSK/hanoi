@@ -32,19 +32,22 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
         /*
         _pole_queue = new Queue<Pole>();
         _pole_queue.Enqueue(_pole_util.PoleLifetime.GetPole());*/
-
+        /*
         for(int i=0; i< GameManager.Instance.RingAmount; i++)
         {
-            _pole_util.PoleFirst.AddRingToPole(RingHandler.Instance.GetRingAt(i));
-        }
+            
+        }*/
         AddEventObservers();
 
         isDone = true;
     }
     public void AddEventObservers()
     {
+        EventBroadcaster.Instance.AddObserver(EventKeys.RING_ADDPOLE, OnRingAdd);
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_PRESS, OnPolePress);
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_HOVER, OnPoleHover);
+
+        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_RESET, OnGameReset);
     }
     
     private void setPoleRef(EventParameters param)
@@ -61,7 +64,23 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
         setRingRef(param);
     }
 
+    private void addRing()
+    {
+        poleRef.AddRingToPole(_origin_pole.RemoveTopRing());
+    }
+    private void dropRing()
+    {
+        RingHandler.Instance.DropRing(poleRef.transform.localPosition);
+        EventBroadcaster.Instance.PostEvent(EventKeys.RING_MOVE, null);
+    }
+
     #region Event Broadcaster Notifications
+
+    public void OnRingAdd(EventParameters param)
+    {
+        _pole_util.PoleFirst.AddRingToPole(param.GetParameter<Ring>(EventParamKeys.RING, null));
+    }
+
     public void OnPolePress(EventParameters param = null)
     {
         setPoleRef(param);
@@ -82,26 +101,26 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
         // destination pole has no rings
         if (poleRef.GetRingCount() == 0)
         {
-            poleRef.AddRingToPole(_origin_pole.RemoveTopRing());
-            RingHandler.Instance.DropRing(poleRef.transform.localPosition);
+            addRing();
+            dropRing();
             return;
         }
 
 
-        // if destination pole top ring is smaller than floating ring
-        if (poleRef.BorrowTopRing().RingSize < RingHandler.Instance.FloatingRingSize) 
+        // if destination pole top ring is smaller than floating ring (smaller == higher number)
+        if (poleRef.BorrowTopRing().RingSize > RingHandler.Instance.FloatingRingSize) 
             return;
 
 
         // if destination pole's top ring is bigger than floating ring (i.e. if equal, skip this step)
         if(!(poleRef.BorrowTopRing().RingSize == RingHandler.Instance.FloatingRingSize))
         {
-            poleRef.AddRingToPole(_origin_pole.RemoveTopRing());
+            addRing();
         }
 
         // if equal, just drop 
-        RingHandler.Instance.DropRing(poleRef.transform.localPosition);
-        
+        dropRing();
+
     }
     public void OnPoleHover(EventParameters param)
     {
@@ -114,5 +133,13 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 
 
     }
+    public void OnGameReset(EventParameters param)
+    {
+        _pole_util.PoleFirst.DepletePole();
+        _pole_util.PoleSecond.DepletePole();
+        _pole_util.PoleThird.DepletePole();
+
+    }
+
     #endregion
 }

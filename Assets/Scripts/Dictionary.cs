@@ -4,7 +4,8 @@ using UnityEngine;
 
 public static class Dictionary
 {
-    
+    public const string MOVES = "Moves: ";
+    public const string RING = "Rings: ";
 }
 
 public static class RingDictionary

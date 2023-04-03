@@ -7,6 +7,7 @@ public class SceneBootup : MonoBehaviour, IBootstrapper
     public ObjectPooling ObjectPool;
     public PoleUtility PoleUtility;
     public RingUtility RingUtility;
+    public UIRefs UIRefs;
 
     public void Awake()
     {
@@ -21,6 +22,7 @@ public class SceneBootup : MonoBehaviour, IBootstrapper
         PoleHandler.Instance.PoleUtility = PoleUtility;
         PoleHandler.Instance.Initialize();
 
+        UIManager.Instance.UIRefs = UIRefs;
 
         if (RingHandler.Instance.IsDoneInitializing &&
             PoleHandler.Instance.IsDoneInitializing)

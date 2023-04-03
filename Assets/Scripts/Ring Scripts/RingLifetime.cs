@@ -17,12 +17,11 @@ public class RingLifetime : MonoBehaviour
     private GameObject getRing(GameObject ringObject)
     {
         _obj_pool.ObjectTemplate = ringObject;
-
         return _obj_pool.GameObjectPool.Get();
     }
 
-    private void releaseRing(GameObject gameobject)
+    public void ReleaseRing(Ring r)
     {
-        _obj_pool.GameObjectPool.Release(gameObject);
+        _obj_pool.GameObjectPool.Release(r.gameObject);
     }
 }

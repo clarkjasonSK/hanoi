@@ -56,6 +56,10 @@ public class Pole : Poolable
     {
         return _pole_data.StackCount;
     }
+    public void DepletePole()
+    {
+        _pole_data.DepleteStack();
+    }
 
     private void OnMouseEnter()
     {

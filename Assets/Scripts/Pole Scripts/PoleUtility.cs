@@ -6,4 +6,6 @@ public class PoleUtility : MonoBehaviour
 {
     public PoleLifetime PoleLifetime;
     public Pole PoleFirst;
+    public Pole PoleSecond;
+    public Pole PoleThird;
 }

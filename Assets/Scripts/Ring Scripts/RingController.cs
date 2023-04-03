@@ -25,6 +25,13 @@ public class RingController : MonoBehaviour
 
     public void Reset()
     {
+        ResetForces();
+        StopMoving();
+        StopFloating();
+    }
+
+    public void ResetForces()
+    {
         transform.rotation = Quaternion.Euler(0, 0, 0);
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.angularVelocity = Vector3.zero;
@@ -56,7 +63,7 @@ public class RingController : MonoBehaviour
     }
     public void StopMoving(float stopLocation)
     {
-        StopCoroutine(_move_ring);
+        StopMoving();
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, stopLocation);
     }
 
