@@ -241,7 +241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &153710295
 Transform:
   m_ObjectHideFlags: 0
@@ -686,7 +686,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442295609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -4}
+  m_LocalPosition: {x: 0, y: 8, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -805,6 +805,10 @@ PrefabInstance:
     - target: {fileID: 9004445525023492230, guid: eaf80aa2fb7c4fb418dafa4ea6a0afc5, type: 3}
       propertyPath: m_Name
       value: RingG
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004445525023492230, guid: eaf80aa2fb7c4fb418dafa4ea6a0afc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9004445525023492233, guid: eaf80aa2fb7c4fb418dafa4ea6a0afc5, type: 3}
       propertyPath: m_RootOrder
@@ -1125,6 +1129,10 @@ PrefabInstance:
     - target: {fileID: 5575966126162756569, guid: 5e7a287253213d3418e0e69b2100539c, type: 3}
       propertyPath: m_Name
       value: RingE
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575966126162756569, guid: 5e7a287253213d3418e0e69b2100539c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e7a287253213d3418e0e69b2100539c, type: 3}
@@ -1635,6 +1643,10 @@ PrefabInstance:
     - target: {fileID: 7542911933513312674, guid: 8ec3fa630749e8f4a8b21e4ccc50ccc4, type: 3}
       propertyPath: m_Name
       value: Ring
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542911933513312674, guid: 8ec3fa630749e8f4a8b21e4ccc50ccc4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7542911933513312685, guid: 8ec3fa630749e8f4a8b21e4ccc50ccc4, type: 3}
       propertyPath: m_RootOrder
@@ -2778,7 +2790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dc62ba83156a443a671258b0fb24f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obj_pool: {fileID: 1654140087}
   _ring_templates:
   - {fileID: 7231129814358103834}
   - {fileID: 4354964431713784695}
@@ -2933,6 +2944,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RingD
       objectReference: {fileID: 0}
+    - target: {fileID: 8581862605336409773, guid: 516410f6b9b0d2348b78e229b24923ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 516410f6b9b0d2348b78e229b24923ac, type: 3}
 --- !u!4 &455581108037443681 stripped
@@ -2955,6 +2970,10 @@ PrefabInstance:
     - target: {fileID: 306682920260428263, guid: 0ccefee839f1da746b5a545f3943e239, type: 3}
       propertyPath: m_Name
       value: RingC
+      objectReference: {fileID: 0}
+    - target: {fileID: 306682920260428263, guid: 0ccefee839f1da746b5a545f3943e239, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 306682920260428264, guid: 0ccefee839f1da746b5a545f3943e239, type: 3}
       propertyPath: m_RootOrder
@@ -3085,6 +3104,10 @@ PrefabInstance:
     - target: {fileID: 807277948234388164, guid: 30a485437e31f0745b4232b3162805e1, type: 3}
       propertyPath: m_Name
       value: RingF
+      objectReference: {fileID: 0}
+    - target: {fileID: 807277948234388164, guid: 30a485437e31f0745b4232b3162805e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 807277948234388171, guid: 30a485437e31f0745b4232b3162805e1, type: 3}
       propertyPath: m_RootOrder
@@ -3474,6 +3497,10 @@ PrefabInstance:
     - target: {fileID: 602856310898808291, guid: 3e9836650b413534291d37db98cf5291, type: 3}
       propertyPath: m_Name
       value: RingB
+      objectReference: {fileID: 0}
+    - target: {fileID: 602856310898808291, guid: 3e9836650b413534291d37db98cf5291, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 602856310898808300, guid: 3e9836650b413534291d37db98cf5291, type: 3}
       propertyPath: m_RootOrder
@@ -3965,6 +3992,10 @@ PrefabInstance:
     - target: {fileID: 8199700155967649497, guid: 0d10839b68bfd2848b95d4912468fbe3, type: 3}
       propertyPath: m_Name
       value: RingA
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199700155967649497, guid: 0d10839b68bfd2848b95d4912468fbe3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d10839b68bfd2848b95d4912468fbe3, type: 3}

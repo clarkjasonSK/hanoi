@@ -19,6 +19,7 @@ public class Ring : Poolable
     void Start()
     {
         _ring_data.Reset();
+        OnInstantiate();
     }
 
     public void FloatRing(float floatHeight)
@@ -55,11 +56,13 @@ public class Ring : Poolable
         if (_game_values is null)
         {
             _game_values = GameManager.Instance.GameValues;
+            _ring_contrlr.GameValues = _game_values;
         }
     }
 
     public override void OnActivate()
     {
+        gameObject.SetActive(true);
         transform.localPosition += new Vector3(0, (.5f * _ring_data.RingSize), 0);
     }
 

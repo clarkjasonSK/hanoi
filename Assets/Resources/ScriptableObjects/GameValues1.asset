@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RingFloatSpeed: 20
   RingTravelSpeed: 20
+  RingMaxDropSpeed: 7.5
   PoleMoveSpeed: 10

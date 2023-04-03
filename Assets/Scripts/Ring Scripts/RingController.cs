@@ -6,8 +6,13 @@ public class RingController : MonoBehaviour
 {
     #region Ring Controller Variables
     [SerializeField] private Rigidbody _rigidbody;
-
     #endregion
+
+    [SerializeField] private GameValues _game_values;
+    public GameValues GameValues
+    {
+        set { _game_values = value; }    
+    }
 
     #region IEnumerators
     private IEnumerator _move_ring;
@@ -21,6 +26,14 @@ public class RingController : MonoBehaviour
             _rigidbody = GetComponent<Rigidbody>();
         }
 
+    }
+
+    private void Update()
+    {
+        if(_rigidbody.velocity.magnitude > _game_values.RingMaxDropSpeed)
+        {
+            _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _game_values.RingMaxDropSpeed);
+        }
     }
 
     public void Reset()
