@@ -25,8 +25,8 @@ public class RingLifetime : MonoBehaviour
 
     public void ReleaseRing(Ring r)
     {
-        r.gameObject.SetActive(false);
         r.OnDeactivate();
+        r.gameObject.SetActive(false);
         //_obj_pool.GameObjectPool.Release(r.gameObject);
     }
 }

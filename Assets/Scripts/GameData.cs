@@ -19,9 +19,16 @@ public class GameData : ScriptableObject
         set { _move_count = value; }
     }
 
-    public void ResetGame(int ringAmount)
+    [SerializeField] private bool _goal_pole_whole;
+    public bool GoalPoalWhole
     {
-        _rings_amount = ringAmount;
+        get { return _goal_pole_whole; }
+        set { _goal_pole_whole = value; }
+    }
+
+    public void ResetGame()
+    {
         _move_count = 0;
+        _goal_pole_whole = false;
     }
 }

@@ -54,6 +54,8 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
         {
             _rings.Add(_ring_util.RingLifetime.GetNewRing(i));
 
+            _rings[i].IsSmallestRing = i == ringAmount - 1 ? true : false;
+
             _rings[i].transform.localPosition += _ring_util.RingSpawnHeight.transform.localPosition;
 
             _ringh_params.AddParameter<Ring>(EventParamKeys.RING,_rings[i]);
@@ -73,7 +75,7 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
     public void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.RINGS_SPAWN, OnRingSpawn);
-        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_RESET, OnGameReset);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetsReset);
     }
 
     #endregion
@@ -108,9 +110,9 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
 
     public void OnRingSpawn(EventParameters param = null)
     {
-        InstantiateRings(param.GetParameter<int>(EventParamKeys.RING_AMOUNT, 0));
+        InstantiateRings(GameManager.Instance.RingAmount);
     }
-    public void OnGameReset(EventParameters param)
+    public void OnAssetsReset(EventParameters param = null)
     {
         ResetRings();
     }

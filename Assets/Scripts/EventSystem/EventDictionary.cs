@@ -11,8 +11,11 @@ public class EventKeys{
     public const string GAME_PAUSE = "GAME_PAUSED";
     public const string GAME_RESET = "GAME_RESET";
 
+    public const string ASSETS_RESET = "ASSETS_RESET";
+
     public const string POLE_PRESS = "POLE_PRESSED";
     public const string POLE_HOVER= "POLE_HOVERED";
+    public const string POLE_FULL = "POLE_FULL";
 
     public const string RINGS_SPAWN = "RINGS_SPAWN";
     public const string RING_ADDPOLE = "RING_ADDPOLE";
@@ -20,7 +23,7 @@ public class EventKeys{
     public const string RING_DESELECT = "RING_DESELECTED";
 
     public const string RING_MOVE = "RING_MOVED";
-    public const string RING_STACK = "RING_STACKED";
+    public const string RING_TOP_STACK = "RING_TOP_STACK";
 
     public const string COUNT_UPDATE= "COUNT_UPDATE";
     public const string SLIDER_CHANGE = "SLIDER_CHANGE";

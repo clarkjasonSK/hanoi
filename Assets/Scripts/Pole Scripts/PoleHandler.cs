@@ -24,7 +24,6 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 
     #region Cache Parameter Refs
     Pole poleRef;
-    Ring ringRef;
     #endregion
 
     public void Initialize()
@@ -47,26 +46,21 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_PRESS, OnPolePress);
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_HOVER, OnPoleHover);
 
-        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_RESET, OnGameReset);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetsReset);
     }
     
     private void setPoleRef(EventParameters param)
     {
         poleRef = param.GetParameter<Pole>(EventParamKeys.SELECTED_POLE,null);
     }
-    private void setRingRef(EventParameters param)
-    {
-        ringRef = param.GetParameter<Ring>(EventParamKeys.SELECTED_RING, null);
-    }
-    private void setRefs(EventParameters param)
-    {
-        setPoleRef(param);
-        setRingRef(param);
-    }
-
     private void addRing()
     {
         poleRef.AddRingToPole(_origin_pole.RemoveTopRing());
+
+        if(poleRef.GetRingCount()==GameManager.Instance.RingAmount )
+        {
+            EventBroadcaster.Instance.PostEvent(EventKeys.POLE_FULL, null);
+        }
     }
     private void dropRing()
     {
@@ -111,9 +105,8 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
         if (poleRef.BorrowTopRing().RingSize > RingHandler.Instance.FloatingRingSize) 
             return;
 
-
         // if destination pole's top ring is bigger than floating ring (i.e. if equal, skip this step)
-        if(!(poleRef.BorrowTopRing().RingSize == RingHandler.Instance.FloatingRingSize))
+        if (!(poleRef.BorrowTopRing().RingSize == RingHandler.Instance.FloatingRingSize))
         {
             addRing();
         }
@@ -133,7 +126,7 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 
 
     }
-    public void OnGameReset(EventParameters param)
+    public void OnAssetsReset(EventParameters param)
     {
         _pole_util.PoleFirst.DepletePole();
         _pole_util.PoleSecond.DepletePole();

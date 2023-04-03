@@ -13,12 +13,16 @@ public class Ring : Poolable
     {
         get { return _ring_data.RingSize; }
     }
+    public bool IsSmallestRing
+    {
+        get { return _ring_data.IsSmallestRing; }
+        set { _ring_data.IsSmallestRing = value; }
+    }
 
     #endregion
 
     void Start()
     {
-        _ring_data.Reset();
         OnInstantiate();
     }
 
@@ -71,5 +75,14 @@ public class Ring : Poolable
         transform.localPosition = Vector3.zero;
         _ring_data.Reset();
         _ring_contrlr.Reset();
+    }
+
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!_ring_data.IsSmallestRing || collision.gameObject.tag != TagNames.RING)
+            return;
+
+        EventBroadcaster.Instance.PostEvent(EventKeys.RING_TOP_STACK, null);
     }
 }

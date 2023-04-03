@@ -7,7 +7,6 @@ public class Pole : Poolable
     #region Pole Variables
     [SerializeField] private PoleData _pole_data;
     [SerializeField] private PoleController _pole_contrlr;
-
     #endregion
 
     [SerializeField] private GameValues _game_values;

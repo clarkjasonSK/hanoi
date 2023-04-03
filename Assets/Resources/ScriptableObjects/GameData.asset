@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7671939b0a165a44d8a133f21481f210, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  _rings_amount: 4
-  _move_count: 0
+  _rings_amount: 3
+  _move_count: 1
+  _goal_pole_whole: 0

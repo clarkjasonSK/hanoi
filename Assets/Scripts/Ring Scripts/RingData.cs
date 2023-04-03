@@ -10,11 +10,11 @@ public class RingData : MonoBehaviour
         get { return _ring_size; } 
     }
 
-    [SerializeField] private bool _is_top_ring;
-    public bool IsTopRing
+    [SerializeField] private bool _is_smallest_ring;
+    public bool IsSmallestRing
     {
-        get { return _is_top_ring; }
-        set { _is_top_ring = value; }
+        get { return _is_smallest_ring; }
+        set { _is_smallest_ring = value; }
     }
 
     #region StateHandler Variables
@@ -32,7 +32,7 @@ public class RingData : MonoBehaviour
     public void Reset()
     {
         //_ring_size = 10 - _ring_size;
-        _is_top_ring = false;
+        _is_smallest_ring = false;
         _ring_state_handler.SwitchState(RingState.STACKED);
     }
 

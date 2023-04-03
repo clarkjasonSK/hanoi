@@ -18,7 +18,6 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
         set { _ui_refs = value; }
     }
 
-
     public void Initialize()
     {
         AddEventObservers();
@@ -41,7 +40,8 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
     }
     public void OnSliderChange(EventParameters param)
     {
-
+        GameManager.Instance.SetRingsAmount(param.GetParameter<int>(EventParamKeys.SLIDER_NUMBER, 0));
+        EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
     }
 
     #endregion

@@ -46,9 +46,13 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
         set { _game_data.RingsAmount = value; }
     }
 
+
+
     #region Event Paramters
     private EventParameters _game_params;
     #endregion
+
+
     public void Initialize()
     {
         _game_state_handler = new StateHandler<GameState>();
@@ -58,6 +62,7 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
         _game_data = ScriptableObjectsHelper.GetSO<GameData>(FileNames.GAME_DATA);
 
         _game_data.RingsAmount = 3;
+        _game_data.ResetGame();
         _game_params = new EventParameters();
         AddEventObservers();
 
@@ -69,21 +74,17 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_PAUSE, OnGamePause);
 
+        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_RESET, OnGameReset);
+
         EventBroadcaster.Instance.AddObserver(EventKeys.RING_MOVE, OnRingMove);
-        EventBroadcaster.Instance.AddObserver(EventKeys.SLIDER_CHANGE, OnSliderChange);
+        EventBroadcaster.Instance.AddObserver(EventKeys.RING_TOP_STACK, OnRingTopStack);
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_FULL, OnPoleFull);
     }
     
-    public void SetRingAmount(int ringAmount)
+    public void SetRingsAmount(int ringsAmount)
     {
-        _game_data.RingsAmount = ringAmount;
+        _game_data.RingsAmount = ringsAmount;
     }
-    public void GameStart()
-    {
-        _game_data.MoveCount = 0;
-        _game_params.AddParameter(EventParamKeys.RING_AMOUNT, _game_data.RingsAmount);
-        EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_SPAWN, _game_params);
-    }
-
 
     #region Event Broadcaster Notifications
     public void OnMenuStart(EventParameters param=null)
@@ -94,7 +95,7 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     {
         _game_state_handler.Initialize(GameState.INGAME);
 
-        GameStart();
+        EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, param);
 
     }
     public void OnGamePause(EventParameters param = null)
@@ -109,13 +110,28 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
         EventBroadcaster.Instance.PostEvent(EventKeys.COUNT_UPDATE, _game_params);
 
     }
-    public void OnSliderChange(EventParameters param = null)
+    public void OnGameReset(EventParameters param = null)
     {
-        EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
-        SetRingAmount(param.GetParameter<int>(EventParamKeys.SLIDER_NUMBER, 0));
-        GameStart();
+        ResetGame();
     }
-
+    public void OnPoleFull(EventParameters param = null)
+    {
+        _game_data.GoalPoalWhole = true;
+    }
+    public void OnRingTopStack(EventParameters param = null)
+    {
+        if (_game_data.GoalPoalWhole)
+        {
+            Invoke("ResetGame", _game_values.GameRestartDelay);
+        }
+    }
+    private void ResetGame()
+    {
+        _game_data.ResetGame();
+        EventBroadcaster.Instance.PostEvent(EventKeys.ASSETS_RESET, null);
+        EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_SPAWN, null);
+    }
+    
     #endregion
 }
 
