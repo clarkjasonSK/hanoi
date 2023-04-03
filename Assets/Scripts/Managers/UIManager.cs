@@ -29,6 +29,7 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.COUNT_UPDATE, OnCountUpdate);
         EventBroadcaster.Instance.AddObserver(EventKeys.SLIDER_CHANGE, OnSliderChange);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetReset);
     }
 
 
@@ -42,6 +43,10 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
     {
         GameManager.Instance.SetRingsAmount(param.GetParameter<int>(EventParamKeys.SLIDER_NUMBER, 0));
         EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
+    }
+    public void OnAssetReset(EventParameters param)
+    {
+        _ui_refs.GameUI.ResetCount();
     }
 
     #endregion

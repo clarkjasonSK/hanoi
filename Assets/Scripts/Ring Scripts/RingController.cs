@@ -61,7 +61,7 @@ public class RingController : MonoBehaviour
     {
         while(transform.position.z != moveLocation)
         {
-            Debug.Log("Moving ring!");
+            //Debug.Log("Moving ring!");
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.MoveTowards(transform.localPosition.z, moveLocation, moveSpeed * Time.deltaTime));
             yield return null;
         }
@@ -92,7 +92,7 @@ public class RingController : MonoBehaviour
     {
         while (transform.position.y != floatHeight)
         {
-            Debug.Log("Floating ring!");
+            //Debug.Log("Floating ring!");
             transform.localPosition = new Vector3(transform.localPosition.x, Mathf.MoveTowards(transform.localPosition.y, floatHeight, floatSpeed * Time.deltaTime), transform.localPosition.z);
             yield return null;
         }
