@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Pole : Poolable
+public class Pole : Poolable, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     #region Pole Variables
     [SerializeField] private PoleData _pole_data;
@@ -62,19 +63,12 @@ public class Pole : Poolable
 
     private void OnMouseEnter()
     {
-        if (_pole_data.IsHovering)
-            return;
-
-        EventBroadcaster.Instance.PostEvent(EventKeys.POLE_HOVER, poleParams);
-        _pole_data.IsHovering = true;
     }
     void OnMouseDown()
     {
-        EventBroadcaster.Instance.PostEvent(EventKeys.POLE_PRESS, poleParams);
     }
     void OnMouseExit()
     {
-        _pole_data.IsHovering = false;
     }
 
     public override void OnInstantiate()
@@ -90,5 +84,24 @@ public class Pole : Poolable
     public override void OnDeactivate()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_pole_data.IsHovering)
+            return;
+
+        EventBroadcaster.Instance.PostEvent(EventKeys.POLE_HOVER, poleParams);
+        _pole_data.IsHovering = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _pole_data.IsHovering = false;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        EventBroadcaster.Instance.PostEvent(EventKeys.POLE_PRESS, poleParams);
     }
 }

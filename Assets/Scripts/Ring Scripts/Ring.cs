@@ -9,6 +9,8 @@ public class Ring : Poolable
     #region Ring Variables
     [SerializeField] private RingData _ring_data;
     [SerializeField] private RingController _ring_contrlr;
+    [SerializeField] private AudioSource _ring_audio;
+    [SerializeField] private RingSFXSO _ring_sfxso;
     public int RingSize
     {
         get { return _ring_data.RingSize; }
@@ -56,12 +58,18 @@ public class Ring : Poolable
         {
             _ring_contrlr = GetComponent<RingController>();
         }
+        if (_ring_audio is null)
+        {
+            _ring_audio = GetComponent<AudioSource>();
+        }
 
+        _ring_audio.clip = _ring_sfxso.RingHit;
         if (_game_values is null)
         {
             _game_values = GameManager.Instance.GameValues;
             _ring_contrlr.GameValues = _game_values;
         }
+
     }
 
     public override void OnActivate()
@@ -80,6 +88,7 @@ public class Ring : Poolable
     
     private void OnCollisionEnter(Collision collision)
     {
+        _ring_audio.Play();
         if (!_ring_data.IsSmallestRing || collision.gameObject.tag != TagNames.RING)
             return;
 

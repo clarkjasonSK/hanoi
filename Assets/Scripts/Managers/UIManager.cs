@@ -13,6 +13,10 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
     #endregion
 
     [SerializeField] private UIRefs _ui_refs;
+
+    #region Cache Refs
+    private int tempAmnt;
+    #endregion
     public UIRefs UIRefs
     {
         set { _ui_refs = value; }
@@ -41,7 +45,9 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
     }
     public void OnSliderChange(EventParameters param)
     {
-        GameManager.Instance.SetRingsAmount(param.GetParameter<int>(EventParamKeys.SLIDER_NUMBER, 0));
+        tempAmnt = param.GetParameter<int>(EventParamKeys.SLIDER_NUMBER, 0);
+        _ui_refs.GameUI.SetRingCount(tempAmnt);
+        GameManager.Instance.SetRingsAmount(tempAmnt);
         EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
     }
     public void OnAssetReset(EventParameters param)
