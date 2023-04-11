@@ -28,7 +28,6 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 
     public void Initialize()
     {
-        
         _pole_queue = new Queue<Pole>();
         AddEventObservers();
 
@@ -67,21 +66,25 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     #region Event Broadcaster Notifications
     public void OnGameStart(EventParameters param = null)
     {
-
-         poleRef = _pole_util.PoleLifetime.GetPole();
-        poleRef.transform.localPosition = _pole_util.PoleSpawnPos.transform.localPosition;
-        _pole_queue.Enqueue(poleRef);
-
-        /*
-        for(int i=0; i< GameManager.Instance.RingAmount; i++)
+        
+        for(int i=0; i<3; i++)
         {
-            
-        }*/
+            poleRef = _pole_util.PoleLifetime.GetPole();
+            _pole_queue.Enqueue(poleRef);
+
+            // from end pole to beggining pole
+            poleRef.PolePosition = _pole_util.PositionArray[_pole_util.PositionArray.Length - 1 - i]; 
+            _pole_util.PositionArray[_pole_util.PositionArray.Length - 1 - i].PoleRef = poleRef;
+
+            poleRef.transform.localPosition = _pole_util.PositionArray[_pole_util.PositionArray.Length-3-i].GetLocation(); // set at two locations back
+            poleRef.MoveToPolePosition();
+        }
+
     }
 
     public void OnRingAdd(EventParameters param)
     {
-        _pole_util.PoleFirst.AddRingToPole(param.GetParameter<Ring>(EventParamKeys.RING, null));
+        _pole_util.PositionArray[2].PoleRef.AddRingToPole(param.GetParameter<Ring>(EventParamKeys.RING, null));
     }
 
     public void OnPolePress(EventParameters param = null)
@@ -137,9 +140,14 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     }
     public void OnAssetsReset(EventParameters param)
     {
+        for(int i=2; i<5; i++)
+        {
+            _pole_util.PositionArray[i].PoleRef.ResetPole();
+        }
+        /*
         _pole_util.PoleFirst.DepletePole();
         _pole_util.PoleSecond.DepletePole();
-        _pole_util.PoleThird.DepletePole();
+        _pole_util.PoleThird.DepletePole();*/
 
     }
 

@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class PoleData : MonoBehaviour
 {
-    [SerializeField] [Range(1, 3)] private int _pole_position;
-    public int PolePosition
-    {
-        get { return _pole_position; }
-        set { _pole_position = value; }
-    }
-
     [SerializeField] private bool _is_hovering;
     public bool IsHovering
     {
@@ -44,7 +37,6 @@ public class PoleData : MonoBehaviour
 
     public void ResetData()
     {
-        _pole_position = 0;
         _is_hovering = false;
         DepleteStack();
     }

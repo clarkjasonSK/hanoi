@@ -25,7 +25,7 @@ public class PoleController : MonoBehaviour
     {
         while(transform.localPosition.z!= targetLocation.z)
         {
-            transform.localPosition += new Vector3(0, 0, Mathf.MoveTowards(transform.localPosition.z, targetLocation.z, moveSpeed*Time.deltaTime));
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.MoveTowards(transform.localPosition.z, targetLocation.z, moveSpeed*Time.deltaTime));
             yield return null;
         }
 

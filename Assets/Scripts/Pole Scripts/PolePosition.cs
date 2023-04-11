@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
-    [SerializeField] [Range(1, 3)] private int _pole_position;
+    [SerializeField] [Range(-1, 3)] private int _pole_order;
     [SerializeField] private Pole _pole_ref;
-    public Pole PolePositionPole
+    public Pole PoleRef
     {
         get { return _pole_ref; }
         set { _pole_ref = value; }
@@ -19,9 +19,19 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     void Start()
     {
+        if (_pole_order < 1)
+            return;
+
         poleParams = new EventParameters();
         poleParams.AddParameter(EventParamKeys.SELECTED_POLE, _pole_ref);
     }
+
+    public Vector3 GetLocation()
+    {
+        return this.transform.parent.localPosition;
+    }
+
+    #region Pointer Events
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (_pole_ref.IsHoveringOver)
@@ -40,4 +50,5 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         EventBroadcaster.Instance.PostEvent(EventKeys.POLE_PRESS, poleParams);
     }
+    #endregion
 }

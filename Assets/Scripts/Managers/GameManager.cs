@@ -78,7 +78,7 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
 
         EventBroadcaster.Instance.AddObserver(EventKeys.RING_MOVE, OnRingMove);
         EventBroadcaster.Instance.AddObserver(EventKeys.RING_TOP_STACK, OnRingTopStack);
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_FULL, OnPoleFull);
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_FULL, OnEndPoleFull);
     }
     
     public void SetRingsAmount(int ringsAmount)
@@ -95,7 +95,7 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     {
         _game_state_handler.Initialize(GameState.INGAME);
 
-        EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, param);
+        //EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, param);
 
     }
     public void OnGamePause(EventParameters param = null)
@@ -114,7 +114,7 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     {
         ResetGame();
     }
-    public void OnPoleFull(EventParameters param = null)
+    public void OnEndPoleFull(EventParameters param = null)
     {
         _game_data.GoalPoalWhole = true;
     }
