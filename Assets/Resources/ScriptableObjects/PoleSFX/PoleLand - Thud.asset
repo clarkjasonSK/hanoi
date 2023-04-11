@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de0ef73d35fbe594d8758c12336b01e2, type: 3}
-  m_Name: Wood
+  m_Script: {fileID: 11500000, guid: 546d8e22ca0a58043ba2c0304045ad82, type: 3}
+  m_Name: PoleLand - Thud
   m_EditorClassIdentifier: 
-  RingHit: {fileID: 8300000, guid: a1506f52beeb6bb4aa894e4158812761, type: 3}
-  RingFloat: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: c12034dcfdc91dd4281d0d6ddb9fb291, type: 3}
+  Volume: 1
+  Pitch: 1

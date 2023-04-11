@@ -1,43 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Pole : Poolable, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class Pole : Poolable
 {
     #region Pole Variables
     [SerializeField] private PoleData _pole_data;
     [SerializeField] private PoleController _pole_contrlr;
+    public bool IsHoveringOver
+    {
+        get { return _pole_data.IsHovering; }
+        set { _pole_data.IsHovering = value; }
+    }
+    #endregion
+
+    #region Ring Audio Variables
+    [SerializeField] private SimpleSFX _pole_hit_sfx;
+
+    [SerializeField] private AudioSource _audio_src;
     #endregion
 
     [SerializeField] private GameValues _game_values;
-
-    #region Event Parameters
-    private EventParameters poleParams;
-    #endregion
-    void Start()
-    {
-        if (_pole_data is null)
-        {
-            _pole_data = GetComponent<PoleData>();
-        }
-        if (_pole_contrlr is null)
-        {
-            _pole_contrlr = GetComponent<PoleController>();
-        }
-
-        if (_game_values is null)
-        {
-            _game_values = GameManager.Instance.GameValues;
-        }
-        poleParams = new EventParameters();
-        poleParams.AddParameter(EventParamKeys.SELECTED_POLE, this);
-
-        if(_pole_data.PolePosition == 1)
-        {
-            //_pole_data.AddRing(RingHandler.Get);
-        }
-    }
 
     public void AddRingToPole(Ring ring)
     {
@@ -61,47 +44,51 @@ public class Pole : Poolable, IPointerEnterHandler, IPointerExitHandler, IPointe
         _pole_data.DepleteStack();
     }
 
-    private void OnMouseEnter()
-    {
-    }
-    void OnMouseDown()
-    {
-    }
-    void OnMouseExit()
-    {
-    }
-
     public override void OnInstantiate()
     {
-        throw new System.NotImplementedException();
+
+        if (_pole_data is null)
+        {
+            _pole_data = GetComponent<PoleData>();
+        }
+        if (_pole_contrlr is null)
+        {
+            _pole_contrlr = GetComponent<PoleController>();
+        }
+        if (_audio_src is null)
+        {
+            _audio_src = GetComponent<AudioSource>();
+        }
+
+        if (_game_values is null)
+        {
+            _game_values = GameManager.Instance.GameValues;
+        }
+
     }
 
     public override void OnActivate()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnDeactivate()
     {
-        throw new System.NotImplementedException();
+        _pole_data.ResetData();
+        _pole_contrlr.ResetController();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (_pole_data.IsHovering)
-            return;
+        if (collision.gameObject.CompareTag(TagNames.RING))
+        {
+            _pole_hit_sfx.PlaySFX(_audio_src);
+        }
 
-        EventBroadcaster.Instance.PostEvent(EventKeys.POLE_HOVER, poleParams);
-        _pole_data.IsHovering = true;
-    }
+        if (collision.gameObject.CompareTag(TagNames.POLE_DESPAWN))
+        {
+            ///deactivate
+        }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        _pole_data.IsHovering = false;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        EventBroadcaster.Instance.PostEvent(EventKeys.POLE_PRESS, poleParams);
     }
 }

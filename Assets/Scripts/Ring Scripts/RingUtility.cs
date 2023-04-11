@@ -5,6 +5,6 @@ using UnityEngine;
 public class RingUtility : MonoBehaviour
 {
     public RingLifetime RingLifetime;
-    public Transform RingSpawnHeight;
+    public Transform RingSpawnPos;
     public Transform RingFloatHeight;
 }

@@ -56,7 +56,7 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
 
             _rings[i].IsSmallestRing = i == ringAmount - 1 ? true : false;
 
-            _rings[i].transform.localPosition += _ring_util.RingSpawnHeight.transform.localPosition;
+            _rings[i].transform.localPosition += _ring_util.RingSpawnPos.transform.localPosition;
 
             _ringh_params.AddParameter<Ring>(EventParamKeys.RING,_rings[i]);
             EventBroadcaster.Instance.PostEvent(EventKeys.RING_ADDPOLE, _ringh_params);

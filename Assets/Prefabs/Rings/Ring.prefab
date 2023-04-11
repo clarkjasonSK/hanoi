@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3274608593944210343}
   - component: {fileID: 946575567026704689}
   - component: {fileID: 2961301210662879253}
-  - component: {fileID: 6801783034588353932}
+  - component: {fileID: 2512755582882931791}
   - component: {fileID: 7542911933513312684}
   - component: {fileID: 7542911933513312680}
   - component: {fileID: 7542911933513312681}
@@ -52,12 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cacfdcda6b9fce4b869e49d4ec4a426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolOrigin: {fileID: 0}
   _game_values: {fileID: 0}
   _ring_data: {fileID: 946575567026704689}
   _ring_contrlr: {fileID: 2961301210662879253}
-  _ring_audio: {fileID: 6801783034588353932}
-  _ring_sfxso: {fileID: 11400000, guid: 7e0140c630ce45347ada6f88a5aeec3d, type: 2}
+  _ring_hit_sfx: {fileID: 11400000, guid: c69f2d3a255fbad4398bccf92c45674f, type: 2}
+  _audio_src: {fileID: 2512755582882931791}
 --- !u!114 &946575567026704689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 7542911933513312684}
   _game_values: {fileID: 0}
---- !u!82 &6801783034588353932
+--- !u!82 &2512755582882931791
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

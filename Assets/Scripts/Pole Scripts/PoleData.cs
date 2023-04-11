@@ -42,5 +42,11 @@ public class PoleData : MonoBehaviour
         _ring_stack.Clear();
     }
 
+    public void ResetData()
+    {
+        _pole_position = 0;
+        _is_hovering = false;
+        DepleteStack();
+    }
 
 }

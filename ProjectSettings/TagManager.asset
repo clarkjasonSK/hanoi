@@ -6,12 +6,12 @@ TagManager:
   tags:
   - Ring
   - Pole
-  - ObjectPool
+  - PoleDespawn
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Pole Colliders
   - Water
   - UI
   - 

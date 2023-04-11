@@ -28,20 +28,16 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 
     public void Initialize()
     {
-        /*
+        
         _pole_queue = new Queue<Pole>();
-        _pole_queue.Enqueue(_pole_util.PoleLifetime.GetPole());*/
-        /*
-        for(int i=0; i< GameManager.Instance.RingAmount; i++)
-        {
-            
-        }*/
         AddEventObservers();
 
         isDone = true;
     }
     public void AddEventObservers()
     {
+        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
+
         EventBroadcaster.Instance.AddObserver(EventKeys.RING_ADDPOLE, OnRingAdd);
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_PRESS, OnPolePress);
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_HOVER, OnPoleHover);
@@ -69,6 +65,19 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     }
 
     #region Event Broadcaster Notifications
+    public void OnGameStart(EventParameters param = null)
+    {
+
+         poleRef = _pole_util.PoleLifetime.GetPole();
+        poleRef.transform.localPosition = _pole_util.PoleSpawnPos.transform.localPosition;
+        _pole_queue.Enqueue(poleRef);
+
+        /*
+        for(int i=0; i< GameManager.Instance.RingAmount; i++)
+        {
+            
+        }*/
+    }
 
     public void OnRingAdd(EventParameters param)
     {

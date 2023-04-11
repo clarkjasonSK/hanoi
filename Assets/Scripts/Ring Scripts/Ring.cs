@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ring : Poolable
+public class Ring : MonoBehaviour
 {
     [SerializeField] private GameValues _game_values;
 
     #region Ring Variables
     [SerializeField] private RingData _ring_data;
     [SerializeField] private RingController _ring_contrlr;
-    [SerializeField] private AudioSource _ring_audio;
-    [SerializeField] private RingSFXSO _ring_sfxso;
+
     public int RingSize
     {
         get { return _ring_data.RingSize; }
@@ -20,7 +19,12 @@ public class Ring : Poolable
         get { return _ring_data.IsSmallestRing; }
         set { _ring_data.IsSmallestRing = value; }
     }
+    #endregion
 
+    #region Ring Audio Variables
+    [SerializeField] private SimpleSFX _ring_hit_sfx;
+
+    [SerializeField] private AudioSource _audio_src;
     #endregion
 
     void Start()
@@ -48,7 +52,7 @@ public class Ring : Poolable
         _ring_contrlr.StopFloating();
     }
 
-    public override void OnInstantiate()
+    public void OnInstantiate()
     {
         if (_ring_data is null)
         {
@@ -58,12 +62,10 @@ public class Ring : Poolable
         {
             _ring_contrlr = GetComponent<RingController>();
         }
-        if (_ring_audio is null)
+        if (_audio_src is null)
         {
-            _ring_audio = GetComponent<AudioSource>();
+            _audio_src = GetComponent<AudioSource>();
         }
-
-        _ring_audio.clip = _ring_sfxso.RingHit;
         if (_game_values is null)
         {
             _game_values = GameManager.Instance.GameValues;
@@ -72,13 +74,13 @@ public class Ring : Poolable
 
     }
 
-    public override void OnActivate()
+    public void OnActivate()
     {
         gameObject.SetActive(true);
         transform.localPosition += new Vector3(0, (.5f * _ring_data.RingSize), 0);
     }
 
-    public override void OnDeactivate()
+    public void OnDeactivate()
     {
         transform.localPosition = Vector3.zero;
         _ring_data.Reset();
@@ -88,7 +90,8 @@ public class Ring : Poolable
     
     private void OnCollisionEnter(Collision collision)
     {
-        _ring_audio.Play();
+        _ring_hit_sfx.PlaySFX(_audio_src);
+
         if (!_ring_data.IsSmallestRing || collision.gameObject.tag != TagNames.RING)
             return;
 
