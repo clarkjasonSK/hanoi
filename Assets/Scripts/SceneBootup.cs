@@ -8,6 +8,7 @@ public class SceneBootup : MonoBehaviour, IBootstrapper
     public PoleUtility PoleUtility;
     public RingUtility RingUtility;
     public UIRefs UIRefs;
+    public PanelRefs PanelRefs;
 
     public void Awake()
     {
@@ -16,11 +17,14 @@ public class SceneBootup : MonoBehaviour, IBootstrapper
     public void LoadSingletonsAndDependencies()
     {
         ObjectPool.startPooling();
+        PoleHandler.Instance.PoleUtility = PoleUtility;
+        PoleHandler.Instance.Initialize();
+
         RingHandler.Instance.RingUtility = RingUtility;
         RingHandler.Instance.Initialize();
 
-        PoleHandler.Instance.PoleUtility = PoleUtility;
-        PoleHandler.Instance.Initialize();
+        PanelHandler.Instance.PanelRefs = PanelRefs;
+        PanelHandler.Instance.Initialize();
 
         UIManager.Instance.UIRefs = UIRefs;
 

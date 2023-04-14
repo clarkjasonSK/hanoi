@@ -30,6 +30,9 @@ public class RingController : MonoBehaviour
 
     private void Update()
     {
+        if (_rigidbody.velocity.magnitude < _game_values.RingMaxDropSpeed)
+            return;
+
         if(_rigidbody.velocity.magnitude > _game_values.RingMaxDropSpeed)
         {
             _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _game_values.RingMaxDropSpeed);

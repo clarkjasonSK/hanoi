@@ -11,14 +11,23 @@ public class EventKeys{
     public const string GAME_PAUSE = "GAME_PAUSED";
     public const string GAME_RESET = "GAME_RESET";
 
+    public const string DESPAWN_DONE = "DESPAWN_DONE";
     public const string ASSETS_RESET = "ASSETS_RESET";
+
+    public const string POS_EXIT = "POS_EXIT";
+    public const string POS_END_ENTER = "POS_END_ENTER";
 
     public const string POLE_PRESS = "POLE_PRESSED";
     public const string POLE_HOVER= "POLE_HOVERED";
+    public const string POLE_ADD_RING = "POLE_ADD_RING";
     public const string POLE_FULL = "POLE_FULL";
+    public const string POLE_DESPAWN= "POLE_DESPAWN";
+
+    public const string PANEL_DROP = "PANEL_DROP";
+    public const string PANEL_RISE = "PANEL_RISE";
 
     public const string RINGS_SPAWN = "RINGS_SPAWN";
-    public const string RING_ADDPOLE = "RING_ADDPOLE";
+    public const string RINGS_DESPAWN = "RINGS_DESPAWN";
     public const string RING_SELECT = "RING_SELECTED";
     public const string RING_DESELECT = "RING_DESELECTED";
 
@@ -28,18 +37,16 @@ public class EventKeys{
     public const string COUNT_UPDATE= "COUNT_UPDATE";
     public const string SLIDER_CHANGE = "SLIDER_CHANGE";
 
-    public const string BEG_TOUCH = "BEGINNING_POSITION_TOUCHED";
-    public const string MID_TOUCH = "MIDDLE_POSITION_TOUCHED";
-    public const string END_TOUCH = "ENDING_POSITION_TOUCHED";
+
 }
 
 public class EventParamKeys
 {
-    public const string RING = "RING";
+    public const string RING = "RING"; 
     public const string RING_AMOUNT = "RING_AMOUNT";
+    public const string RING_IS_SMALLEST = "RING_IS_SMALLEST";
 
-    public const string SELECTED_POLE = "SELECTED_POLE";
-    public const string SELECTED_RING = "SELECTED_RING";
+    public const string POLE = "POLE";
 
     public const string MOVE_COUNT = "MOVE_COUNT";
     public const string SLIDER_NUMBER = "SLIDER_NUMBER";

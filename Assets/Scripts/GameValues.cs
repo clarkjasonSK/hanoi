@@ -10,6 +10,7 @@ public class GameValues : ScriptableObject
     public float RingMaxDropSpeed;
 
     public float PoleMoveSpeed;
+    public float PanelMoveSpeed;
 
     public float GameRestartDelay;
 }

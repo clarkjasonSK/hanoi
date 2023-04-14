@@ -34,7 +34,12 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
 
 
     #region Event Parameters
-    private EventParameters _ringh_params;
+    private EventParameters _ring_params;
+    #endregion
+
+    #region Cache Refs
+    private Ring ringRef;
+    //private bool despawnedRingSize;
     #endregion
 
     #region Initializers
@@ -43,7 +48,7 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
         _rings = new List<Ring>();
 
         //InstantiateRings(GameManager.Instance.RingAmount);
-        _ringh_params = new EventParameters();
+        _ring_params = new EventParameters();
         AddEventObservers();
 
         isDone = true;
@@ -58,8 +63,8 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
 
             _rings[i].transform.localPosition += _ring_util.RingSpawnPos.transform.localPosition;
 
-            _ringh_params.AddParameter<Ring>(EventParamKeys.RING,_rings[i]);
-            EventBroadcaster.Instance.PostEvent(EventKeys.RING_ADDPOLE, _ringh_params);
+            _ring_params.AddParameter<Ring>(EventParamKeys.RING,_rings[i]);
+            EventBroadcaster.Instance.PostEvent(EventKeys.POLE_ADD_RING, _ring_params);
         }
     }
     public void ResetRings()
@@ -74,12 +79,14 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
    
     public void AddEventObservers()
     {
+        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnRingSpawn);
+
         EventBroadcaster.Instance.AddObserver(EventKeys.RINGS_SPAWN, OnRingSpawn);
+        EventBroadcaster.Instance.AddObserver(EventKeys.RINGS_DESPAWN, OnRingDespawn);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetsReset);
     }
 
     #endregion
-
 
     public Ring GetRingAt(int ringIndex)
     {
@@ -103,15 +110,36 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
         _floating_ring = null;
     }
 
-
-
+    private void setRingRefs(EventParameters param)
+    {
+        ringRef = param.GetParameter<Ring>(EventParamKeys.RING, null);
+    }
 
     #region Event Broadcaster Notifications
-
+    /*
+    public void OnPosEndEnter(EventParameters param)
+    {
+        OnRingSpawn(param);
+    }*/
     public void OnRingSpawn(EventParameters param = null)
     {
         InstantiateRings(GameManager.Instance.RingAmount);
     }
+    public void OnRingDespawn(EventParameters param)
+    {
+        setRingRefs(param);
+        //despawnedRingSize = ringRef.RingSize;
+        _rings.Remove(ringRef);
+        _ring_util.RingLifetime.ReleaseRing(ringRef);
+
+        if (!param.GetParameter<bool>(EventParamKeys.RING_IS_SMALLEST, false))
+            return;
+
+        Debug.Log("smallest ring!");
+        EventBroadcaster.Instance.PostEvent(EventKeys.DESPAWN_DONE, null);
+    }
+    
+
     public void OnAssetsReset(EventParameters param = null)
     {
         ResetRings();

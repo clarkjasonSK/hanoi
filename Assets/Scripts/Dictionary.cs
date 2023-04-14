@@ -16,7 +16,7 @@ public static class TagNames
 {
     public const string RING = "Ring";
     public const string POLE = "Pole";
-    public const string POLE_DESPAWN = "PoleDespawn";
+    public const string DESPAWN = "DespawnArea";
 } 
 
 public static class FileNames

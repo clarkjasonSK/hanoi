@@ -15,7 +15,6 @@ public class Pole : Poolable
     [SerializeField] private PolePosition _pole_position;
     public PolePosition PolePosition
     {
-        get { return _pole_position; }
         set { _pole_position = value; }
     }
     #endregion
@@ -27,6 +26,12 @@ public class Pole : Poolable
     #endregion
 
     [SerializeField] private GameValues _game_values;
+
+
+    #region Event Parameters
+    private EventParameters _pole_param;
+    #endregion
+
 
     public void AddRingToPole(Ring ring)
     {
@@ -50,7 +55,10 @@ public class Pole : Poolable
         _pole_data.ResetData();
         _pole_contrlr.ResetController();
     }
-
+    public int GetPolePosition()
+    {
+        return _pole_position.PoleOrder;
+    }
     public void MoveToPolePosition()
     {
         _pole_contrlr.MoveToLocation(_pole_position.GetLocation(), _game_values.PoleMoveSpeed);
@@ -76,6 +84,9 @@ public class Pole : Poolable
         {
             _game_values = GameManager.Instance.GameValues;
         }
+
+        _pole_param = new EventParameters();
+        _pole_param.AddParameter<Pole>(EventParamKeys.POLE, this);
     }
 
     public override void OnActivate()
@@ -90,16 +101,21 @@ public class Pole : Poolable
     }
     #endregion
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision col)
     {
-        if (collision.gameObject.CompareTag(TagNames.RING))
+        if (col.gameObject.CompareTag(TagNames.RING))
         {
             _pole_hit_sfx.PlaySFX(_audio_src);
         }
 
-        if (collision.gameObject.CompareTag(TagNames.POLE_DESPAWN))
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag(TagNames.DESPAWN))
         {
-            ///deactivate
+            EventBroadcaster.Instance.PostEvent(EventKeys.POLE_DESPAWN, _pole_param);
+            //this.gameObject.SetActive(false); // TEMPORARY
         }
 
     }

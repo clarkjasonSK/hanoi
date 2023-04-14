@@ -12,8 +12,8 @@ public class PoleLifetime : MonoBehaviour
         return _obj_pool.GameObjectPool.Get().GetComponent<Pole>();
     }
 
-    public void ReturnPole(GameObject gameobject)
+    public void ReturnPole(Pole pole)
     {
-        _obj_pool.GameObjectPool.Release(gameObject);
+        _obj_pool.GameObjectPool.Release(pole.gameObject);
     }
 }

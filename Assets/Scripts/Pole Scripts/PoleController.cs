@@ -38,8 +38,6 @@ public class PoleController : MonoBehaviour
 
     public void ResetController()
     {
-
         StopCoroutine(_moving_pole);
-        ToggleColliders(false);
     }
 }

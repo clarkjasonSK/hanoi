@@ -16,7 +16,6 @@ public class Ring : MonoBehaviour
     }
     public bool IsSmallestRing
     {
-        get { return _ring_data.IsSmallestRing; }
         set { _ring_data.IsSmallestRing = value; }
     }
     #endregion
@@ -27,6 +26,11 @@ public class Ring : MonoBehaviour
     [SerializeField] private AudioSource _audio_src;
     #endregion
 
+    #region Event Parameters
+    private EventParameters _ring_param;
+    #endregion
+
+
     void Start()
     {
         OnInstantiate();
@@ -34,8 +38,9 @@ public class Ring : MonoBehaviour
 
     public void FloatRing(float floatHeight)
     {
-        _ring_contrlr.ResetForces();
+        _ring_data.RingEvent = false;
         _ring_data.RingStateHandler.SwitchState(RingState.FLOATING);
+        _ring_contrlr.ResetForces();
         _ring_contrlr.StartFloating(floatHeight, _game_values.RingFloatSpeed);
 
     }
@@ -71,7 +76,8 @@ public class Ring : MonoBehaviour
             _game_values = GameManager.Instance.GameValues;
             _ring_contrlr.GameValues = _game_values;
         }
-
+        _ring_param = new EventParameters();
+        _ring_param.AddParameter<Ring>(EventParamKeys.RING, this);
     }
 
     public void OnActivate()
@@ -95,6 +101,24 @@ public class Ring : MonoBehaviour
         if (!_ring_data.IsSmallestRing || collision.gameObject.tag != TagNames.RING)
             return;
 
-        EventBroadcaster.Instance.PostEvent(EventKeys.RING_TOP_STACK, null);
+        if (!_ring_data.RingEvent)
+        {
+            _ring_data.RingEvent = true;
+            EventBroadcaster.Instance.PostEvent(EventKeys.RING_TOP_STACK, null);
+        }
+
     }
+
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag(TagNames.DESPAWN))
+        {
+            Debug.Log("ring despawn!");
+            _ring_param.AddParameter(EventParamKeys.RING_IS_SMALLEST, _ring_data.IsSmallestRing);
+            EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_DESPAWN, _ring_param);
+            //this.gameObject.SetActive(false); // TEMP
+        }
+    }
+
 }

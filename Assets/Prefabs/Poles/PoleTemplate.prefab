@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 6103463602674328562}
   m_Layer: 0
   m_Name: PoleTemplate
-  m_TagString: Untagged
+  m_TagString: Pole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,8 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolOrigin: {fileID: 0}
-  _pole_data: {fileID: 6960885321541212418}
   _pole_contrlr: {fileID: 2793966576858532826}
+  _pole_data: {fileID: 6960885321541212418}
+  _pole_position: {fileID: 0}
   _pole_hit_sfx: {fileID: 11400000, guid: 8b93290322beb45438ecfa830415b7c4, type: 2}
   _audio_src: {fileID: 7400566532659010083}
   _game_values: {fileID: 0}
@@ -152,7 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74311bc199f96e74aa8881fefa69fe92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pole_position: 1
   _is_hovering: 0
 --- !u!114 &2793966576858532826
 MonoBehaviour:
