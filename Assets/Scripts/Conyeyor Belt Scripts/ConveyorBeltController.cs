@@ -17,7 +17,6 @@ public class ConveyorBeltController : MonoBehaviour
     {
         while (_conveyor_mat.mainTextureOffset.y != targetOffset)
         {
-            Debug.Log("belt moving!");
             _conveyor_mat.mainTextureOffset = new Vector2(_conveyor_mat.mainTextureOffset.x, Mathf.MoveTowards(_conveyor_mat.mainTextureOffset.y, targetOffset, moveSpeed * Time.deltaTime));
             yield return null;
         }
@@ -28,6 +27,5 @@ public class ConveyorBeltController : MonoBehaviour
     public void StopMoving()
     {
         StopCoroutine(_moving_belt);
-        Debug.Log("belt stop!");
     }
 }

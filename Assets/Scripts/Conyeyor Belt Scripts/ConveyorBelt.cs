@@ -6,8 +6,14 @@ public class ConveyorBelt : MonoBehaviour
 {
     [SerializeField] ConveyorBeltController _con_belt_ctrller;
 
-    [SerializeField] GameValues _game_values;
+    #region Ring Audio Variables
+    [SerializeField] private AudioSource _audio_src;
 
+    [SerializeField] private SimpleSFX _con_belt_move;
+    [SerializeField] private SimpleSFX _con_belt_stop;
+    #endregion
+
+    [SerializeField] GameValues _game_values;
     public void Initialize()
     {
         if (_con_belt_ctrller is null)
@@ -19,10 +25,15 @@ public class ConveyorBelt : MonoBehaviour
 
     public void MoveBelt()
     {
+        Debug.Log("move belt");
+        _con_belt_move.PlaySFX(_audio_src);
         _con_belt_ctrller.StartMoving(_game_values.BeltMoveSpeed);
     }
     public void StopBelt()
     {
+        //_con_belt_move.StopSFX(_audio_src, false);
+        _audio_src.Stop();
+        _con_belt_stop.PlaySFX(_audio_src);
         _con_belt_ctrller.StopMoving();
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SFX", menuName = "ScriptableObjects/SimpleSFX")]
 public class SimpleSFX : SFXEvent
 {
-	 public AudioClip AudioClip;
+	public AudioClip AudioClip;
+	public bool AudioOverridable;
 
 	[Range(0, 1.0f)] public float Volume=1f;
 
@@ -13,10 +14,14 @@ public class SimpleSFX : SFXEvent
 
 	public override void PlaySFX(AudioSource src)
 	{
-		if (AudioClip is null || src.isPlaying)
-        {
+		if (AudioClip is null)
 			return;
-		}
+
+        if (!AudioOverridable)
+        {
+			if (src.isPlaying)
+				return;
+        }
 		src.volume = Volume;
 		src.pitch = Pitch;
 		src.PlayOneShot(AudioClip);

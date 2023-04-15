@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ring : MonoBehaviour
 {
-    [SerializeField] private GameValues _game_values;
 
     #region Ring Variables
     [SerializeField] private RingData _ring_data;
@@ -21,15 +20,20 @@ public class Ring : MonoBehaviour
     #endregion
 
     #region Ring Audio Variables
-    [SerializeField] private SimpleSFX _ring_hit_sfx;
-
     [SerializeField] private AudioSource _audio_src;
+
+    [SerializeField] private SimpleSFX _ring_hit_sfx;
+    [SerializeField] private SimpleSFX _ring_float_sfx;
+    [SerializeField] private SimpleSFX _ring_drop_sfx;
+
     #endregion
 
     #region Event Parameters
     private EventParameters _ring_param;
     #endregion
 
+
+    [SerializeField] private GameValues _game_values;
 
     void Start()
     {
@@ -38,6 +42,7 @@ public class Ring : MonoBehaviour
 
     public void FloatRing(float floatHeight)
     {
+        _ring_float_sfx.PlaySFX(_audio_src);
         _ring_data.RingEvent = false;
         _ring_data.RingStateHandler.SwitchState(RingState.FLOATING);
         _ring_contrlr.ResetForces();
@@ -52,6 +57,7 @@ public class Ring : MonoBehaviour
 
     public void DropRing(float endLocation)
     {
+        _ring_drop_sfx.PlaySFX(_audio_src);
         _ring_data.RingStateHandler.SwitchState(RingState.STACKED);
         _ring_contrlr.StopMoving(endLocation);
         _ring_contrlr.StopFloating();
