@@ -10,8 +10,6 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         get { return _pole_order; }
     }
-    [SerializeField] private PolePosition _prev_pole_pos;
-    [SerializeField] private PolePosition _next_pole_pos;
     [SerializeField] private Pole _pole_ref;
     public Pole PoleRef
     {
@@ -23,13 +21,7 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private EventParameters poleParams;
     #endregion
 
-    void Awake()
-    {
-        if (!poleInOrder())
-            return;
-
-    }
-    public void SetPoleParam()
+    public void Initialize()
     {
         if(poleParams is null)
             poleParams = new EventParameters();
@@ -46,6 +38,7 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             return false;
         return true;
     }
+
     #region Pointer Events
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -78,12 +71,12 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnTriggerEnter(Collider col)
     {
-        if (!col.gameObject.CompareTag(TagNames.POLE))
-            return;
-        if (_pole_order != 3)
-            return;
+        //if (!col.gameObject.CompareTag(TagNames.POLE))
+        //    return;
+        //if (_pole_order != 3)
+        //    return;
 
-        EventBroadcaster.Instance.PostEvent(EventKeys.POS_END_ENTER, null);
+        //EventBroadcaster.Instance.PostEvent(EventKeys.POS_END_ENTER, null);
     }
     public void OnTriggerExit(Collider col)
     {

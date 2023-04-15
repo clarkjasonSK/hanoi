@@ -15,8 +15,8 @@ public class EventKeys{
     public const string ASSETS_RESET = "ASSETS_RESET";
 
     public const string POS_EXIT = "POS_EXIT";
-    public const string POS_END_ENTER = "POS_END_ENTER";
 
+    public const string POLE_MOVE_FINISH = "POLE_MOVE_FINISH";
     public const string POLE_PRESS = "POLE_PRESSED";
     public const string POLE_HOVER= "POLE_HOVERED";
     public const string POLE_ADD_RING = "POLE_ADD_RING";

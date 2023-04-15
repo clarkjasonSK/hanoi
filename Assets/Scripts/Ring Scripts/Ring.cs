@@ -93,7 +93,7 @@ public class Ring : MonoBehaviour
         _ring_contrlr.Reset();
     }
 
-    
+
     private void OnCollisionEnter(Collision collision)
     {
         _ring_hit_sfx.PlaySFX(_audio_src);
@@ -114,10 +114,8 @@ public class Ring : MonoBehaviour
     {
         if (col.gameObject.CompareTag(TagNames.DESPAWN))
         {
-            Debug.Log("ring despawn!");
             _ring_param.AddParameter(EventParamKeys.RING_IS_SMALLEST, _ring_data.IsSmallestRing);
             EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_DESPAWN, _ring_param);
-            //this.gameObject.SetActive(false); // TEMP
         }
     }
 

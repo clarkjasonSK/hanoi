@@ -8,8 +8,13 @@ public static class Dictionary
     public const string RING = "Rings: ";
 }
 
-public static class RingDictionary
+public static class PoleDictionary
 {
+    public const int SPAWN_INDEX = 2;
+
+    public const int SPAWN_POS = -1;
+    public const int BEG_POS = 1;
+    public const int END_POS = 3;
 
 }
 public static class TagNames

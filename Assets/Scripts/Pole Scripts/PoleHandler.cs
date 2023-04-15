@@ -37,8 +37,8 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
 
-        EventBroadcaster.Instance.AddObserver(EventKeys.POS_END_ENTER, OnPosEndEnter);
 
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_MOVE_FINISH, OnPoleMoveFinish);
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_ADD_RING, OnPoleAddRing);
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_PRESS, OnPolePress);
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_HOVER, OnPoleHover);
@@ -57,7 +57,7 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     {
         poleRef.AddRingToPole(_origin_pole.RemoveTopRing());
 
-        if(poleRef.GetPolePosition() == 3 && poleRef.GetRingCount()==GameManager.Instance.RingAmount )
+        if(poleRef.GetPolePosition() == PoleDictionary.END_POS && poleRef.GetRingCount()==GameManager.Instance.RingAmount )
         {
             EventBroadcaster.Instance.PostEvent(EventKeys.POLE_FULL, null);
         }
@@ -74,20 +74,15 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
         _pole_queue.Enqueue(poleRef);
         return poleRef;
     }
-    private void setPole(Pole pole, int posOffset, int locOffset)
+    private void setPole(Pole pole, int posIndex, int locIndex)
     {
-        //Debug.Log("=============");
-        //if(locOffset==-1)
-            //Debug.Log("setting pole " + pole.GetPolePosition() + " at pos: " + _pole_util.PositionArray[posOffset].PoleOrder);
+        pole.PolePosition = _pole_util.PositionArray[posIndex];
+        _pole_util.PositionArray[posIndex].PoleRef = pole;
+        _pole_util.PositionArray[posIndex].Initialize();
 
-        pole.PolePosition = _pole_util.PositionArray[posOffset];
-        _pole_util.PositionArray[posOffset].PoleRef = pole;
-        _pole_util.PositionArray[posOffset].SetPoleParam();
-        ////Debug.Log("after setting: " + pole.GetPolePosition());
-
-        if (locOffset != -1)
+        if (locIndex != PoleDictionary.SPAWN_POS)
         {
-            pole.transform.localPosition = _pole_util.PositionArray[locOffset].GetLocation();
+            pole.transform.localPosition = _pole_util.PositionArray[locIndex].GetLocation();
         }
 
         pole.MoveToPolePosition();
@@ -99,20 +94,20 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
         
         for(int i = _pole_util.PositionArray.Length - 1; 0 < i; i--)
         {
-            // from end pole to beggining pole, set at two locations backs
+            // from end pole to beggining pole, set at two locations back
             setPole(createPole(), i, i-1);
         }
 
     }
 
-    public void OnPosEndEnter(EventParameters param)
+    public void OnPoleMoveFinish(EventParameters param)
     {
         setPole(createPole(), 0, 0);
     }
 
     public void OnPoleAddRing(EventParameters param)
     {
-        _pole_util.PositionArray[2].PoleRef.AddRingToPole(param.GetParameter<Ring>(EventParamKeys.RING, null));
+        _pole_util.PositionArray[PoleDictionary.SPAWN_INDEX].PoleRef.AddRingToPole(param.GetParameter<Ring>(EventParamKeys.RING, null));
     }
 
     public void OnPolePress(EventParameters param = null)
@@ -174,11 +169,8 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     }
     public void OnDespawnDone(EventParameters param)
     {
-        Debug.Log("===============================despawn done");
         for (int i = _pole_util.PositionArray.Length - 1; 0 < i; i--)
         {
-            // from end pole to beggining pole, set at two locations backs
-            //Debug.Log("poleref: " + (i - 1) + " and polepos: " + i + " is " + _pole_util.PositionArray[i - 1].PoleRef.gameObject.name);
             setPole(_pole_util.PositionArray[i-1].PoleRef, i, -1);
         }
 

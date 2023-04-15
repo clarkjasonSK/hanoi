@@ -27,11 +27,9 @@ public class Pole : Poolable
 
     [SerializeField] private GameValues _game_values;
 
-
     #region Event Parameters
     private EventParameters _pole_param;
     #endregion
-
 
     public void AddRingToPole(Ring ring)
     {
@@ -49,6 +47,13 @@ public class Pole : Poolable
     public int GetRingCount()
     {
         return _pole_data.StackCount;
+    }
+    public void PoleMoveFinish()
+    {
+        if(_pole_position.PoleOrder == PoleDictionary.END_POS)
+        {
+            EventBroadcaster.Instance.PostEvent(EventKeys.POLE_MOVE_FINISH, null);
+        }
     }
     public void ResetPole()
     {

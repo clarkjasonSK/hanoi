@@ -9,6 +9,7 @@ public class SceneBootup : MonoBehaviour, IBootstrapper
     public RingUtility RingUtility;
     public UIRefs UIRefs;
     public PanelRefs PanelRefs;
+    public ConveyorBeltRefs ConveyorBeltRefs; 
 
     public void Awake()
     {
@@ -26,10 +27,16 @@ public class SceneBootup : MonoBehaviour, IBootstrapper
         PanelHandler.Instance.PanelRefs = PanelRefs;
         PanelHandler.Instance.Initialize();
 
+        ConveyorBeltHandler.Instance.ConveyorBeltRefs = ConveyorBeltRefs;
+        ConveyorBeltHandler.Instance.Initialize();
+
         UIManager.Instance.UIRefs = UIRefs;
 
         if (RingHandler.Instance.IsDoneInitializing &&
-            PoleHandler.Instance.IsDoneInitializing)
+            PoleHandler.Instance.IsDoneInitializing &&
+            PanelHandler.Instance.IsDoneInitializing &&
+            ConveyorBeltHandler.Instance.IsDoneInitializing
+            )
         {
             Debug.Log("Game Scene initialized!");
             EventBroadcaster.Instance.PostEvent(EventKeys.GAME_START, null);

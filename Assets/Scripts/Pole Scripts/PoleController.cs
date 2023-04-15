@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PoleController : MonoBehaviour
 {
+    [SerializeField] private Pole _pole_ref;
     [SerializeField] private GameObject _pole_shaft;
 
     [SerializeField] private BoxCollider _base_collider;
 
     private IEnumerator _moving_pole;
+
+    private void Start()
+    {
+        if (_pole_ref is null)
+            _pole_ref = GetComponent<Pole>();
+    }
 
     public void SetShaftHeight(float shaftHeight)
     {
@@ -28,7 +35,7 @@ public class PoleController : MonoBehaviour
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.MoveTowards(transform.localPosition.z, targetLocation.z, moveSpeed*Time.deltaTime));
             yield return null;
         }
-
+        _pole_ref.PoleMoveFinish();
         yield break;
     }
     public void ToggleColliders(bool toggle)

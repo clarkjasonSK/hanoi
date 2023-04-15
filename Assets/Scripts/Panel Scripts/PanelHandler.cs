@@ -38,7 +38,7 @@ public class PanelHandler : Singleton<PanelHandler>, ISingleton, IEventObserver
 
     public void OnPanelDrop(EventParameters param = null)
     {
-        Debug.Log("panel drop!");
+        //Debug.Log("panel drop!");
         _panel_refs.Panel.MovePanel(_panel_refs._panel_low_pos.transform);
     }
     public void OnPanelRise(EventParameters param = null)

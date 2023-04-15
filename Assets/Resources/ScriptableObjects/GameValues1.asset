@@ -15,6 +15,7 @@ MonoBehaviour:
   RingFloatSpeed: 20
   RingTravelSpeed: 20
   RingMaxDropSpeed: 7.5
-  PoleMoveSpeed: 10
+  PoleMoveSpeed: 8
   PanelMoveSpeed: 15
+  BeltMoveSpeed: 8
   GameRestartDelay: 0.5

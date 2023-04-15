@@ -265,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 137630243}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -8.659561e-17, w: -0.7071068}
   m_LocalPosition: {x: 40, y: 0, z: 0}
-  m_LocalScale: {x: 2000.0005, y: 2000, z: 15}
+  m_LocalScale: {x: -2000, y: 2000, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247438243}
@@ -482,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8437512456541858761, guid: 56cb08fbd30d2ed4b9abc03789844a16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8437512456541858761, guid: 56cb08fbd30d2ed4b9abc03789844a16, type: 3}
       propertyPath: m_LocalPosition.z
@@ -726,6 +726,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1448004871979411738, guid: e4065c8d269dfd84d8b24425a3470cb2, type: 3}
   m_PrefabInstance: {fileID: 175359439}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &339382547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339382548}
+  - component: {fileID: 339382549}
+  m_Layer: 0
+  m_Name: ConveyorBeltRefs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &339382548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339382547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1404668247}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &339382549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339382547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4188cece59382b54992ccb33ba8ee688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConveyorBelt: {fileID: 995436559}
 --- !u!1 &344941891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,7 +1300,7 @@ Transform:
   m_GameObject: {fileID: 469115792}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -8.659561e-17, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -40}
-  m_LocalScale: {x: 2000.0005, y: 2000, z: 15}
+  m_LocalScale: {x: 2000.0005, y: -2000, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247438243}
@@ -1858,6 +1903,7 @@ Transform:
   - {fileID: 1392941670}
   - {fileID: 1589230929}
   - {fileID: 1365254595}
+  - {fileID: 1902661153}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1971,6 +2017,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 995436558}
+  - component: {fileID: 995436559}
+  - component: {fileID: 995436560}
   m_Layer: 0
   m_Name: ConveyorBelt
   m_TagString: Untagged
@@ -1986,7 +2034,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995436557}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: 0.1, z: -0.32999992}
+  m_LocalPosition: {x: 0, y: 0.1, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1999,6 +2047,33 @@ Transform:
   m_Father: {fileID: 128104803}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &995436559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995436557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f4fb9a2e64a0d49855e1a0151e4fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _con_belt_ctrller: {fileID: 995436560}
+  _game_values: {fileID: 0}
+--- !u!114 &995436560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995436557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54a46bce1af42a479201346ef185344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _conveyor_mat: {fileID: 2100000, guid: 17c55a334eb4f6a428c94e01ac1408bb, type: 2}
 --- !u!1001 &1026286461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2244,7 +2319,7 @@ Transform:
   m_GameObject: {fileID: 1189926177}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -8.659561e-17, w: -0.7071068}
   m_LocalPosition: {x: 40, y: 0, z: -40}
-  m_LocalScale: {x: 2000.0005, y: 2000, z: 15}
+  m_LocalScale: {x: -2000, y: -2000, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247438243}
@@ -2594,6 +2669,7 @@ Transform:
   - {fileID: 2123018498}
   - {fileID: 916231560}
   - {fileID: 1935550608}
+  - {fileID: 339382548}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3098,6 +3174,7 @@ MonoBehaviour:
   RingUtility: {fileID: 2123018500}
   UIRefs: {fileID: 916231561}
   PanelRefs: {fileID: 1935550609}
+  ConveyorBeltRefs: {fileID: 339382549}
 --- !u!1 &1589230928
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,6 +3565,52 @@ Transform:
   m_Father: {fileID: 1277917169}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1902661152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1902661153}
+  - component: {fileID: 1902661154}
+  m_Layer: 0
+  m_Name: ConveyorBeltHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1902661153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902661152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 951942931}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1902661154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902661152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf882938a38e72040935d99cfc9c0443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 0
+  _con_belt_refs: {fileID: 0}
 --- !u!1 &1935550607
 GameObject:
   m_ObjectHideFlags: 0
@@ -4229,10 +4352,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2767304973853612788, guid: edd06b06ab9622d43807e1e96935eb3d, type: 3}
-      propertyPath: m_TagString
-      value: Pole
-      objectReference: {fileID: 0}
     - target: {fileID: 3255154316247760974, guid: edd06b06ab9622d43807e1e96935eb3d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4740,7 +4859,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7213b8436deff5349885437f1bb4906e, type: 2}
+  - {fileID: 2100000, guid: 7b2afa164c5c085458b2b59b91f87dad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -135,7 +135,6 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
         if (!param.GetParameter<bool>(EventParamKeys.RING_IS_SMALLEST, false))
             return;
 
-        Debug.Log("smallest ring!");
         EventBroadcaster.Instance.PostEvent(EventKeys.DESPAWN_DONE, null);
     }
     
