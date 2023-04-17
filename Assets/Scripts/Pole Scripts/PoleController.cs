@@ -17,9 +17,9 @@ public class PoleController : MonoBehaviour
             _pole_ref = GetComponent<Pole>();
     }
 
-    public void SetShaftHeight(float shaftHeight)
+    private void setShaftHeight(int shaftHeight, float baseSize, float mult)
     {
-        _pole_shaft.transform.localScale = new Vector3(_pole_shaft.transform.localScale.x, shaftHeight, _pole_shaft.transform.localScale.z);
+        _pole_shaft.transform.localScale = new Vector3(_pole_shaft.transform.localScale.x, _pole_shaft.transform.localScale.y, baseSize + (mult * (shaftHeight-3)) );
     }
 
     public void MoveToLocation(Vector3 targetLocation, float moveSpeed)
@@ -43,8 +43,10 @@ public class PoleController : MonoBehaviour
         _base_collider.enabled = toggle;
     }
 
-    public void ResetController()
+    public void ResetController(int shaftLength, float baseSize, float mult)
     {
-        StopCoroutine(_moving_pole);
+        //StopCoroutine(_moving_pole);
+        setShaftHeight(shaftLength, baseSize, mult);
+
     }
 }

@@ -55,10 +55,10 @@ public class Pole : Poolable
             EventBroadcaster.Instance.PostEvent(EventKeys.POLE_MOVE_FINISH, null);
         }
     }
-    public void ResetPole()
+    public void ResetPole(int ringAmount)
     {
         _pole_data.ResetData();
-        _pole_contrlr.ResetController();
+        _pole_contrlr.ResetController(ringAmount, _game_values.PoleShaftBase, _game_values.PoleShaftMult);
     }
     public int GetPolePosition()
     {
@@ -101,8 +101,7 @@ public class Pole : Poolable
 
     public override void OnDeactivate()
     {
-        _pole_data.ResetData();
-        _pole_contrlr.ResetController();
+        //ResetPole(3);
     }
     #endregion
 

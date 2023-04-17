@@ -27,10 +27,9 @@ public class PanelHandler : Singleton<PanelHandler>, ISingleton, IEventObserver
     }
     public void AddEventObservers()
     {
-
         EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_DROP, OnPanelDrop);
         EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_RISE, OnPanelRise);
-        EventBroadcaster.Instance.AddObserver(EventKeys.DESPAWN_DONE, OnPanelRise); // same a panel rise, just in case panel rise would need to be called by itself
+        EventBroadcaster.Instance.AddObserver(EventKeys.DESPAWN_DONE, OnPanelRise); // same as panel rise
     }
 
 
@@ -38,7 +37,6 @@ public class PanelHandler : Singleton<PanelHandler>, ISingleton, IEventObserver
 
     public void OnPanelDrop(EventParameters param = null)
     {
-        //Debug.Log("panel drop!");
         _panel_refs.Panel.MovePanel(_panel_refs._panel_low_pos.transform);
     }
     public void OnPanelRise(EventParameters param = null)

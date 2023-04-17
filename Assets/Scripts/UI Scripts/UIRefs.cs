@@ -5,4 +5,5 @@ using UnityEngine;
 public class UIRefs : MonoBehaviour
 {
     public GameUI GameUI;
+    public SliderScript SliderScript;
 }

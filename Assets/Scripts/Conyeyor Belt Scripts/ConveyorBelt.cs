@@ -25,7 +25,6 @@ public class ConveyorBelt : MonoBehaviour
 
     public void MoveBelt()
     {
-        Debug.Log("move belt");
         _con_belt_move.PlaySFX(_audio_src);
         _con_belt_ctrller.StartMoving(_game_values.BeltMoveSpeed);
     }

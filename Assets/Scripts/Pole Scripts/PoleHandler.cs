@@ -71,6 +71,7 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     private Pole createPole()
     {
         poleRef = _pole_util.PoleLifetime.GetPole();
+        poleRef.ResetPole(GameManager.Instance.RingAmount);
         _pole_queue.Enqueue(poleRef);
         return poleRef;
     }
@@ -180,7 +181,7 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     {
         for(int i=2; i<5; i++)
         {
-            _pole_util.PositionArray[i].PoleRef.ResetPole();
+            _pole_util.PositionArray[i].PoleRef.ResetPole(GameManager.Instance.RingAmount);
         }
 
 

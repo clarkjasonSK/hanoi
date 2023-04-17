@@ -34,6 +34,15 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
         EventBroadcaster.Instance.AddObserver(EventKeys.COUNT_UPDATE, OnCountUpdate);
         EventBroadcaster.Instance.AddObserver(EventKeys.SLIDER_CHANGE, OnSliderChange);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetReset);
+
+        // band aid fix, change later PLEASE
+        EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_DROP, OnPanelDrop);
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_MOVE_FINISH, OnPoleMoveFinish);
+    }
+
+    public void ResetButtonClicked()
+    {
+        EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
     }
 
 
@@ -46,13 +55,28 @@ public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
     public void OnSliderChange(EventParameters param)
     {
         tempAmnt = param.GetParameter<int>(EventParamKeys.SLIDER_NUMBER, 0);
+
+        if (tempAmnt == GameManager.Instance.RingAmount)
+            return;
+
         _ui_refs.GameUI.SetRingCount(tempAmnt);
         GameManager.Instance.SetRingsAmount(tempAmnt);
         EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
     }
-    public void OnAssetReset(EventParameters param)
+    public void OnAssetReset(EventParameters param = null)
     {
         _ui_refs.GameUI.ResetCount();
+    }
+
+    public void OnPanelDrop(EventParameters param = null)
+    {
+        _ui_refs.GameUI.ToggleButton(false);
+        _ui_refs.SliderScript.ToggleSlider(false);
+    }
+    public void OnPoleMoveFinish(EventParameters param = null)
+    {
+        _ui_refs.GameUI.ToggleButton(true);
+        _ui_refs.SliderScript.ToggleSlider(true);
     }
 
     #endregion

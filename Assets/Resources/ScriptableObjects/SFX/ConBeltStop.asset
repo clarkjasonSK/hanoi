@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioClip: {fileID: 8300000, guid: 3696a0f6ac515664abb9a045d3892473, type: 3}
   AudioOverridable: 0
-  Volume: 0.5
+  Volume: 1
   Pitch: 1

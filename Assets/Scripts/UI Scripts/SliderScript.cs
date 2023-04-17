@@ -19,8 +19,16 @@ public class SliderScript : MonoBehaviour, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!_ring_slider.interactable)
+            return;
+
         _ui_param.AddParameter<int>(EventParamKeys.SLIDER_NUMBER, (int)_ring_slider.value);
 
         EventBroadcaster.Instance.PostEvent(EventKeys.SLIDER_CHANGE, _ui_param);
+    }
+
+    public void ToggleSlider(bool toggle)
+    {
+        _ring_slider.interactable = toggle;
     }
 }
