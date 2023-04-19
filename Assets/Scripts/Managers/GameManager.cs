@@ -11,7 +11,8 @@ public enum GameState
     PAUSED
 }
 
-public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
+[CreateAssetMenu(fileName = "GameManager", menuName = "ScriptableObjects/Managers/GameManager")]
+public class GameManager : SingletonSO<GameManager>, ISingleton, IEventObserver
 {
     #region ISingleton Variables
     private bool isDone = false;
@@ -46,6 +47,8 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
         set { _game_data.RingsAmount = value; }
     }
 
+    [SerializeField] private GameObject _game_assistant_prefab;
+    [SerializeField] private GameAssistant _game_assistant;
 
 
     #region Event Paramters
@@ -55,11 +58,16 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
 
     public void Initialize()
     {
+        if(_game_values is null )
+            _game_values = ScriptableObjectsHelper.GetSO<GameValues>(FileNames.GAME_VALUES);
+        if(_game_data is null)
+            _game_data = ScriptableObjectsHelper.GetSO<GameData>(FileNames.GAME_DATA);
+
+        DontDestroyOnLoad(_game_assistant = Instantiate(_game_assistant_prefab).GetComponent<GameAssistant>());
+
         _game_state_handler = new StateHandler<GameState>();
         _game_state_handler.Initialize(GameState.PROGRAM_START);
 
-        _game_values = ScriptableObjectsHelper.GetSO<GameValues>(FileNames.GAME_VALUES);
-        _game_data = ScriptableObjectsHelper.GetSO<GameData>(FileNames.GAME_DATA);
 
         _game_data.RingsAmount = 3;
         _game_data.ResetGame();
@@ -130,8 +138,18 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
 
     public void OnDespawnDone(EventParameters param = null)
     {
-         Invoke("resetGame", _game_values.GameRestartDelay);
+        //Invoke("resetGame", _game_values.GameRestartDelay);
+
+        _game_assistant.InvokeReset(resetGame, _game_values.GameRestartDelay);
+
     }
+
+    private IEnumerator invokeReset(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+    }
+
     private void resetGame()
     {
         _game_data.ResetGame();

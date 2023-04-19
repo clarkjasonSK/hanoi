@@ -26,6 +26,8 @@ public static class TagNames
 
 public static class FileNames
 {
+    public const string SO_MANAGERS = "ScriptableObjects/Managers/";
+    public const string SO_HANDLERS = "ScriptableObjects/Handlers/";
     public const string GAME_DATA = "ScriptableObjects/GameData";
     public const string GAME_VALUES = "ScriptableObjects/GameValues1";
 }

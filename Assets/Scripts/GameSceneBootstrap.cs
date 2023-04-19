@@ -2,35 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneBootup : MonoBehaviour, IBootstrapper
+public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
 {
-    public ObjectPooling ObjectPool;
-    public PoleUtility PoleUtility;
-    public RingUtility RingUtility;
-    public UIRefs UIRefs;
-    public PanelRefs PanelRefs;
-    public ConveyorBeltRefs ConveyorBeltRefs; 
-
     public void Awake()
     {
         LoadSingletonsAndDependencies();
     }
     public void LoadSingletonsAndDependencies()
     {
-        ObjectPool.startPooling();
-        PoleHandler.Instance.PoleUtility = PoleUtility;
+        GetComponent<PoleRefs>().ObjectPooling.startPooling();
+
+        PoleHandler.Instance.PoleRefs = GetComponent<PoleRefs>();
         PoleHandler.Instance.Initialize();
 
-        RingHandler.Instance.RingUtility = RingUtility;
+        RingHandler.Instance.RingRefs = GetComponent<RingRefs>(); ;
         RingHandler.Instance.Initialize();
 
-        PanelHandler.Instance.PanelRefs = PanelRefs;
+        PanelHandler.Instance.PanelRefs = GetComponent<PanelRefs>(); ;
         PanelHandler.Instance.Initialize();
 
-        ConveyorBeltHandler.Instance.ConveyorBeltRefs = ConveyorBeltRefs;
+        ConveyorBeltHandler.Instance.ConveyorBeltRefs = GetComponent<ConveyorBeltRefs>(); ;
         ConveyorBeltHandler.Instance.Initialize();
 
-        UIManager.Instance.UIRefs = UIRefs;
+        UIManager.Instance.UIRefs = GetComponent<UIRefs>();
 
         if (RingHandler.Instance.IsDoneInitializing &&
             PoleHandler.Instance.IsDoneInitializing &&

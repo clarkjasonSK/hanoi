@@ -14,7 +14,7 @@ public class SimpleSFX : SFXEvent
 
 	public override void PlaySFX(AudioSource src)
 	{
-		if (AudioClip is null)
+		if (AudioClip is null || !src.gameObject.activeInHierarchy)
 			return;
 
         if (!AudioOverridable)

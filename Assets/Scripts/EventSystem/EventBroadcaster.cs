@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventBroadcaster : Singleton<EventBroadcaster>, ISingleton
+[CreateAssetMenu(fileName = "EventBroadcaster", menuName = "ScriptableObjects/Managers/EventBroadcaster")]
+public class EventBroadcaster : SingletonSO<EventBroadcaster>, ISingleton
 {
     #region ISingleton Variables
     private bool isDone = false;
@@ -18,7 +19,10 @@ public class EventBroadcaster : Singleton<EventBroadcaster>, ISingleton
 
     public void Initialize()
     {
-        _observers = new Dictionary<string, ObserverAction>();
+        if (_observers is null)
+            _observers = new Dictionary<string, ObserverAction>();
+        else
+            _observers.Clear();
 
         isDone = true;
     }

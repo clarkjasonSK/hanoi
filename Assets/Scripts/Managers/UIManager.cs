@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : Singleton<UIManager>, ISingleton, IEventObserver
+[CreateAssetMenu(fileName = "UIManager", menuName = "ScriptableObjects/Managers/UIManager")]
+public class UIManager : SingletonSO<UIManager>, ISingleton, IEventObserver
 {
     #region Singleton Variables
     private bool isDone = false;

@@ -13,10 +13,10 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
     #endregion
 
     #region Ring Handler Variables
-    [SerializeField] private RingUtility _ring_util;
-    public RingUtility RingUtility
+    [SerializeField] private RingRefs _ring_refs;
+    public RingRefs RingRefs
     {
-        set { _ring_util = value; }
+        set { _ring_refs = value; }
     }
 
     [SerializeField] private List<Ring> _rings;
@@ -57,11 +57,11 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
     {
         for (int i = 0; i < ringAmount; i++)
         {
-            _rings.Add(_ring_util.RingLifetime.GetNewRing(i));
+            _rings.Add(_ring_refs.RingLifetime.GetNewRing(i));
 
             _rings[i].IsSmallestRing = i == ringAmount - 1 ? true : false;
 
-            _rings[i].transform.localPosition += _ring_util.RingSpawnPos.transform.localPosition;
+            _rings[i].transform.localPosition += _ring_refs.RingSpawnPos.transform.localPosition;
 
             _ring_params.AddParameter<Ring>(EventParamKeys.RING,_rings[i]);
             EventBroadcaster.Instance.PostEvent(EventKeys.POLE_ADD_RING, _ring_params);
@@ -71,7 +71,7 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
     {
         foreach(Ring r in _rings)
         {
-            _ring_util.RingLifetime.ReleaseRing(r);
+            _ring_refs.RingLifetime.ReleaseRing(r);
         }
         _rings.Clear();
         _floating_ring = null;
@@ -96,7 +96,7 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
     public void FloatRing(Ring selectedRing)
     {
         _floating_ring = selectedRing;
-        selectedRing.FloatRing(_ring_util.RingFloatHeight.localPosition.y);
+        selectedRing.FloatRing(_ring_refs.RingFloatHeight.localPosition.y);
     }
 
     public void MoveFloatingRing(Vector3 moveLocation)
@@ -130,7 +130,7 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
         setRingRefs(param);
         //despawnedRingSize = ringRef.RingSize;
         _rings.Remove(ringRef);
-        _ring_util.RingLifetime.ReleaseRing(ringRef);
+        _ring_refs.RingLifetime.ReleaseRing(ringRef);
 
         if (!param.GetParameter<bool>(EventParamKeys.RING_IS_SMALLEST, false))
             return;
