@@ -7,6 +7,10 @@ public class PoleLifetime : MonoBehaviour
     [SerializeField] ObjectPooling _obj_pool;
     [SerializeField] Transform _pole_spawn_transform;
 
+    public void StartPool()
+    {
+        _obj_pool.startPooling();
+    }
     public Pole GetPole()
     {
         return _obj_pool.GameObjectPool.Get().GetComponent<Pole>();

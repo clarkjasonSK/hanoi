@@ -13,10 +13,6 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     #endregion
 
     [SerializeField] private PoleRefs _pole_refs;
-    public PoleRefs PoleRefs
-    {
-        set { _pole_refs= value; }
-    }
 
     private Queue<Pole> _pole_queue;
     private Pole _origin_pole;
@@ -27,6 +23,9 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 
     public void Initialize()
     {
+        _pole_refs = GetComponent<PoleRefs>();
+        _pole_refs.PoleLifetime.StartPool();
+
         _pole_queue = new Queue<Pole>();
         AddEventObservers();
 

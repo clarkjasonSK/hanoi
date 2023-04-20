@@ -40,7 +40,7 @@ public class GameUI : MonoBehaviour
     #region OnClick Functions
     public void OnResetClicked()
     {
-        UIManager.Instance.ResetButtonClicked();
+        GameUIHandler.Instance.ResetButtonClicked();
     }
 
     #endregion

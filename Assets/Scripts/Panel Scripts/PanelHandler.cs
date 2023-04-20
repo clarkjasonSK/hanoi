@@ -13,14 +13,10 @@ public class PanelHandler : Singleton<PanelHandler>, ISingleton, IEventObserver
     #endregion
 
     [SerializeField] private PanelRefs _panel_refs;
-    public PanelRefs PanelRefs
-    {
-        set { _panel_refs = value; }
-    }
 
     public void Initialize()
     {
-
+        _panel_refs = GetComponent<PanelRefs>();
         AddEventObservers();
 
         isDone = true;
