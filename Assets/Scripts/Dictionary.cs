@@ -22,6 +22,8 @@ public static class TagNames
     public const string RING = "Ring";
     public const string POLE = "Pole";
     public const string DESPAWN = "DespawnArea";
+
+    public const string HANOI_SCENE = "HanoiScene";
 } 
 
 public static class FileNames
