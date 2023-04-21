@@ -38,7 +38,6 @@ public class RingHandler : Singleton<RingHandler>, IEventObserver
         _ring_params = new EventParameters();
         AddEventObservers();
 
-        Debug.Log(" Ring handler initialized! " + gameObject.name);
         isDone = true;
     }
     public void InstantiateRings(int ringAmount)

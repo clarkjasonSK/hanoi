@@ -10,13 +10,10 @@ public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, IEventObserve
     public override void Initialize()
     {
         _con_belt_refs = GetComponent<ConveyorBeltRefs>();
-        //Debug.Log("conbelt GO: " + this.gameObject.name);
-        //Debug.Log("conbelt refs: " + _con_belt_refs );
         _con_belt_refs.ConveyorBelt.Initialize();
 
         AddEventObservers();
 
-        Debug.Log(" Conveyor belt handler initialized! " + gameObject.name);
         isDone = true;
     }
 

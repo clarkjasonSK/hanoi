@@ -21,7 +21,6 @@ public class PoleHandler : Singleton<PoleHandler>, IEventObserver
         _pole_queue = new Queue<Pole>();
         AddEventObservers();
 
-        Debug.Log(" Pole handler initialized! " + gameObject.name);
         isDone = true;
     }
     public void AddEventObservers()

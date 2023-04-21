@@ -24,6 +24,11 @@ public class ConveyorBeltController : MonoBehaviour
         yield break;
     }
 
+    public void ResetBeltMat()
+    {
+        _conveyor_mat.mainTextureOffset = new Vector2(_conveyor_mat.mainTextureOffset.x, 0);
+    }
+
     public void StopMoving()
     {
         StopCoroutine(_moving_belt);

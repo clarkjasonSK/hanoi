@@ -16,7 +16,6 @@ public class GameUIHandler : Singleton<GameUIHandler>, IEventObserver
 
         AddEventObservers();
 
-        Debug.Log(" GameUi handler initialized! " + gameObject.name);
         isDone = true;
     }
 

@@ -12,7 +12,6 @@ public class PanelHandler : Singleton<PanelHandler>, IEventObserver
         _panel_refs = GetComponent<PanelRefs>();
         AddEventObservers();
 
-        Debug.Log(" Panel handler initialized! " + gameObject.name);
         isDone = true;
     }
     public void AddEventObservers()
