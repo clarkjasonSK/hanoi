@@ -2,25 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, ISingleton, IEventObserver
+public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
 
     [SerializeField] ConveyorBeltRefs _con_belt_refs;
 
-    public void Initialize()
+    public override void Initialize()
     {
         _con_belt_refs = GetComponent<ConveyorBeltRefs>();
+        //Debug.Log("conbelt GO: " + this.gameObject.name);
+        //Debug.Log("conbelt refs: " + _con_belt_refs );
         _con_belt_refs.ConveyorBelt.Initialize();
 
         AddEventObservers();
 
+        Debug.Log(" Conveyor belt handler initialized! " + gameObject.name);
         isDone = true;
     }
 

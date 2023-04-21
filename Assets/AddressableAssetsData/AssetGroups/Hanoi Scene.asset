@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 03c5f435e145300428b19b12230c210b
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 6e7ddb4d18c992e4887ddb6f9fc19d13
+    m_Address: Assets/Prefabs/GameSceneAssets
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - HanoiScene
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0f98516f13d7ed444905144f5510673e, type: 2}
   m_SchemaSet:
