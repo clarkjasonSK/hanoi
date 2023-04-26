@@ -13,6 +13,8 @@ public class GameValues : ScriptableObject
     public float PoleShaftBase;
     public float PoleShaftMult;
 
+    public float LeverRotateSpeed;
+
     public float PanelMoveSpeed;
 
     public float BeltMoveSpeed;
