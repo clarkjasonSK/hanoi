@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelHandler : Singleton<PanelHandler>, IEventObserver
+public class PanelHandler : Singleton<PanelHandler>, ISingleton, IEventObserver
 {
+    #region ISingleton Variables
+    private bool isDone = false;
+    public bool IsDoneInitializing
+    {
+        get { return isDone; }
+    }
+    #endregion
 
     [SerializeField] private PanelRefs _panel_refs;
 
-    public override void Initialize()
+    public void Initialize()
     {
         _panel_refs = GetComponent<PanelRefs>();
         AddEventObservers();

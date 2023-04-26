@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUIHandler : Singleton<GameUIHandler>, IEventObserver
+public class GameUIHandler : Singleton<GameUIHandler>, ISingleton, IEventObserver
 {
+    #region ISingleton Variables
+    private bool isDone = false;
+    public bool IsDoneInitializing
+    {
+        get { return isDone; }
+    }
+    #endregion
+
     [SerializeField] private GameUIRefs _game_ui_refs;
 
     #region Cache Refs
     private int tempAmnt;
     #endregion
 
-    public override void Initialize()
+    public void Initialize()
     {
         _game_ui_refs = GetComponent<GameUIRefs>();
 
