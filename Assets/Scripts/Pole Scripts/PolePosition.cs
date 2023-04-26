@@ -23,6 +23,8 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void Initialize()
     {
+
+
         if(poleParams is null)
             poleParams = new EventParameters();
 

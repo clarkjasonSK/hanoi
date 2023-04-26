@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IBootstrapper
 {
-    void LoadSingletonsAndDependencies();
+    void LoadScene();
 }

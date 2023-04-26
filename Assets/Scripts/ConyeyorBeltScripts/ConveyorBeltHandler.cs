@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, ISingleton, IEventObserver
 {
+
     #region ISingleton Variables
     private bool isDone = false;
     public bool IsDoneInitializing
@@ -12,13 +13,12 @@ public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, ISingleton, I
     }
     #endregion
 
+
     [SerializeField] ConveyorBeltRefs _con_belt_refs;
-    public ConveyorBeltRefs ConveyorBeltRefs
-    {
-        set { _con_belt_refs = value; }
-    }
+
     public void Initialize()
     {
+        _con_belt_refs = GetComponent<ConveyorBeltRefs>();
         _con_belt_refs.ConveyorBelt.Initialize();
 
         AddEventObservers();
@@ -28,7 +28,6 @@ public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, ISingleton, I
 
     public void AddEventObservers()
     {
-
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnBeltMove);
         EventBroadcaster.Instance.AddObserver(EventKeys.DESPAWN_DONE, OnBeltMove);
 

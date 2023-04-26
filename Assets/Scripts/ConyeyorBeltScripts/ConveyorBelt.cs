@@ -16,8 +16,9 @@ public class ConveyorBelt : MonoBehaviour
     [SerializeField] GameValues _game_values;
     public void Initialize()
     {
-        if (_con_belt_ctrller is null)
-            _con_belt_ctrller = GetComponent<ConveyorBeltController>();
+        _con_belt_ctrller = GetComponent<ConveyorBeltController>();
+        _con_belt_ctrller.ResetBeltMat();
+        _audio_src = GetComponent<AudioSource>();
 
         if (_game_values is null)
             _game_values = GameManager.Instance.GameValues;
