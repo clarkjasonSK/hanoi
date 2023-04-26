@@ -45,13 +45,6 @@ public abstract class Singleton<T> : Singleton where T : MonoBehaviour //abstrac
         }
 
     }
-
-    protected bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-
     private void Awake()
     {
         if (_persistent)
@@ -60,7 +53,6 @@ public abstract class Singleton<T> : Singleton where T : MonoBehaviour //abstrac
         }
     }
 
-    public abstract void Initialize();
     protected virtual void OnAwake() {} // optional to use to use an an Init method; virtual keyword due to the optionality
 }
 

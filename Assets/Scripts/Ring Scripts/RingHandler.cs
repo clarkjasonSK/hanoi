@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RingHandler : Singleton<RingHandler>, IEventObserver
+public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
 {
+    #region ISingleton Variables
+    private bool isDone = false;
+    public bool IsDoneInitializing
+    {
+        get { return isDone; }
+    }
+    #endregion
+
     #region Ring Handler Variables
     [SerializeField] private RingRefs _ring_refs;
 
@@ -31,14 +39,13 @@ public class RingHandler : Singleton<RingHandler>, IEventObserver
     #endregion
 
     #region Initializers
-    public override void Initialize()
+    public void Initialize()
     {
         _ring_refs = GetComponent<RingRefs>();
         _rings = new List<Ring>();
         _ring_params = new EventParameters();
         AddEventObservers();
 
-        Debug.Log(" Ring handler initialized! " + gameObject.name);
         isDone = true;
     }
     public void InstantiateRings(int ringAmount)

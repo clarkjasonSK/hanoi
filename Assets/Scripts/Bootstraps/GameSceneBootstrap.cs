@@ -17,19 +17,19 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
     {
         Addressables.LoadAssetsAsync<GameObject>(HanoiScene, (asset) =>
           {
-              if (asset is not null)
-              {
-                  //Debug.Log("Insantiating: " + asset.name);
-                  Instantiate(asset, HanoiSceneParent);
-              }
-              else
+              if (asset is null)
               {
                   Debug.Log("Error loading!");
+                  return;
               }
+
+              //Debug.Log("Insantiating: " + asset.name);
+              Instantiate(asset, HanoiSceneParent);
+
 
           }).Completed += (asyncOperation) =>
           {
-              if(asyncOperation.Status == AsyncOperationStatus.Succeeded)
+              if (asyncOperation.Status == AsyncOperationStatus.Succeeded)
               {
                   Debug.Log("Async Assets loading finished!");
                   loadDependencies();
@@ -58,11 +58,5 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
             EventBroadcaster.Instance.PostEvent(EventKeys.GAME_START, null);
         }
 
-        //Debug.Log("ring: " +RingHandler.Instance.IsDoneInitializing + 
-        //    " pole " + PoleHandler.Instance.IsDoneInitializing +
-        //    " panel: "+ PanelHandler.Instance.IsDoneInitializing+
-        //    " conveyor: " + ConveyorBeltHandler.Instance.IsDoneInitializing+
-        //    " gameui " + GameUIHandler.Instance.IsDoneInitializing
-        //    );
     }
 }
