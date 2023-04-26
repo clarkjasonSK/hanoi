@@ -22,9 +22,13 @@ public class EventBroadcaster : SingletonSO<EventBroadcaster>, ISingleton
         if (_observers is null)
             _observers = new Dictionary<string, ObserverAction>();
         else
-            _observers.Clear();
+            ClearEvents();
 
         isDone = true;
+    }
+    public void ClearEvents()
+    {
+        _observers.Clear();
     }
     public void AddObserver(string eventName, ObserverAction observerAction)
     {

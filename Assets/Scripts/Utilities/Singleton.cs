@@ -43,8 +43,8 @@ public abstract class Singleton<T> : Singleton where T : MonoBehaviour //abstrac
             }
             
         }
-    }
 
+    }
     private void Awake()
     {
         if (_persistent)

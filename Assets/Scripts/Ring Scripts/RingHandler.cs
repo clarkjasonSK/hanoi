@@ -14,10 +14,6 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
 
     #region Ring Handler Variables
     [SerializeField] private RingRefs _ring_refs;
-    public RingRefs RingRefs
-    {
-        set { _ring_refs = value; }
-    }
 
     [SerializeField] private List<Ring> _rings;
     [SerializeField] private Ring _floating_ring;
@@ -45,9 +41,8 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
     #region Initializers
     public void Initialize()
     {
+        _ring_refs = GetComponent<RingRefs>();
         _rings = new List<Ring>();
-
-        //InstantiateRings(GameManager.Instance.RingAmount);
         _ring_params = new EventParameters();
         AddEventObservers();
 
