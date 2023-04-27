@@ -7,11 +7,12 @@ TagManager:
   - Ring
   - Pole
   - DespawnArea
+  - LeverHandle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Pole Colliders
+  - PointerColliders
   - Water
   - UI
   - 

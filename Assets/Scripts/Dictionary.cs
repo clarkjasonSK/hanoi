@@ -23,6 +23,8 @@ public static class TagNames
     public const string POLE = "Pole";
     public const string DESPAWN = "DespawnArea";
 
+    public const string LEVER_HANDLE = "LeverHandle";
+
     public const string HANOI_SCENE = "HanoiScene";
 } 
 

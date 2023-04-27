@@ -18,6 +18,7 @@ MonoBehaviour:
   PoleMoveSpeed: 6
   PoleShaftBase: 0.7
   PoleShaftMult: 0.06
+  LeverRotateSpeed: 300
   PanelMoveSpeed: 5.25
   BeltMoveSpeed: 6
   GameRestartDelay: 1.3

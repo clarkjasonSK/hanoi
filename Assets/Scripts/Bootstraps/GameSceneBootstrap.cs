@@ -44,6 +44,7 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
         ConveyorBeltHandler.Instance.Initialize();
         PoleHandler.Instance.Initialize();
         RingHandler.Instance.Initialize();
+        LeverHandler.Instance.Initialize();
         GameUIHandler.Instance.Initialize();
 
         if (RingHandler.Instance.IsDoneInitializing &&

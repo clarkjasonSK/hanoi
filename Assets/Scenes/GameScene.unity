@@ -180,27 +180,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9097723470658954722, guid: dd319d5d2f36af84fa9b1cd4627f6614, type: 3}
   m_PrefabInstance: {fileID: 6079323034437446314}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1073026672 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6669397503768994737, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
-  m_PrefabInstance: {fileID: 2397870394718000740}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1073026675
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073026672}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &1124311822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4588198756047246336, guid: a6c47e85e2e58324b86e24d7d74d2406, type: 3}
@@ -218,21 +197,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2835053868639744002, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
+      propertyPath: lever_pos_num
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2835053868914947084, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
+      propertyPath: lever_pos_num
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2835053868940505495, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
+      propertyPath: lever_pos_num
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2835053869224142660, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
+      propertyPath: lever_pos_num
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4918481219014117465, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.809017
       objectReference: {fileID: 0}
     - target: {fileID: 4918481219014117465, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
       propertyPath: m_LocalRotation.x
+      value: 0.58778524
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918481219014117465, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918481219014117465, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4918481219014117465, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6332293092704630423, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
-      propertyPath: m_Name
-      value: LeverExoskeleton
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 6332293093795725344, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
       propertyPath: m_RootOrder
@@ -240,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6332293093795725344, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6332293093795725344, guid: 0a2bd440e65ef8b48b29eca90e89c7f6, type: 3}
       propertyPath: m_LocalPosition.y

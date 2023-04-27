@@ -4,30 +4,38 @@ using UnityEngine;
 
 public class LeverController : MonoBehaviour
 {
+    [SerializeField] private Lever _lever_ref;
     [SerializeField] private Transform _lever_handle;
-    public Transform LeverHandle
-    {
-        set { _lever_handle = value; }
-    }
 
     private IEnumerator _rotation;
 
-    public void StartRotating(float rotAngle, float rotSpeed)
+    public void Initialize(Lever leverRef, Transform leverHandle)
     {
+        _lever_ref = leverRef;
+        _lever_handle = leverHandle;
+    }
+    public void StartRotating(int rotAngle, float rotSpeed)
+    {
+        StopRotating();
+
         _rotation = rotatingLever(rotAngle, rotSpeed);
         StartCoroutine(_rotation);
     }
 
     public void StopRotating()
     {
-        StopCoroutine(_rotation);
+        if(_rotation is not null)
+            StopCoroutine(_rotation);
     }
-    private IEnumerator rotatingLever(float rotAngle, float rotSpeed)
+    private IEnumerator rotatingLever(int rotAngle, float rotSpeed)
     {
-        while(_lever_handle.transform.rotation.x != rotAngle)
+        while (LeverHandler.Instance.ConvertEulerAngle(_lever_handle.transform.localEulerAngles.x) != rotAngle)
         {
-            // TODO quaternion rotate?
+            _lever_handle.transform.localEulerAngles = new Vector3(Mathf.MoveTowards(LeverHandler.Instance.ConvertEulerAngle(_lever_handle.transform.localEulerAngles.x), rotAngle, rotSpeed * Time.deltaTime), 0, 0);
+            yield return null;
         }
-        yield return null;
+
+        _lever_ref.RotateFinish();
+        yield break;
     }
 }

@@ -18,10 +18,17 @@ public class LeverData : MonoBehaviour
         set { _lever_selected = value; }
     }
 
+    [SerializeField] private bool _lever_rotating;
+    public bool LeverRotating
+    {
+        get { return _lever_rotating; }
+        set { _lever_rotating = value; }
+    }
+
 
     public void ResetData(int defaultPos)
     {
-        _lever_position = defaultPos;
+        //_lever_position = defaultPos;
         _lever_selected = false;
     }
 }
