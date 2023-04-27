@@ -12,6 +12,10 @@ public class Lever : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     [SerializeField] private GameValues _game_values;
 
+    public bool LeverSelected
+    {
+        get { return _lever_data.LeverSelected; }
+    }
 
     private void Start()
     {
@@ -30,11 +34,13 @@ public class Lever : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        _lever_data.LeverSelected = true;
         // lever is selected in LeverData
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        _lever_data.LeverSelected = false;
         // lever is deselected
         // post event asset restart with selected lever position
     }
