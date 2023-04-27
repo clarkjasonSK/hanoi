@@ -962,23 +962,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744141897958540939, guid: 7bcd4d708b53ffd4fb644dd8385216a2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.809017
       objectReference: {fileID: 0}
     - target: {fileID: 744141897958540939, guid: 7bcd4d708b53ffd4fb644dd8385216a2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.58778524
       objectReference: {fileID: 0}
     - target: {fileID: 744141897958540939, guid: 7bcd4d708b53ffd4fb644dd8385216a2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 744141897958540939, guid: 7bcd4d708b53ffd4fb644dd8385216a2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 744141897958540939, guid: 7bcd4d708b53ffd4fb644dd8385216a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 744141897958540939, guid: 7bcd4d708b53ffd4fb644dd8385216a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1167,6 +1167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeverPos5
       objectReference: {fileID: 0}
+    - target: {fileID: 8122507449824603712, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}
+      propertyPath: lever_pos_num
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}
 --- !u!4 &5000578815377946050 stripped
@@ -1337,6 +1341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeverPos6
       objectReference: {fileID: 0}
+    - target: {fileID: 8122507449824603712, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}
+      propertyPath: lever_pos_num
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}
 --- !u!4 &5000578814751793796 stripped
@@ -1399,6 +1407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeverPos7
       objectReference: {fileID: 0}
+    - target: {fileID: 8122507449824603712, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}
+      propertyPath: lever_pos_num
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}
 --- !u!4 &5000578814473152138 stripped
@@ -1460,6 +1472,10 @@ PrefabInstance:
     - target: {fileID: 1334557478452722887, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}
       propertyPath: m_Name
       value: LeverPos4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8122507449824603712, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}
+      propertyPath: lever_pos_num
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d444f5c57c0bf347a85c659f0c477c3, type: 3}

@@ -40,17 +40,18 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
 
     private void loadDependencies()
     {
+        PoleHandler.Instance.Initialize(); // POLE BEFORE RING 
+        RingHandler.Instance.Initialize();
         PanelHandler.Instance.Initialize();
         ConveyorBeltHandler.Instance.Initialize();
-        PoleHandler.Instance.Initialize();
-        RingHandler.Instance.Initialize();
         LeverHandler.Instance.Initialize();
         GameUIHandler.Instance.Initialize();
 
-        if (RingHandler.Instance.IsDoneInitializing &&
-            PoleHandler.Instance.IsDoneInitializing &&
+        if (PoleHandler.Instance.IsDoneInitializing && 
+            RingHandler.Instance.IsDoneInitializing &&
             PanelHandler.Instance.IsDoneInitializing &&
             ConveyorBeltHandler.Instance.IsDoneInitializing &&
+            LeverHandler.Instance.IsDoneInitializing &&
             GameUIHandler.Instance.IsDoneInitializing
             )
         {
