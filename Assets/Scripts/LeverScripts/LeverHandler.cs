@@ -36,13 +36,11 @@ public class LeverHandler : Singleton<LeverHandler>, ISingleton, IEventObserver
 
     public void AddEventObservers()
     {
-        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
         EventBroadcaster.Instance.AddObserver(EventKeys.LEVER_POS_HOVER, OnLeverPosHover);
         EventBroadcaster.Instance.AddObserver(EventKeys.LEVER_POS_CHOSEN, OnLeverPosChosen);
 
-        // band aid fix, change later PLEASE
-        EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_DROP, OnPanelDrop);
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_MOVE_FINISH, OnPoleMoveFinish);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DISABLE, onAssetsDisable);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_ENABLE, onAssetsEnable);
     }
     private void setLeverKey(EventParameters param)
     {
@@ -54,10 +52,7 @@ public class LeverHandler : Singleton<LeverHandler>, ISingleton, IEventObserver
     }
 
     #region Event Broadcaster Notifications
-    public void OnGameStart(EventParameters param = null)
-    {
 
-    }
     public void OnLeverPosHover(EventParameters param)
     {
         if (!_lever_refs.Lever.LeverSelected)
@@ -80,11 +75,11 @@ public class LeverHandler : Singleton<LeverHandler>, ISingleton, IEventObserver
         EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
     }
 
-    public void OnPanelDrop(EventParameters param = null)
+    public void onAssetsDisable(EventParameters param = null)
     {
         _lever_refs.Lever.ToggleHandle(false);
     }
-    public void OnPoleMoveFinish(EventParameters param = null)
+    public void onAssetsEnable(EventParameters param = null)
     {
         _lever_refs.Lever.ToggleHandle(true);
     }

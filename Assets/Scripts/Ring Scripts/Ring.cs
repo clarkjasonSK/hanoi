@@ -110,7 +110,7 @@ public class Ring : MonoBehaviour
         if (!_ring_data.RingEvent)
         {
             _ring_data.RingEvent = true;
-            EventBroadcaster.Instance.PostEvent(EventKeys.RING_TOP_STACK, null);
+            EventBroadcaster.Instance.PostEvent(EventKeys.RING_STACKED_FULL, null);
         }
 
     }
@@ -120,8 +120,7 @@ public class Ring : MonoBehaviour
     {
         if (col.gameObject.CompareTag(TagNames.DESPAWN))
         {
-            _ring_param.AddParameter(EventParamKeys.RING_IS_SMALLEST, _ring_data.IsSmallestRing);
-            EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_DESPAWN, _ring_param);
+            EventBroadcaster.Instance.PostEvent(EventKeys.RING_DESPAWN, _ring_param);
         }
     }
 

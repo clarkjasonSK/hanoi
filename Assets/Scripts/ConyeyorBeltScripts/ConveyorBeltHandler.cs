@@ -28,10 +28,10 @@ public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, ISingleton, I
 
     public void AddEventObservers()
     {
-        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnBeltMove);
-        EventBroadcaster.Instance.AddObserver(EventKeys.DESPAWN_DONE, OnBeltMove);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_INIT, OnBeltMove);
 
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_MOVE_FINISH, OnBeltStop);
+        EventBroadcaster.Instance.AddObserver(EventKeys.CON_BELT_MOVE, OnBeltMove);
+        EventBroadcaster.Instance.AddObserver(EventKeys.CON_BELT_STOP, OnBeltStop);
     }
 
     #region Event Broadcaster Notifications

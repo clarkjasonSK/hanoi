@@ -25,7 +25,6 @@ public class PanelHandler : Singleton<PanelHandler>, ISingleton, IEventObserver
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_DROP, OnPanelDrop);
         EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_RISE, OnPanelRise);
-        EventBroadcaster.Instance.AddObserver(EventKeys.DESPAWN_DONE, OnPanelRise); // same as panel rise
     }
 
 

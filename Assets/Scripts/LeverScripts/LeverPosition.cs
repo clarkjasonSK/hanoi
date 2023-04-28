@@ -36,11 +36,11 @@ public class LeverPosition : MonoBehaviour, IPointerEnterHandler
         if (!other.CompareTag(TagNames.LEVER_HANDLE))
             return;
 
-        if (LeverHandler.Instance.ConvertEulerAngle(other.transform.localEulerAngles.x) >= LeverHandler.Instance.ConvertEulerAngle(transform.localEulerAngles.x))
+        if (LeverHandler.Instance.ConvertEulerAngle(other.transform.localEulerAngles.x) > LeverHandler.Instance.ConvertEulerAngle(transform.localEulerAngles.x))
         {
             _lever_rotate_right.PlaySFX(_audio_src);
         }
-        else
+        else if (LeverHandler.Instance.ConvertEulerAngle(other.transform.localEulerAngles.x) < LeverHandler.Instance.ConvertEulerAngle(transform.localEulerAngles.x))
         {
             _lever_rotate_left.PlaySFX(_audio_src);
         }

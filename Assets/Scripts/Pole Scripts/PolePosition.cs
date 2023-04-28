@@ -50,7 +50,7 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (_pole_ref.IsHoveringOver)
             return;
 
-        EventBroadcaster.Instance.PostEvent(EventKeys.POLE_HOVER, poleParams);
+        EventBroadcaster.Instance.PostEvent(EventKeys.POS_ENTER, poleParams);
         _pole_ref.IsHoveringOver = true;
     }
 
@@ -67,29 +67,8 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (!poleInOrder())
             return;
 
-        EventBroadcaster.Instance.PostEvent(EventKeys.POLE_PRESS, poleParams);
+        EventBroadcaster.Instance.PostEvent(EventKeys.POS_PRESS, poleParams);
     }
     #endregion
 
-    public void OnTriggerEnter(Collider col)
-    {
-        //if (!col.gameObject.CompareTag(TagNames.POLE))
-        //    return;
-        //if (_pole_order != 3)
-        //    return;
-
-        //EventBroadcaster.Instance.PostEvent(EventKeys.POS_END_ENTER, null);
-    }
-    public void OnTriggerExit(Collider col)
-    {
-        /*
-        if (_prev_pole_pos is null && _next_pole_pos is null)
-        {
-            // spawn pole on top, no movement
-            return;
-        }
-        // if next pole position is null, create 
-
-        EventBroadcaster.Instance.PostEvent(EventKeys.POS_EXIT, poleParams);*/
-    }
 }

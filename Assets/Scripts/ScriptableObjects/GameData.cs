@@ -20,7 +20,7 @@ public class GameData : ScriptableObject
     }
 
     [SerializeField] private bool _goal_pole_whole;
-    public bool GoalPoalWhole
+    public bool GoalPoleWhole
     {
         get { return _goal_pole_whole; }
         set { _goal_pole_whole = value; }

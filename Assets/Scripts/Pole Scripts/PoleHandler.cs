@@ -33,18 +33,19 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     }
     public void AddEventObservers()
     {
-        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
-
-
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_MOVE_FINISH, OnPoleMoveFinish);
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_ADD_RING, OnPoleAddRing);
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_PRESS, OnPolePress);
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_HOVER, OnPoleHover);
-
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_DESPAWN, OnPoleDespawn);
-        EventBroadcaster.Instance.AddObserver(EventKeys.DESPAWN_DONE, OnDespawnDone);
-
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_INIT, OnPolesInit);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetsReset);
+
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_SPAWN, OnPoleSpawn);
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_DESPAWN, OnPoleDespawn);
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_ADJUST, OnPoleAdjust);
+
+        EventBroadcaster.Instance.AddObserver(EventKeys.POS_ENTER, OnPosEnter);
+        EventBroadcaster.Instance.AddObserver(EventKeys.POS_PRESS, OnPosPress);
+
+        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_ADD_RING, OnPoleAddRing);
+
+
     }
     
     private void setPoleRef(EventParameters param)
@@ -57,13 +58,13 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 
         if(poleRef.GetPolePosition() == PoleDictionary.END_POS && poleRef.GetRingCount()==GameManager.Instance.RingAmount )
         {
-            EventBroadcaster.Instance.PostEvent(EventKeys.POLE_FULL, null);
+            EventBroadcaster.Instance.PostEvent(EventKeys.POLE_END_FULL, null);
         }
     }
     private void dropRing()
     {
         RingHandler.Instance.DropRing(poleRef.transform.localPosition);
-        EventBroadcaster.Instance.PostEvent(EventKeys.RING_MOVE, null);
+        EventBroadcaster.Instance.PostEvent(EventKeys.RING_DROPPED, null);
     }
 
     private Pole createPole()
@@ -88,7 +89,7 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     }
 
     #region Event Broadcaster Notifications
-    public void OnGameStart(EventParameters param = null)
+    public void OnPolesInit(EventParameters param = null)
     {
         
         for(int i = _pole_refs.PositionArray.Length - 1; 0 < i; i--)
@@ -99,17 +100,20 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
 
     }
 
-    public void OnPoleMoveFinish(EventParameters param)
+    public void OnPoleSpawn(EventParameters param)
     {
         setPole(createPole(), 0, 0);
     }
 
-    public void OnPoleAddRing(EventParameters param)
+    public void OnPosEnter(EventParameters param)
     {
-        _pole_refs.PositionArray[PoleDictionary.SPAWN_INDEX].PoleRef.AddRingToPole(param.GetParameter<Ring>(EventParamKeys.RING, null));
-    }
+        if (!RingHandler.Instance.HasFloatingRing)
+            return;
 
-    public void OnPolePress(EventParameters param = null)
+        setPoleRef(param);
+        RingHandler.Instance.MoveFloatingRing(poleRef.transform.localPosition);
+    }
+    public void OnPosPress(EventParameters param = null)
     {
         setPoleRef(param);
 
@@ -149,27 +153,23 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
         dropRing();
 
     }
-    public void OnPoleHover(EventParameters param)
+    public void OnPoleAddRing(EventParameters param)
     {
-        if (!RingHandler.Instance.HasFloatingRing)
-            return;
-        
-        setPoleRef(param);
-
-        RingHandler.Instance.MoveFloatingRing(poleRef.transform.localPosition);
-
-
+        _pole_refs.PositionArray[PoleDictionary.SPAWN_INDEX].PoleRef.AddRingToPole(param.GetParameter<Ring>(EventParamKeys.RING, null));
     }
+
+
     public void OnPoleDespawn(EventParameters param)
     {
         setPoleRef(param);
 
         _pole_refs.PoleLifetime.ReturnPole(_pole_queue.Dequeue());
     }
-    public void OnDespawnDone(EventParameters param)
+    public void OnPoleAdjust(EventParameters param)
     {
+        
         for (int i = _pole_refs.PositionArray.Length - 1; 0 < i; i--)
-        {
+        { // move leading poles forward
             setPole(_pole_refs.PositionArray[i-1].PoleRef, i, -1);
         }
 

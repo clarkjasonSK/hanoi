@@ -29,13 +29,12 @@ public class GameUIHandler : Singleton<GameUIHandler>, ISingleton, IEventObserve
 
     public void AddEventObservers()
     {
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetReset);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DISABLE, onAssetsDisable);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_ENABLE, onAssetsEnable);
+
         EventBroadcaster.Instance.AddObserver(EventKeys.COUNT_UPDATE, OnCountUpdate);
         EventBroadcaster.Instance.AddObserver(EventKeys.SLIDER_CHANGE, OnSliderChange);
-        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetReset);
-
-        // band aid fix, change later PLEASE
-        EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_DROP, OnPanelDrop);
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_MOVE_FINISH, OnPoleMoveFinish);
     }
 
     public void ResetButtonClicked()
@@ -47,7 +46,7 @@ public class GameUIHandler : Singleton<GameUIHandler>, ISingleton, IEventObserve
     #region Event Broadcaster Notifications
     public void OnCountUpdate(EventParameters param)
     {
-        _game_ui_refs.GameUI.IncrCount(param.GetParameter<int>(EventParamKeys.MOVE_COUNT, 0));
+        _game_ui_refs.GameUI.IncrCount(GameManager.Instance.MoveCount);
 
     }
     public void OnSliderChange(EventParameters param)
@@ -66,12 +65,12 @@ public class GameUIHandler : Singleton<GameUIHandler>, ISingleton, IEventObserve
         _game_ui_refs.GameUI.ResetCount();
     }
 
-    public void OnPanelDrop(EventParameters param = null)
+    public void onAssetsDisable(EventParameters param = null)
     {
         _game_ui_refs.GameUI.ToggleButton(false);
         _game_ui_refs.SliderScript.ToggleSlider(false);
     }
-    public void OnPoleMoveFinish(EventParameters param = null)
+    public void onAssetsEnable(EventParameters param = null)
     {
         _game_ui_refs.GameUI.ToggleButton(true);
         _game_ui_refs.SliderScript.ToggleSlider(true);

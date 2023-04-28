@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546d8e22ca0a58043ba2c0304045ad82, type: 3}
-  m_Name: PanelDrop
+  m_Script: {fileID: 11500000, guid: a10b040f8b1daee41b53d2ef7237c649, type: 3}
+  m_Name: AssetManager
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: 5a0738cd8e38c164d892394aefc69428, type: 3}
-  AudioOverridable: 0
-  Volume: 0.5
-  Pitch: 0.65
