@@ -6,10 +6,6 @@ public class LeverHandler : Singleton<LeverHandler>, IEventObserver
 {
     [SerializeField] private LeverRefs _lever_refs;
 
-    #region Event Parameters
-    private EventParameters leverParam;
-    #endregion
-
     #region Cache Params
     private Lever leverKey;
     private LeverPosition leverPosKey;
@@ -20,7 +16,6 @@ public class LeverHandler : Singleton<LeverHandler>, IEventObserver
         if (_lever_refs is null)
             _lever_refs = GetComponent<LeverRefs>();
 
-        leverParam = new EventParameters();
         AddEventObservers();
 
         isDone = true;
@@ -33,6 +28,14 @@ public class LeverHandler : Singleton<LeverHandler>, IEventObserver
 
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DISABLE, onAssetsDisable);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_ENABLE, onAssetsEnable);
+    }
+
+    private void setChosenLeverNumber(int leverNumber)
+    {
+        //sets the text mesh to match the number and angle of given levernumber.
+        // do this instead of assigning new color every time
+        _lever_refs.LeverChosenNumber.text = "" + leverNumber;
+        _lever_refs.LeverChosenNumber.transform.localEulerAngles = new Vector3(0,0, ConvertEulerAngle(72-(36*(leverNumber-3))));
     }
     private void setLeverKey(EventParameters param)
     {
@@ -63,6 +66,7 @@ public class LeverHandler : Singleton<LeverHandler>, IEventObserver
         if (leverKey.LeverPos == GameManager.Instance.RingAmount)
             return;
 
+        setChosenLeverNumber(leverKey.LeverPos);
         GameManager.Instance.SetRingsAmount(leverKey.LeverPos);
         EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
     }
