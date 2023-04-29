@@ -2,16 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverHandler : Singleton<LeverHandler>, ISingleton, IEventObserver
+public class LeverHandler : Singleton<LeverHandler>, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
-
     [SerializeField] private LeverRefs _lever_refs;
 
     #region Event Parameters
@@ -23,7 +15,7 @@ public class LeverHandler : Singleton<LeverHandler>, ISingleton, IEventObserver
     private LeverPosition leverPosKey;
     #endregion
 
-    public void Initialize()
+    public override void Initialize()
     {
         if (_lever_refs is null)
             _lever_refs = GetComponent<LeverRefs>();

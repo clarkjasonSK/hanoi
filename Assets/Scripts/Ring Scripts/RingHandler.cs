@@ -2,16 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
+public class RingHandler : Singleton<RingHandler>, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
-
     #region Ring Handler Variables
     [SerializeField] private RingRefs _ring_refs;
 
@@ -41,7 +33,7 @@ public class RingHandler : Singleton<RingHandler>, ISingleton, IEventObserver
     #endregion
 
     #region Initializers
-    public void Initialize()
+    public override void Initialize()
     {
         _ring_refs = GetComponent<RingRefs>();
         _rings = new List<Ring>();

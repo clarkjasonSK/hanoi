@@ -3,17 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AssetManager", menuName = "ScriptableObjects/Managers/AssetManager")]
-public class AssetManager : SingletonSO<AssetManager>, ISingleton, IEventObserver
+public class AssetManager : SingletonSO<AssetManager>, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
-
-    public void Initialize()
+    public override void Initialize()
     {
 
         AddEventObservers();

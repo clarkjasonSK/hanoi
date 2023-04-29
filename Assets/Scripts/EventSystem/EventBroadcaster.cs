@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EventBroadcaster", menuName = "ScriptableObjects/Managers/EventBroadcaster")]
-public class EventBroadcaster : SingletonSO<EventBroadcaster>, ISingleton
+public class EventBroadcaster : SingletonSO<EventBroadcaster>
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
-
     public delegate void ObserverAction(EventParameters param);
 
     private Dictionary<string, ObserverAction> _observers;
 
-    public void Initialize()
+    public override void Initialize()
     {
         if (_observers is null)
             _observers = new Dictionary<string, ObserverAction>();

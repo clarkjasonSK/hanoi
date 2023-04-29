@@ -12,16 +12,8 @@ public enum GameState
 }
 
 [CreateAssetMenu(fileName = "GameManager", menuName = "ScriptableObjects/Managers/GameManager")]
-public class GameManager : SingletonSO<GameManager>, ISingleton, IEventObserver
+public class GameManager : SingletonSO<GameManager>, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
-
     #region StateHandler Variables
     private StateHandler<GameState> _game_state_handler;
     public StateHandler<GameState> GameStateHandler
@@ -33,7 +25,6 @@ public class GameManager : SingletonSO<GameManager>, ISingleton, IEventObserver
         get { return _game_state_handler.CurrentState; }
     }
     #endregion
-
 
     #region Game Manager Variables
     [SerializeField] private GameValues _game_values;
@@ -62,7 +53,7 @@ public class GameManager : SingletonSO<GameManager>, ISingleton, IEventObserver
     #endregion
 
 
-    public void Initialize()
+    public override void Initialize()
     {
         if(_game_values is null )
             _game_values = ScriptableObjectsHelper.GetSO<GameValues>(FileNames.GAME_VALUES);

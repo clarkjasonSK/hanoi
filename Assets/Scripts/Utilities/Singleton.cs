@@ -45,6 +45,18 @@ public abstract class Singleton<T> : Singleton where T : MonoBehaviour //abstrac
         }
 
     }
+
+    #region ISingleton 
+    protected bool isDone = false;
+    public bool IsDoneInitializing
+    {
+        get { return isDone; }
+    }
+
+    public abstract void Initialize();
+
+    #endregion
+
     private void Awake()
     {
         if (_persistent)

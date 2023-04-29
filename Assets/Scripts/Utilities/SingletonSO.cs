@@ -8,7 +8,6 @@ using UnityEngine;
 */
 public abstract class SingletonSO<T> : SingletonSO where T : ScriptableObject //abstract singleton with generic T of constraint type ScriptableObject
 {
-
     private static T _instance; // local instance reference
     public static T Instance
     {
@@ -38,6 +37,17 @@ public abstract class SingletonSO<T> : SingletonSO where T : ScriptableObject //
             return _instance = ScriptableObjectsHelper.GetSO<T>(FileNames.SO_MANAGERS + typeof(T).ToString());
         }
     }
+
+    #region ISingleton 
+    protected bool isDone = false;
+    public bool IsDoneInitializing
+    {
+        get { return isDone; }
+    }
+
+    public abstract void Initialize();
+
+    #endregion
 
 }
 

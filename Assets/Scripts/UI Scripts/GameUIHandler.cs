@@ -2,15 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUIHandler : Singleton<GameUIHandler>, ISingleton, IEventObserver
+public class GameUIHandler : Singleton<GameUIHandler>, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
 
     [SerializeField] private GameUIRefs _game_ui_refs;
 
@@ -18,7 +11,7 @@ public class GameUIHandler : Singleton<GameUIHandler>, ISingleton, IEventObserve
     private int tempAmnt;
     #endregion
 
-    public void Initialize()
+    public override void Initialize()
     {
         _game_ui_refs = GetComponent<GameUIRefs>();
 

@@ -201,10 +201,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: StationaryAssetsParent
       objectReference: {fileID: 0}
-    - target: {fileID: 8130609471518066004, guid: 85c017fc023cab545be964095e0ef614, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8130609471518066011, guid: 85c017fc023cab545be964095e0ef614, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -248,22 +244,6 @@ PrefabInstance:
     - target: {fileID: 8130609471518066011, guid: 85c017fc023cab545be964095e0ef614, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130609472518968947, guid: 85c017fc023cab545be964095e0ef614, type: 3}
-      propertyPath: m_Color.b
-      value: 0.46431115
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130609472518968947, guid: 85c017fc023cab545be964095e0ef614, type: 3}
-      propertyPath: m_Color.g
-      value: 0.61433417
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130609472518968947, guid: 85c017fc023cab545be964095e0ef614, type: 3}
-      propertyPath: m_Color.r
-      value: 0.6981132
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130609472518968947, guid: 85c017fc023cab545be964095e0ef614, type: 3}
-      propertyPath: m_Intensity
-      value: 1.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85c017fc023cab545be964095e0ef614, type: 3}

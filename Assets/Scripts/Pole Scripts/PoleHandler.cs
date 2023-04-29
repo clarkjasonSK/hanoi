@@ -2,15 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
+public class PoleHandler : Singleton<PoleHandler>, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
 
     [SerializeField] private PoleRefs _pole_refs;
 
@@ -21,7 +14,7 @@ public class PoleHandler : Singleton<PoleHandler>, ISingleton, IEventObserver
     private Pole poleRef;
     #endregion
 
-    public void Initialize()
+    public override void Initialize()
     {
         _pole_refs = GetComponent<PoleRefs>();
         _pole_refs.PoleLifetime.StartPool();
