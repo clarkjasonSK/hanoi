@@ -46,19 +46,12 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
         ConveyorBeltHandler.Instance.Initialize();
         LeverHandler.Instance.Initialize();
         GameUIHandler.Instance.Initialize();
-
-        if (PoleHandler.Instance.IsDoneInitializing && 
-            RingHandler.Instance.IsDoneInitializing &&
-            PanelHandler.Instance.IsDoneInitializing &&
-            ConveyorBeltHandler.Instance.IsDoneInitializing &&
-            LeverHandler.Instance.IsDoneInitializing &&
-            GameUIHandler.Instance.IsDoneInitializing
-            )
-        {
-            Debug.Log("Dependencies initialized!");
-            this.gameObject.SetActive(false);
-            EventBroadcaster.Instance.PostEvent(EventKeys.GAME_START, null);
-        }
+        VFXHandler.Instance.Initialize();
+        
+        Debug.Log("Dependencies initialized!");
+        this.gameObject.SetActive(false);
+        EventBroadcaster.Instance.PostEvent(EventKeys.GAME_START, null);
+        
 
     }
 }

@@ -6,6 +6,9 @@ public static class Dictionary
 {
     public const string MOVES = "Moves: ";
     public const string RING = "Rings: ";
+
+    public const float RING_VFX_BASE_RAD = 6.2f;
+    public const float RING_VFX_DECREMENT = .7f;
 }
 
 public static class PoleDictionary

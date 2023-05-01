@@ -54,11 +54,18 @@ public class EventKeys{
     public const string SLIDER_CHANGE = "SLIDER_CHANGE";
 
 
+    public const string RING_HIT = "RING_HIT";
+
+
+
 }
 
 public class EventParamKeys
 {
-    public const string RING = "RING"; 
+    public const string RING = "RING";
+
+    public const string RING_HIT_SFX = "RING_HIT_SFX";
+    public const string RING_HIT_VFX = "RING_HIT_VFX";
 
     public const string POLE = "POLE";
 

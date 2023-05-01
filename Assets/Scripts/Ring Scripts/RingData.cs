@@ -16,11 +16,12 @@ public class RingData : MonoBehaviour
         get { return _is_smallest_ring; }
         set { _is_smallest_ring = value; }
     }
-    private bool _ring_event_posted;
-    public bool RingEvent
+
+    private bool _ring_collision;
+    public bool RingCollision
     {
-        get { return _ring_event_posted; }
-        set { _ring_event_posted = value; }
+        get { return _ring_collision; }
+        set { _ring_collision = value; }
     }
 
     #region StateHandler Variables
@@ -39,7 +40,7 @@ public class RingData : MonoBehaviour
     {
         //_ring_size = 10 - _ring_size;
         _is_smallest_ring = false;
-        _ring_event_posted = false;
+        _ring_collision = false;
         _ring_state_handler.SwitchState(RingState.STACKED);
     }
 

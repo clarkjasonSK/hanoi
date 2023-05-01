@@ -20,6 +20,8 @@ public class ObjectPooling : MonoBehaviour
 
     public bool instantiateOnAwake = true;
 
+    private GameObject tempGameObject;
+    private Poolable tempPoolable;
     void Awake()
     {
         if (instantiateOnAwake)
@@ -35,9 +37,9 @@ public class ObjectPooling : MonoBehaviour
 
     public GameObject generateObject()
     {
-        GameObject tempObject = Instantiate(ObjectTemplate, ObjectTransform);
-        tempObject.SetActive(false);
-        Poolable tempPoolable = tempObject.GetComponent<Poolable>();
+        tempGameObject = Instantiate(ObjectTemplate, ObjectTransform);
+        tempGameObject.SetActive(false);
+        tempPoolable = tempGameObject.GetComponent<Poolable>();
 
         if (tempPoolable != null)
         {
@@ -45,14 +47,14 @@ public class ObjectPooling : MonoBehaviour
             tempPoolable.SetObjectPool(this);
         }
 
-        return tempObject;
+        return tempGameObject;
     }
 
     public void onGetObject(GameObject gameObj)
     {
         gameObj.SetActive(true);
 
-        Poolable tempPoolable = gameObj.GetComponent<Poolable>();
+        tempPoolable = gameObj.GetComponent<Poolable>();
         if (tempPoolable != null)
         {
             tempPoolable.OnActivate();
@@ -62,7 +64,7 @@ public class ObjectPooling : MonoBehaviour
     public void onReleaseObject(GameObject gameObj)
     {
         gameObj.SetActive(false);
-        Poolable tempPoolable = gameObj.GetComponent<Poolable>();
+        tempPoolable = gameObj.GetComponent<Poolable>();
         if (tempPoolable != null)
         {
             tempPoolable.OnDeactivate();
