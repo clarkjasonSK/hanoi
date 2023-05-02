@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5160e1970aa809d47a0e2b2c0f9911f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectTemplate: {fileID: 4589312417372917569, guid: 25082db4e94ca22478163fc1d5ec53e4, type: 3}
+  ObjectTemplate: {fileID: 4589312417372917569, guid: aaed22231f8e38f41a82f97f04bc8791, type: 3}
   ObjectTransform: {fileID: 2646222776195488616}
   CollectionCheck: 0
   InitialPoolSize: 7
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _persistent: 0
   _vfx_refs: {fileID: 2646222777125793366}
+  _vis_vals: {fileID: 0}
 --- !u!114 &2646222777125793366
 MonoBehaviour:
   m_ObjectHideFlags: 0
