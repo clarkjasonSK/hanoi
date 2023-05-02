@@ -28,8 +28,6 @@ public class Ring : MonoBehaviour
 
     #endregion
 
-
-    [SerializeField] private ParticleSystem _ring_hit_vfx;
     [SerializeField] private GameValues _game_values;
 
     private IEnumerator _ring_collision_cooldown;
@@ -89,12 +87,12 @@ public class Ring : MonoBehaviour
         }
         _ring_param = new EventParameters();
         _ring_param.AddParameter(EventParamKeys.RING, this);
-        _ring_param.AddParameter(EventParamKeys.RING_HIT_VFX, _ring_hit_vfx);
 
 
+        /*
         var tempShape = _ring_hit_vfx.shape;
 
-        tempShape.radius = Dictionary.RING_VFX_BASE_RAD - (_ring_data.RingSize * Dictionary.RING_VFX_DECREMENT);
+        tempShape.radius = Dictionary.RING_VFX_BASE_RAD - (_ring_data.RingSize * Dictionary.RING_VFX_DECREMENT);*/
 
     }
 
@@ -111,13 +109,6 @@ public class Ring : MonoBehaviour
         _ring_contrlr.Reset();
     }
 
-    private void playVFX(Vector3 contactPos)
-    {
-        //_ring_hit_vfx.transform.position = contactPos;
-        //Debug.Log("vfx played! ");
-        _ring_hit_vfx.Play();
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (_ring_data.RingCollision)
@@ -127,7 +118,10 @@ public class Ring : MonoBehaviour
 
         _ring_hit_sfx.PlaySFX(_audio_src);
 
-        //playVFX(collision.contacts[0].point);
+        // attach collision position
+        //_ring_param.AddParameter(EventParamKeys.RING_HIT_VFX, new Vector3(transform.position.x, collision.contacts[0].point.y, transform.position.z ) );
+        //_ring_param.AddParameter(EventParamKeys.RING_HIT_VFX, transform.position );
+
         EventBroadcaster.Instance.PostEvent(EventKeys.RING_HIT, _ring_param);
 
         if (!_ring_data.IsSmallestRing || collision.gameObject.tag != TagNames.RING)
@@ -138,6 +132,9 @@ public class Ring : MonoBehaviour
     }
     private void startRingCollisionCooldown()
     {
+        if (!this.gameObject.activeInHierarchy)
+            return;
+
         _ring_data.RingCollision = true;
         _ring_collision_cooldown = ringCollisionCooldown();
         StartCoroutine(_ring_collision_cooldown);

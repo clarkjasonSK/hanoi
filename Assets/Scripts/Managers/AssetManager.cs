@@ -5,8 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AssetManager", menuName = "ScriptableObjects/Managers/AssetManager")]
 public class AssetManager : SingletonSO<AssetManager>, IEventObserver
 {
+    [SerializeField] private VisualValues _visual_values;
+    public VisualValues VisualValues
+    {
+        get { return _visual_values; }
+    }
+
     public override void Initialize()
     {
+        if (_visual_values is null)
+            _visual_values = ScriptableObjectsHelper.GetSO<VisualValues>(FileNames.VISUAL_VALUES);
 
         AddEventObservers();
 
