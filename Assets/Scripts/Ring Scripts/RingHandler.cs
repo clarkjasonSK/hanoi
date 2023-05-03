@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RingHandler : Singleton<RingHandler>, IEventObserver
+public class RingHandler : Handler
 {
     #region Ring Handler Variables
     [SerializeField] private RingRefs _ring_refs;
@@ -39,8 +39,6 @@ public class RingHandler : Singleton<RingHandler>, IEventObserver
         _rings = new List<Ring>();
         _ring_params = new EventParameters();
         AddEventObservers();
-
-        isDone = true;
     }
     public void InstantiateRings(int ringAmount)
     {
@@ -58,7 +56,7 @@ public class RingHandler : Singleton<RingHandler>, IEventObserver
         _ring_despawn_count = 0;
     }
    
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_INIT, OnRingSpawn);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetsReset);

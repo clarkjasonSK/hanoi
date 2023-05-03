@@ -26,7 +26,7 @@ public static class TagNames
 
     public const string LEVER_HANDLE = "LeverHandle";
 
-    public const string HANOI_SCENE = "HanoiScene";
+    public const string RING_PARENT = "RingParent";
 } 
 
 public static class FileNames

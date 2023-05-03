@@ -32,6 +32,9 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
               {
                   Debug.Log("Async Assets loading finished!");
                   loadDependencies();
+
+                  this.gameObject.SetActive(false);
+                  EventBroadcaster.Instance.PostEvent(EventKeys.GAME_START, null);
               }
           };
 
@@ -42,23 +45,21 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
         if (gameobjectParent.GetComponent<Handler>() is null)
             return;
 
-        Debug.Log("found handler!");
+        //Debug.Log("found handler!");
         gameobjectParent.GetComponent<Handler>().Initialize();
     }
 
     private void loadDependencies()
     {
-        PoleHandler.Instance.Initialize(); // POLE BEFORE RING 
-        RingHandler.Instance.Initialize();
-        PanelHandler.Instance.Initialize();
-        ConveyorBeltHandler.Instance.Initialize();
+        //PoleHandler.Instance.Initialize();
+        //RingHandler.Instance.Initialize();
+        //PanelHandler.Instance.Initialize();
+        //ConveyorBeltHandler.Instance.Initialize();
         //LeverHandler.Instance.Initialize();
         GameUIHandler.Instance.Initialize();
-        VFXHandler.Instance.Initialize();
+        //VFXHandler.Instance.Initialize();
         
         Debug.Log("Dependencies initialized!");
-        this.gameObject.SetActive(false);
-        EventBroadcaster.Instance.PostEvent(EventKeys.GAME_START, null);
         
 
     }

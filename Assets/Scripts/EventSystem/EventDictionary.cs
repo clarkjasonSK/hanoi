@@ -55,6 +55,7 @@ public class EventKeys{
 
 
     public const string RING_HIT = "RING_HIT";
+    public const string VFX_STOP = "VFX_STOP";
 
 
 
@@ -74,4 +75,6 @@ public class EventParamKeys
 
     public const string MOVE_COUNT = "MOVE_COUNT";
     public const string SLIDER_NUMBER = "SLIDER_NUMBER";
+
+    public const string VFX_PARTICLE = "VFX_PARTICLE";
 }

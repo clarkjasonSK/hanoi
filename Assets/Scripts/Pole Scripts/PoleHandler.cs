@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoleHandler : Singleton<PoleHandler>, IEventObserver
+public class PoleHandler : Handler
 {
 
     [SerializeField] private PoleRefs _pole_refs;
@@ -21,10 +21,8 @@ public class PoleHandler : Singleton<PoleHandler>, IEventObserver
 
         _pole_queue = new Queue<Pole>();
         AddEventObservers();
-
-        isDone = true;
     }
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_INIT, OnPolesInit);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetsReset);
@@ -56,7 +54,7 @@ public class PoleHandler : Singleton<PoleHandler>, IEventObserver
     }
     private void dropRing()
     {
-        RingHandler.Instance.DropRing(poleRef.transform.localPosition);
+        _pole_refs.RingHandler.DropRing(poleRef.transform.localPosition);
         EventBroadcaster.Instance.PostEvent(EventKeys.RING_DROPPED, null);
     }
 
@@ -100,23 +98,23 @@ public class PoleHandler : Singleton<PoleHandler>, IEventObserver
 
     public void OnPosEnter(EventParameters param)
     {
-        if (!RingHandler.Instance.HasFloatingRing)
+        if (!_pole_refs.RingHandler.HasFloatingRing)
             return;
 
         setPoleRef(param);
-        RingHandler.Instance.MoveFloatingRing(poleRef.transform.localPosition);
+        _pole_refs.RingHandler.MoveFloatingRing(poleRef.transform.localPosition);
     }
     public void OnPosPress(EventParameters param = null)
     {
         setPoleRef(param);
 
-        if (!RingHandler.Instance.HasFloatingRing) // if no floating ring, try to make top ring float
+        if (!_pole_refs.RingHandler.HasFloatingRing) // if no floating ring, try to make top ring float
         {
             if (poleRef.GetRingCount() == 0)
                 return;
 
             _origin_pole = poleRef;
-            RingHandler.Instance.FloatRing(_origin_pole.BorrowTopRing());
+            _pole_refs.RingHandler.FloatRing(_origin_pole.BorrowTopRing());
 
             return;
         }
@@ -133,11 +131,11 @@ public class PoleHandler : Singleton<PoleHandler>, IEventObserver
 
 
         // if destination pole top ring is smaller than floating ring (smaller == higher number)
-        if (poleRef.BorrowTopRing().RingSize > RingHandler.Instance.FloatingRingSize) 
+        if (poleRef.BorrowTopRing().RingSize > _pole_refs.RingHandler.FloatingRingSize) 
             return;
 
         // if destination pole's top ring is bigger than floating ring (i.e. if equal, skip this step)
-        if (!(poleRef.BorrowTopRing().RingSize == RingHandler.Instance.FloatingRingSize))
+        if (!(poleRef.BorrowTopRing().RingSize == _pole_refs.RingHandler.FloatingRingSize))
         {
             addRing();
         }

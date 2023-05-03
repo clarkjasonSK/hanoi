@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelHandler : Singleton<PanelHandler>, IEventObserver
+public class PanelHandler : Handler
 {
     [SerializeField] private PanelRefs _panel_refs;
 
@@ -10,10 +10,8 @@ public class PanelHandler : Singleton<PanelHandler>, IEventObserver
     {
         _panel_refs = GetComponent<PanelRefs>();
         AddEventObservers();
-
-        isDone = true;
     }
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_DROP, OnPanelDrop);
         EventBroadcaster.Instance.AddObserver(EventKeys.PANEL_RISE, OnPanelRise);

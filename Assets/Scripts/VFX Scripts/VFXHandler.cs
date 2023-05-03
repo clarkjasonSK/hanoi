@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VFXHandler : Singleton<VFXHandler>, IEventObserver
+public class VFXHandler : Handler
 {
     [SerializeField] private VFXRefs _vfx_refs;
-
 
 
     [SerializeField] private VisualValues _vis_vals;
@@ -24,17 +23,11 @@ public class VFXHandler : Singleton<VFXHandler>, IEventObserver
         _vfx_refs.VFXLifetime.StartPooling();
 
         AddEventObservers();
-
-        isDone = true;
     }
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.RING_HIT, OnRingHit);
-    }
-
-    public void ReleaseVFX(GameObject vfx)
-    {
-        _vfx_refs.VFXLifetime.ReturnRingVFX(vfx.GetComponent<SimpleVFX>());
+        EventBroadcaster.Instance.AddObserver(EventKeys.VFX_STOP, OnVFXStop);
     }
 
     private void setRingVFX(GameObject newVFX, Ring ring)
@@ -56,6 +49,10 @@ public class VFXHandler : Singleton<VFXHandler>, IEventObserver
 
         setRingVFX(_vfx_refs.VFXLifetime.GetRingVFX(GameManager.Instance.GoalPoleWhole), param.GetParameter<Ring>(EventParamKeys.RING, null));
 
+    }
+    public void OnVFXStop(EventParameters param)
+    {
+        _vfx_refs.VFXLifetime.ReturnRingVFX(param.GetParameter<SimpleVFX>(EventParamKeys.VFX_PARTICLE, null));
     }
 
     #endregion

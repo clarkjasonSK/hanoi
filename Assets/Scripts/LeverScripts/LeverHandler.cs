@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverHandler : Handler, IEventObserver
+public class LeverHandler : Handler
 {
     [SerializeField] private LeverRefs _lever_refs;
 
@@ -19,7 +19,7 @@ public class LeverHandler : Handler, IEventObserver
         AddEventObservers();
     }
 
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.LEVER_POS_HOVER, OnLeverPosHover);
         EventBroadcaster.Instance.AddObserver(EventKeys.LEVER_POS_CHOSEN, OnLeverPosChosen);

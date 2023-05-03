@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SimpleVFX : Poolable
 {
+    private EventParameters _vfx_param;
+
+    private void Start()
+    {
+        _vfx_param = new EventParameters();
+        _vfx_param.AddParameter(EventParamKeys.VFX_PARTICLE, this);
+    }
     void OnParticleSystemStopped()
     {
         if(poolOrigin is null)
@@ -12,7 +19,8 @@ public class SimpleVFX : Poolable
             return;
         }
 
-        VFXHandler.Instance.ReleaseVFX(this.gameObject);
+        EventBroadcaster.Instance.PostEvent(EventKeys.VFX_STOP, _vfx_param);
+       // VFXHandler.Instance.ReleaseVFX(this.gameObject);
     }
 
     #region Poolable

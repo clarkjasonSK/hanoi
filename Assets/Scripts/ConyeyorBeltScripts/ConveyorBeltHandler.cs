@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, IEventObserver
+public class ConveyorBeltHandler : Handler
 {
     [SerializeField] ConveyorBeltRefs _con_belt_refs;
 
@@ -12,11 +12,9 @@ public class ConveyorBeltHandler : Singleton<ConveyorBeltHandler>, IEventObserve
         _con_belt_refs.ConveyorBelt.Initialize();
 
         AddEventObservers();
-
-        isDone = true;
     }
 
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_INIT, OnBeltMove);
 

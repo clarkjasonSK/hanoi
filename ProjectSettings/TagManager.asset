@@ -8,6 +8,7 @@ TagManager:
   - Pole
   - DespawnArea
   - LeverHandle
+  - RingParent
   layers:
   - Default
   - TransparentFX
