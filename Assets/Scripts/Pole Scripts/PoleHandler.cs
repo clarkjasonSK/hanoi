@@ -25,6 +25,7 @@ public class PoleHandler : Handler
     public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_INIT, OnPolesInit);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DISABLE, OnAssetsDisable);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetsReset);
 
         EventBroadcaster.Instance.AddObserver(EventKeys.POLE_SPAWN, OnPoleSpawn);
@@ -165,10 +166,15 @@ public class PoleHandler : Handler
         }
 
     }
-
-    public void OnAssetsReset(EventParameters param)
+    public void OnAssetsDisable(EventParameters param = null)
     {
-        for(int i=2; i<5; i++)
+        _pole_refs.PositionArray[_pole_refs.PositionArray.Length - 1].TogglePolePosition(false);
+    }
+
+    public void OnAssetsReset(EventParameters param = null)
+    {
+        _pole_refs.PositionArray[_pole_refs.PositionArray.Length - 1].TogglePolePosition(true);
+        for (int i=2; i<5; i++)
         {
             _pole_refs.PositionArray[i].PoleRef.ResetPole(GameManager.Instance.RingAmount);
         }

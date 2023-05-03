@@ -17,16 +17,18 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         set { _pole_ref = value; }
     }
 
+    [SerializeField] private BoxCollider _pole_pos_collider;
+
     #region Event Parameters
     private EventParameters poleParams;
     #endregion
 
     public void Initialize()
     {
-
-
         if(poleParams is null)
             poleParams = new EventParameters();
+        if (_pole_pos_collider is null)
+            _pole_pos_collider = GetComponent<BoxCollider>();
 
         poleParams.AddParameter(EventParamKeys.POLE, _pole_ref);
     }
@@ -39,6 +41,12 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (_pole_order < 1)
             return false;
         return true;
+    }
+
+    public void TogglePolePosition(bool toggle)
+    {
+        _pole_pos_collider.enabled = toggle;
+
     }
 
     #region Pointer Events
