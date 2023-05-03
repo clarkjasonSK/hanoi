@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class VFXRefs : MonoBehaviour
 {
-    public ObjectPooling RingHitPool;
+    public VFXLifetime VFXLifetime;
 }

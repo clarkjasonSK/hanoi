@@ -6,14 +6,11 @@ public class VFXHandler : Singleton<VFXHandler>, IEventObserver
 {
     [SerializeField] private VFXRefs _vfx_refs;
 
+
+
     [SerializeField] private VisualValues _vis_vals;
 
-
-
     #region Cache Variables
-    private Ring ringHitKey;
-    //private Vector3 ringHitPos;
-    private GameObject tempGameObj;
     #endregion
 
     public override void Initialize()
@@ -24,7 +21,7 @@ public class VFXHandler : Singleton<VFXHandler>, IEventObserver
         if (_vis_vals is null)
             _vis_vals = AssetManager.Instance.VisualValues;
 
-        _vfx_refs.RingHitPool.startPooling();
+        _vfx_refs.VFXLifetime.StartPooling();
 
         AddEventObservers();
 
@@ -37,28 +34,27 @@ public class VFXHandler : Singleton<VFXHandler>, IEventObserver
 
     public void ReleaseVFX(GameObject vfx)
     {
-        _vfx_refs.RingHitPool.GameObjectPool.Release(vfx);
+        _vfx_refs.VFXLifetime.ReturnRingVFX(vfx.GetComponent<SimpleVFX>());
     }
 
-    private void setRingHitKeyRefs(EventParameters param)
+    private void setRingVFX(GameObject newVFX, Ring ring)
     {
-        ringHitKey = param.GetParameter<Ring>(EventParamKeys.RING, null);
-        //ringHitPos = param.GetParameter<Vector3>(EventParamKeys.RING_HIT_VFX, Vector3.zero);
+        newVFX.transform.position = ring.transform.position;
+        setVFXRadius(newVFX.GetComponent<ParticleSystem>().shape, ring.RingSize);
+
+        newVFX.GetComponent<ParticleSystem>().Play();
     }
+    private void setVFXRadius(ParticleSystem.ShapeModule vfxShape, int targetSize)
+    {
+        vfxShape.radius = _vis_vals.RingVfxBaseRadius - ((targetSize - 1) * _vis_vals.ringVfxDecrement);
+    }
+
     #region Event Broadcaster Notifications
 
     public void OnRingHit(EventParameters param)
     {
-        setRingHitKeyRefs(param);
 
-        tempGameObj = _vfx_refs.RingHitPool.GameObjectPool.Get();
-        tempGameObj.transform.position = ringHitKey.transform.position;
-
-        ParticleSystem.ShapeModule tempShape = tempGameObj.GetComponent<ParticleSystem>().shape;
-
-        tempShape.radius = _vis_vals.RingVfxBaseRadius - ((ringHitKey.RingSize-1)* _vis_vals.ringVfxDecrement);
-
-        tempGameObj.GetComponent<ParticleSystem>().Play();
+        setRingVFX(_vfx_refs.VFXLifetime.GetRingVFX(GameManager.Instance.GoalPoleWhole), param.GetParameter<Ring>(EventParamKeys.RING, null));
 
     }
 

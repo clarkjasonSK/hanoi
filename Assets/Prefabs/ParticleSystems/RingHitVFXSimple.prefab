@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4589312417372917583}
   - component: {fileID: 4589312417372917568}
   m_Layer: 0
-  m_Name: RingHitVFX
+  m_Name: RingHitVFXSimple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

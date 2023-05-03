@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5160e1970aa809d47a0e2b2c0f9911f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectTemplate: {fileID: 4589312417372917569, guid: aaed22231f8e38f41a82f97f04bc8791, type: 3}
+  ObjectTemplate: {fileID: 4589312417372917569, guid: 25082db4e94ca22478163fc1d5ec53e4, type: 3}
   ObjectTransform: {fileID: 2646222776195488616}
   CollectionCheck: 0
   InitialPoolSize: 7
@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 2646222777125793364}
   - component: {fileID: 2646222777125793365}
   - component: {fileID: 2646222777125793366}
+  - component: {fileID: 7827976186831386539}
   m_Layer: 0
   m_Name: VFXParent
   m_TagString: Untagged
@@ -111,4 +112,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b6119f1ca43744fa43f3fc827de1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RingHitPool: {fileID: 2646222776195488623}
+  VFXLifetime: {fileID: 7827976186831386539}
+--- !u!114 &7827976186831386539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2646222777125793367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11dfea01fb669f4fae96894aacfaeb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ring_simple_vfx_pool: {fileID: 2646222776195488623}
+  _ring_fancy_vfx: {fileID: 4589312417372917569, guid: aaed22231f8e38f41a82f97f04bc8791, type: 3}
