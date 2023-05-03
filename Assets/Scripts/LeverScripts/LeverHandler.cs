@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverHandler : Singleton<LeverHandler>, IEventObserver
+public class LeverHandler : Handler, IEventObserver
 {
     [SerializeField] private LeverRefs _lever_refs;
 
@@ -17,8 +17,6 @@ public class LeverHandler : Singleton<LeverHandler>, IEventObserver
             _lever_refs = GetComponent<LeverRefs>();
 
         AddEventObservers();
-
-        isDone = true;
     }
 
     public void AddEventObservers()
@@ -35,7 +33,7 @@ public class LeverHandler : Singleton<LeverHandler>, IEventObserver
         //sets the text mesh to match the number and angle of given levernumber.
         // do this instead of assigning new color every time
         _lever_refs.LeverChosenNumber.text = "" + leverNumber;
-        _lever_refs.LeverChosenNumber.transform.localEulerAngles = new Vector3(0,0, ConvertEulerAngle(72-(36*(leverNumber-3))));
+        _lever_refs.LeverChosenNumber.transform.localEulerAngles = new Vector3(0,0, LeverHelper.ConvertEulerAngle(72-(36*(leverNumber-3))));
     }
     private void setLeverKey(EventParameters param)
     {
@@ -82,12 +80,4 @@ public class LeverHandler : Singleton<LeverHandler>, IEventObserver
 
     #endregion
 
-
-    #region Helper Functions
-    public float ConvertEulerAngle(float angle)
-    {
-        // if angle is greater than left side of lever, subtact full circle angle to get right side
-        return angle > 90 ? angle - 360 : angle;
-    }
-    #endregion
 }

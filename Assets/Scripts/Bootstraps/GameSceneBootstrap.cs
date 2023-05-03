@@ -24,8 +24,7 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
               }
 
               //Debug.Log("Insantiating: " + asset.name);
-              Instantiate(asset, HanoiSceneParent);
-
+              initializeHandler(Instantiate(asset, HanoiSceneParent));
 
           }).Completed += (asyncOperation) =>
           {
@@ -38,13 +37,22 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
 
     }
 
+    private void initializeHandler(GameObject gameobjectParent)
+    {
+        if (gameobjectParent.GetComponent<Handler>() is null)
+            return;
+
+        Debug.Log("found handler!");
+        gameobjectParent.GetComponent<Handler>().Initialize();
+    }
+
     private void loadDependencies()
     {
         PoleHandler.Instance.Initialize(); // POLE BEFORE RING 
         RingHandler.Instance.Initialize();
         PanelHandler.Instance.Initialize();
         ConveyorBeltHandler.Instance.Initialize();
-        LeverHandler.Instance.Initialize();
+        //LeverHandler.Instance.Initialize();
         GameUIHandler.Instance.Initialize();
         VFXHandler.Instance.Initialize();
         

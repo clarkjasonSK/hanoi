@@ -15,8 +15,8 @@ public class LeverPosition : MonoBehaviour, IPointerEnterHandler
         get { return lever_pos_num; }
     }
     public int LeverPosRotationX
-    { // if angle is greater than left quarter, convert to negative
-        get { return transform.localEulerAngles.x > 90 ? (int)(transform.localEulerAngles.x - 360) : (int)(transform.localEulerAngles.x); }
+    { 
+        get { return (int)LeverHelper.ConvertEulerAngle(transform.localEulerAngles.x); }
     }
 
     private EventParameters leverPosParam;
@@ -36,11 +36,11 @@ public class LeverPosition : MonoBehaviour, IPointerEnterHandler
         if (!other.CompareTag(TagNames.LEVER_HANDLE))
             return;
 
-        if (LeverHandler.Instance.ConvertEulerAngle(other.transform.localEulerAngles.x) > LeverHandler.Instance.ConvertEulerAngle(transform.localEulerAngles.x))
+        if (LeverHelper.ConvertEulerAngle(other.transform.localEulerAngles.x) > LeverHelper.ConvertEulerAngle(transform.localEulerAngles.x))
         {
             _lever_rotate_right.PlaySFX(_audio_src);
         }
-        else if (LeverHandler.Instance.ConvertEulerAngle(other.transform.localEulerAngles.x) < LeverHandler.Instance.ConvertEulerAngle(transform.localEulerAngles.x))
+        else if (LeverHelper.ConvertEulerAngle(other.transform.localEulerAngles.x) < LeverHelper.ConvertEulerAngle(transform.localEulerAngles.x))
         {
             _lever_rotate_left.PlaySFX(_audio_src);
         }

@@ -29,9 +29,9 @@ public class LeverController : MonoBehaviour
     }
     private IEnumerator rotatingLever(int rotAngle, float rotSpeed)
     {
-        while (LeverHandler.Instance.ConvertEulerAngle(_lever_handle.transform.localEulerAngles.x) != rotAngle)
+        while (LeverHelper.ConvertEulerAngle(_lever_handle.transform.localEulerAngles.x) != rotAngle)
         {
-            _lever_handle.transform.localEulerAngles = new Vector3(Mathf.MoveTowards(LeverHandler.Instance.ConvertEulerAngle(_lever_handle.transform.localEulerAngles.x), rotAngle, rotSpeed * Time.deltaTime), 0, 0);
+            _lever_handle.transform.localEulerAngles = new Vector3(Mathf.MoveTowards(LeverHelper.ConvertEulerAngle(_lever_handle.transform.localEulerAngles.x), rotAngle, rotSpeed * Time.deltaTime), 0, 0);
             yield return null;
         }
 

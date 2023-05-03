@@ -840,8 +840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191acd741762cbf4085b54b70a76550f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _persistent: 0
-  _lever_refs: {fileID: 9063127923221613511}
+  _lever_refs: {fileID: 0}
 --- !u!114 &9063127923221613511
 MonoBehaviour:
   m_ObjectHideFlags: 0
