@@ -168,12 +168,12 @@ public class PoleHandler : Handler
     }
     public void OnAssetsDisable(EventParameters param = null)
     {
-        _pole_refs.PositionArray[_pole_refs.PositionArray.Length - 1].TogglePolePosition(false);
+        _pole_refs.PositionArray[_pole_refs.PositionArray.Length - 1].TogglePosColliders(false);
     }
 
     public void OnAssetsReset(EventParameters param = null)
     {
-        _pole_refs.PositionArray[_pole_refs.PositionArray.Length - 1].TogglePolePosition(true);
+        _pole_refs.PositionArray[_pole_refs.PositionArray.Length - 1].TogglePosColliders(true);
         for (int i=2; i<5; i++)
         {
             _pole_refs.PositionArray[i].PoleRef.ResetPole(GameManager.Instance.RingAmount);

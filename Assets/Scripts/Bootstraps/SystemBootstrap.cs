@@ -18,14 +18,9 @@ public static class SystemBootstrap
 
         UIManager.Instance.Initialize();
 
-        if (EventBroadcaster.Instance.IsDoneInitializing &&
-            GameManager.Instance.IsDoneInitializing &&
-            AssetManager.Instance.IsDoneInitializing &&
-            UIManager.Instance.IsDoneInitializing)
-        {
-            Debug.Log("System initialized!");
-            EventBroadcaster.Instance.PostEvent(EventKeys.SYSTEM_START, null);
-        }
+        Debug.Log("System initialized!");
+        EventBroadcaster.Instance.PostEvent(EventKeys.SYSTEM_START, null);
+
     }
 
 }

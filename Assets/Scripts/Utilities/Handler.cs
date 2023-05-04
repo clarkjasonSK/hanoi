@@ -7,6 +7,6 @@ public abstract class Handler: MonoBehaviour, ISingleton, IEventObserver
     protected virtual void OnAwake() { } // optional to use to use an an Init method;
 
     public abstract void Initialize();
-    public abstract void AddEventObservers();
+    public virtual void AddEventObservers() { }
 }
 

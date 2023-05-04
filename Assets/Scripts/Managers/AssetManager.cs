@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AssetManager", menuName = "ScriptableObjects/Managers/AssetManager")]
-public class AssetManager : SingletonSO<AssetManager>, IEventObserver
+public class AssetManager : SingletonSO<AssetManager>, ISingleton, IEventObserver
 {
     [SerializeField] private VisualValues _visual_values;
     public VisualValues VisualValues
@@ -17,11 +17,9 @@ public class AssetManager : SingletonSO<AssetManager>, IEventObserver
             _visual_values = ScriptableObjectsHelper.GetSO<VisualValues>(FileNames.VISUAL_VALUES);
 
         AddEventObservers();
-
-        isDone = true;
     }
 
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
 
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);

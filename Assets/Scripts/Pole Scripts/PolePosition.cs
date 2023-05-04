@@ -43,7 +43,7 @@ public class PolePosition : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         return true;
     }
 
-    public void TogglePolePosition(bool toggle)
+    public void TogglePosColliders(bool toggle)
     {
         _pole_pos_collider.enabled = toggle;
 

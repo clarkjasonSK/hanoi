@@ -12,7 +12,7 @@ public enum GameState
 }
 
 [CreateAssetMenu(fileName = "GameManager", menuName = "ScriptableObjects/Managers/GameManager")]
-public class GameManager : SingletonSO<GameManager>, IEventObserver
+public class GameManager : SingletonSO<GameManager>, ISingleton, IEventObserver
 {
     #region StateHandler Variables
     private StateHandler<GameState> _game_state_handler;
@@ -52,7 +52,6 @@ public class GameManager : SingletonSO<GameManager>, IEventObserver
     [SerializeField] private GameAssistant _game_assistant;
     #endregion
 
-
     public override void Initialize()
     {
         if(_game_values is null )
@@ -69,10 +68,8 @@ public class GameManager : SingletonSO<GameManager>, IEventObserver
         _game_data.RingsAmount = 3;
         _game_data.ResetGame();
         AddEventObservers();
-
-        isDone = true;
     }
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.SYSTEM_START, OnMenuStart);
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);

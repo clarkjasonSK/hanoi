@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUIHandler : Singleton<GameUIHandler>, IEventObserver
+public class GameUIHandler : Singleton<GameUIHandler>, ISingleton, IEventObserver
 {
 
     [SerializeField] private GameUIRefs _game_ui_refs;
@@ -16,11 +16,9 @@ public class GameUIHandler : Singleton<GameUIHandler>, IEventObserver
         _game_ui_refs = GetComponent<GameUIRefs>();
 
         AddEventObservers();
-
-        isDone = true;
     }
 
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetReset);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DISABLE, onAssetsDisable);
