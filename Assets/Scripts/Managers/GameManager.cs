@@ -41,6 +41,7 @@ public class GameManager : SingletonSO<GameManager>, ISingleton, IEventObserver
     public int MoveCount
     {
         get { return _game_data.MoveCount; }
+        set { _game_data.MoveCount++; }
     }
     public bool GoalPoleWhole
     {
@@ -84,12 +85,7 @@ public class GameManager : SingletonSO<GameManager>, ISingleton, IEventObserver
     {
         _game_data.RingsAmount = ringsAmount;
     }
-    public void IncrMoveCount()
-    {
-        _game_data.MoveCount++;
-
-    }
-    public void SetEndPoleFull()
+    public void EndPoleFull()
     {
         _game_data.GoalPoleWhole = true;
     }

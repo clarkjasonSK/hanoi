@@ -11,11 +11,14 @@ public class AssetManager : SingletonSO<AssetManager>, ISingleton, IEventObserve
         get { return _visual_values; }
     }
 
+
+    private EventParameters assetParameters;
     public override void Initialize()
     {
         if (_visual_values is null)
             _visual_values = ScriptableObjectsHelper.GetSO<VisualValues>(FileNames.VISUAL_VALUES);
 
+        assetParameters = new EventParameters();
         AddEventObservers();
     }
 
@@ -42,14 +45,16 @@ public class AssetManager : SingletonSO<AssetManager>, ISingleton, IEventObserve
     }
     public void OnRingDropped(EventParameters param = null)
     {
-        GameManager.Instance.IncrMoveCount();
+        GameManager.Instance.MoveCount++;
+        //assetParameters.AddParameter(EventParamKeys.MOVE_COUNT, GameManager.Instance.MoveCount);
+        //EventBroadcaster.Instance.PostEvent(EventKeys.COUNT_UPDATE, assetParameters);
         EventBroadcaster.Instance.PostEvent(EventKeys.COUNT_UPDATE, null);
 
     }
 
     public void OnPoleEndFull(EventParameters param = null)
     {
-        GameManager.Instance.SetEndPoleFull();
+        GameManager.Instance.EndPoleFull();
         EventBroadcaster.Instance.PostEvent(EventKeys.ASSETS_DISABLE, null);
 
     }

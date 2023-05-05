@@ -7,6 +7,10 @@ public static class Dictionary
     public const string MOVES = "Moves: ";
     public const string RING = "Rings: ";
 
+    public static Color MOVES_NEUTRAL = new Color32(175, 175, 175, 255); 
+    public static Color MOVES_UNDER = new Color32(82, 195, 47, 255); 
+    public static Color MOVES_OVER = new Color32(205, 58, 48, 255);
+    public static Color MOVES_SUCESS = new Color32(229, 206, 49, 255);
 }
 
 public static class PoleDictionary
