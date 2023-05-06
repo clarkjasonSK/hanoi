@@ -16,7 +16,11 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: a788af6d586ed294d85799bf62bba895
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: f4d5377fbb2358a4e930312e3856c921
+    m_Address: Assets/SceneMats/LeverMats/LeverHandle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0f98516f13d7ed444905144f5510673e, type: 2}
   m_SchemaSet:

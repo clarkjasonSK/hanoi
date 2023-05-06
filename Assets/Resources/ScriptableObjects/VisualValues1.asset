@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RingVfxBaseRadius: 1.25
   ringVfxDecrement: 0.15
+  MarqueeMoveSpeed: 1
+  MarqueeRespawn: 5
+  MarqueeDespawn: -5
