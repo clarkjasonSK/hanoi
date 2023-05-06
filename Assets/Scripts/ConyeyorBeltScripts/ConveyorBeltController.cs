@@ -9,7 +9,7 @@ public class ConveyorBeltController : MonoBehaviour, IResettable
     private IEnumerator _moving_belt;
     public void StartMoving(float moveSpeed)
     {
-        _moving_belt = movingBelt(_conveyor_mat.mainTextureOffset.y + moveSpeed, moveSpeed);
+        _moving_belt = movingBelt(_conveyor_mat.mainTextureOffset.y - moveSpeed, moveSpeed);
 
         StartCoroutine(_moving_belt);
     }
