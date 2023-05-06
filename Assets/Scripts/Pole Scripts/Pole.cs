@@ -57,7 +57,7 @@ public class Pole : Poolable
     }
     public void ResetPole(int ringAmount)
     {
-        _pole_data.ResetData();
+        _pole_data.Reset();
         _pole_contrlr.ResetController(ringAmount, _game_values.PoleShaftBase, _game_values.PoleShaftMult);
     }
     public int GetPolePosition()

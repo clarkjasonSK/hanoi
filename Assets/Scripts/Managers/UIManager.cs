@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UIManager", menuName = "ScriptableObjects/Managers/UIManager")]
-public class UIManager : SingletonSO<UIManager>, ISingleton, IEventObserver
+public class UIManager : SingletonSO<UIManager>, IInitializable, IEventObserver
 {
     public override void Initialize()
     {

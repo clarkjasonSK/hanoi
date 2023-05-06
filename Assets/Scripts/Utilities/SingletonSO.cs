@@ -6,7 +6,7 @@ using UnityEngine;
  Inherit from this base class to create a singleton.
  e.g. public class MyClassName : SingletonSO<MyClassName>{}
 */
-public abstract class SingletonSO<T> : SingletonSO where T : ScriptableObject, ISingleton, IEventObserver //abstract singleton with generic T of constraint type ScriptableObject
+public abstract class SingletonSO<T> : SingletonSO where T : ScriptableObject, IInitializable, IEventObserver //abstract singleton with generic T of constraint type ScriptableObject
 {
     private static T _instance; // local instance reference
     public static T Instance

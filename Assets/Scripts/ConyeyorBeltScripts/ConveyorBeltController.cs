@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConveyorBeltController : MonoBehaviour
+public class ConveyorBeltController : MonoBehaviour, IResettable
 {
     [SerializeField] Material _conveyor_mat;
 
@@ -24,7 +24,7 @@ public class ConveyorBeltController : MonoBehaviour
         yield break;
     }
 
-    public void ResetBeltMat()
+    public void Reset()
     {
         _conveyor_mat.mainTextureOffset = new Vector2(_conveyor_mat.mainTextureOffset.x, 0);
     }

@@ -17,7 +17,7 @@ public class ConveyorBelt : MonoBehaviour
     public void Initialize()
     {
         _con_belt_ctrller = GetComponent<ConveyorBeltController>();
-        _con_belt_ctrller.ResetBeltMat();
+        _con_belt_ctrller.Reset();
         _audio_src = GetComponent<AudioSource>();
 
         if (_game_values is null)

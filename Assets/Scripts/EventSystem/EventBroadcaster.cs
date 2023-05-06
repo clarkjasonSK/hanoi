@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EventBroadcaster", menuName = "ScriptableObjects/Managers/EventBroadcaster")]
-public class EventBroadcaster : SingletonSO<EventBroadcaster>, ISingleton, IEventObserver
+public class EventBroadcaster : SingletonSO<EventBroadcaster>, IInitializable, IEventObserver
 {
     public delegate void ObserverAction(EventParameters param);
 

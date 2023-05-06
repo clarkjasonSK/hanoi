@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUIHandler : Singleton<GameUIHandler>, ISingleton, IEventObserver
+public class GameUIHandler : Singleton<GameUIHandler>, IInitializable, IEventObserver
 {
 
     [SerializeField] private GameUIRefs _game_ui_refs;

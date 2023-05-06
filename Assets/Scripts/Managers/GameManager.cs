@@ -12,7 +12,7 @@ public enum GameState
 }
 
 [CreateAssetMenu(fileName = "GameManager", menuName = "ScriptableObjects/Managers/GameManager")]
-public class GameManager : SingletonSO<GameManager>, ISingleton, IEventObserver
+public class GameManager : SingletonSO<GameManager>, IInitializable, IEventObserver
 {
     #region StateHandler Variables
     private StateHandler<GameState> _game_state_handler;

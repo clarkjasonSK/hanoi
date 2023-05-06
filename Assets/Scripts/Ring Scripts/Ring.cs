@@ -116,6 +116,7 @@ public class Ring : MonoBehaviour
 
         startRingCollisionCooldown();
 
+
         _ring_hit_sfx.PlaySFX(_audio_src);
 
         // attach collision position

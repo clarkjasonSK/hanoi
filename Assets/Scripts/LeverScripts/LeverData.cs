@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverData : MonoBehaviour
+public class LeverData : MonoBehaviour, IResettable
 {
     [SerializeField] private int _lever_position;
     public int LeverPosition
@@ -26,9 +26,8 @@ public class LeverData : MonoBehaviour
     }
 
 
-    public void ResetData(int defaultPos)
+    public void Reset()
     {
-        //_lever_position = defaultPos;
         _lever_selected = false;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoleData : MonoBehaviour
+public class PoleData : MonoBehaviour, IResettable
 {
     [SerializeField] private bool _is_hovering;
     public bool IsHovering
@@ -35,7 +35,7 @@ public class PoleData : MonoBehaviour
         _ring_stack.Clear();
     }
 
-    public void ResetData()
+    public void Reset()
     {
         _is_hovering = false;
         DepleteStack();

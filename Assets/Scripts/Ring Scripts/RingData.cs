@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RingData : MonoBehaviour
+public class RingData : MonoBehaviour, IResettable
 {
     [SerializeField] [Range(1,10)] private int _ring_size;
     public int RingSize
