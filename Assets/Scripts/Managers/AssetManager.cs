@@ -64,6 +64,7 @@ public class AssetManager : SingletonSO<AssetManager>, IInitializable, IEventObs
     {
         if (GameManager.Instance.GoalPoleWhole)
         {
+            GameManager.Instance.PlayRoundOverSFX();
             EventBroadcaster.Instance.PostEvent(EventKeys.PANEL_DROP, null);
         }
     }

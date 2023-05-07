@@ -56,8 +56,8 @@ MonoBehaviour:
   _ring_contrlr: {fileID: 2961301210662879253}
   _audio_src: {fileID: 2512755582882931791}
   _ring_hit_sfx: {fileID: 11400000, guid: c69f2d3a255fbad4398bccf92c45674f, type: 2}
-  _ring_float_sfx: {fileID: 11400000, guid: 701e40e157226e04e896a93a80251716, type: 2}
-  _ring_drop_sfx: {fileID: 11400000, guid: 2ed2a45f6dad5b541acf39a4fb5c6309, type: 2}
+  _ring_float_sfx: {fileID: 11400000, guid: b5ffa78741b3b75478932b7611614c44, type: 2}
+  _ring_drop_sfx: {fileID: 11400000, guid: 9d04774d83e884048878b8aee46b2c3d, type: 2}
   _game_values: {fileID: 0}
 --- !u!114 &946575567026704689
 MonoBehaviour:

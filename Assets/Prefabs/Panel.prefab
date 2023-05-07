@@ -197,7 +197,8 @@ MonoBehaviour:
   _panel_data: {fileID: 2997909132401266592}
   _panel_ctrl: {fileID: 2997909132401266595}
   _audio_src: {fileID: 2997909132401266593}
-  _panel_drop: {fileID: 11400000, guid: e5526e9bc1805a642b439d75c068e5af, type: 2}
+  _panel_drop: {fileID: 11400000, guid: 4576fc9c2e35007438c79c004c1359e1, type: 2}
+  _panel_rise: {fileID: 11400000, guid: dc712e6140b477d42a1a4e832e14d2a8, type: 2}
   _game_values: {fileID: 0}
 --- !u!114 &2997909132401266592
 MonoBehaviour:

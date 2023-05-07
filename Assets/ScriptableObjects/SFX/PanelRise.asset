@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 546d8e22ca0a58043ba2c0304045ad82, type: 3}
-  m_Name: PanelDrop
+  m_Name: PanelRise
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: 6e11c9b985a261c4086991c6bb461ef6, type: 3}
+  AudioClip: {fileID: 8300000, guid: d5d035bb43819944eb43a791c6cd0046, type: 3}
   AudioOverridable: 1
-  Volume: 1
-  Pitch: 0.9
+  Volume: 0.3
+  Pitch: 0.8

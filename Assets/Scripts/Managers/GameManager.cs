@@ -97,6 +97,11 @@ public class GameManager : SingletonSO<GameManager>, IInitializable, IEventObser
         EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_SPAWN, null);
     }
 
+    public void PlayRoundOverSFX()
+    {
+        _game_assistant.PlayRoundOverSFX();
+    }
+
     #region Event Broadcaster Notifications
     public void OnMenuStart(EventParameters param=null)
     {
