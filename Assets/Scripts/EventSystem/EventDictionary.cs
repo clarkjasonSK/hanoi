@@ -53,6 +53,8 @@ public class EventKeys{
     public const string COUNT_UPDATE= "COUNT_UPDATE";
     public const string SLIDER_CHANGE = "SLIDER_CHANGE";
 
+    public const string BUTTON_RESET_CLICKED = "BUTTON_RESET_CLICKED";
+
 
     public const string RING_HIT = "RING_HIT";
     public const string VFX_STOP = "VFX_STOP";

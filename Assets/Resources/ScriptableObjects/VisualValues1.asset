@@ -17,3 +17,6 @@ MonoBehaviour:
   MarqueeMoveSpeed: 1
   MarqueeRespawn: 5
   MarqueeDespawn: -5
+  ButtonDefaultPos: 6
+  ButtonPressedPos: 5.8
+  ButtonReleaseSpeed: 1

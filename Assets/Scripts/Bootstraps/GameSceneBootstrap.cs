@@ -31,7 +31,7 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
               if (asyncOperation.Status == AsyncOperationStatus.Succeeded)
               {
                   Debug.Log("Async Assets loading finished!");
-                  loadDependencies();
+                  //loadDependencies();
 
                   this.gameObject.SetActive(false);
                   EventBroadcaster.Instance.PostEvent(EventKeys.GAME_START, null);
@@ -49,6 +49,7 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
         gameobjectParent.GetComponent<Handler>().Initialize();
     }
 
+    /*
     private void loadDependencies()
     {
         //PoleHandler.Instance.Initialize();
@@ -62,5 +63,5 @@ public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
         Debug.Log("Dependencies initialized!");
         
 
-    }
+    }*/
 }
