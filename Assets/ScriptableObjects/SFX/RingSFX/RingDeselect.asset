@@ -15,4 +15,4 @@ MonoBehaviour:
   AudioClip: {fileID: 8300000, guid: cea3fbb2ad7935443ac420b52e4fd055, type: 3}
   AudioOverridable: 1
   Volume: 0.7
-  Pitch: 0.75
+  Pitch: 1

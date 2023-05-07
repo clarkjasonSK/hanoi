@@ -9,6 +9,7 @@ public class GameValues : ScriptableObject
     public float RingTravelSpeed;
     public float RingMaxDropSpeed;
     public float RingCollisionCooldown;
+    public float RingDespawnHeight;
 
     public float PoleMoveSpeed;
     public float PoleShaftBase;

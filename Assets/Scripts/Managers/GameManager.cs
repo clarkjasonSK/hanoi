@@ -76,7 +76,6 @@ public class GameManager : SingletonSO<GameManager>, IInitializable, IEventObser
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_PAUSE, OnGamePause);
 
-        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_RESET, OnGameReset);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DESPAWNED, OnAssetsDespawn);
 
     }
@@ -111,22 +110,23 @@ public class GameManager : SingletonSO<GameManager>, IInitializable, IEventObser
     {
         _game_state_handler.Initialize(GameState.INGAME);
 
-        //EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, param);
-
     }
     public void OnGamePause(EventParameters param = null)
     {
         _game_state_handler.Initialize(GameState.PAUSED);
 
     }
-    public void OnGameReset(EventParameters param = null)
-    {
-        resetGame();
-    }
 
     public void OnAssetsDespawn(EventParameters param = null)
     {
-        _game_assistant.InvokeReset(resetGame, _game_values.GameRestartDelay);
+        if (!GoalPoleWhole)
+        {
+            _game_assistant.InvokeReset(resetGame, .1f);
+        }
+        else
+        {
+            _game_assistant.InvokeReset(resetGame, _game_values.GameRestartDelay);
+        }
     }
     
     #endregion

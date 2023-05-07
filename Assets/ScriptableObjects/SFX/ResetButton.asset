@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ResetButton
   m_EditorClassIdentifier: 
   AudioClip: {fileID: 8300000, guid: 85b9b567e678e47409486a349bf35821, type: 3}
-  AudioOverridable: 0
+  AudioOverridable: 1
   Volume: 0.3
   Pitch: 0.65

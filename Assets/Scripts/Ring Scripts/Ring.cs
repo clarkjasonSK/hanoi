@@ -99,7 +99,7 @@ public class Ring : MonoBehaviour
     public void OnActivate()
     {
         gameObject.SetActive(true);
-        transform.localPosition += new Vector3(0, (.5f * _ring_data.RingSize), 0);
+        transform.localPosition += new Vector3(0, (.4f * _ring_data.RingSize), 0);
     }
 
     public void OnDeactivate()

@@ -16,6 +16,7 @@ MonoBehaviour:
   RingTravelSpeed: 20
   RingMaxDropSpeed: 7.5
   RingCollisionCooldown: 1
+  RingDespawnHeight: 16
   PoleMoveSpeed: 6
   PoleShaftBase: 0.7
   PoleShaftMult: 0.06

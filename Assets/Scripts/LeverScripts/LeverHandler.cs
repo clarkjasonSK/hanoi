@@ -6,6 +6,8 @@ public class LeverHandler : Handler
 {
     [SerializeField] private LeverRefs _lever_refs;
 
+    private int _current_lever_pos;
+
     #region Cache Params
     private Lever leverKey;
     private LeverPosition leverPosKey;
@@ -16,6 +18,7 @@ public class LeverHandler : Handler
         if (_lever_refs is null)
             _lever_refs = GetComponent<LeverRefs>();
 
+        _current_lever_pos = 3;
         AddEventObservers();
     }
 
@@ -26,6 +29,7 @@ public class LeverHandler : Handler
 
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DISABLE, onAssetsDisable);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_ENABLE, onAssetsEnable);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DESPAWNED, OnAssetsDespawned);
     }
 
     private void setChosenLeverNumber(int leverNumber)
@@ -65,7 +69,7 @@ public class LeverHandler : Handler
             return;
 
         setChosenLeverNumber(leverKey.LeverPos);
-        GameManager.Instance.SetRingsAmount(leverKey.LeverPos);
+        _current_lever_pos = leverKey.LeverPos;
         EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, null);
     }
 
@@ -76,6 +80,10 @@ public class LeverHandler : Handler
     public void onAssetsEnable(EventParameters param = null)
     {
         _lever_refs.Lever.ToggleHandle(true);
+    }
+    public void OnAssetsDespawned(EventParameters param = null)
+    {
+        GameManager.Instance.SetRingsAmount(_current_lever_pos);
     }
 
     #endregion

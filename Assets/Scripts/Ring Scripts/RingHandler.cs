@@ -21,7 +21,14 @@ public class RingHandler : Handler
 
     private int _ring_despawn_count;
     #endregion
+    
 
+    #region Ring Handler SFX 
+    [SerializeField] private AudioSource _audio_src;
+    [SerializeField] private SimpleSFX _ring_float_reset_sfx;
+    #endregion
+
+    [SerializeField] private GameValues _game_vals;
 
     #region Event Parameters
     private EventParameters _ring_params;
@@ -38,6 +45,7 @@ public class RingHandler : Handler
         _ring_refs = GetComponent<RingRefs>();
         _rings = new List<Ring>();
         _ring_params = new EventParameters();
+        _game_vals = GameManager.Instance.GameValues;
         AddEventObservers();
     }
     public void InstantiateRings(int ringAmount)
@@ -61,6 +69,7 @@ public class RingHandler : Handler
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_INIT, OnRingSpawn);
         EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_RESET, OnAssetsReset);
 
+        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_RESET, FloatToResetRings);
         EventBroadcaster.Instance.AddObserver(EventKeys.RINGS_SPAWN, OnRingSpawn);
         EventBroadcaster.Instance.AddObserver(EventKeys.RING_DESPAWN, OnRingDespawn);
 
@@ -78,8 +87,11 @@ public class RingHandler : Handler
         _floating_ring = null;
         _ring_despawn_count = 0;
     }
-
-    public void FloatRing(Ring selectedRing)
+    public void FloatRing(Ring selectedRing, float targetHeight)
+    {
+        selectedRing.FloatRing(targetHeight);
+    }
+    public void FloatRing(Ring selectedRing )
     {
         _floating_ring = selectedRing;
         selectedRing.FloatRing(_ring_refs.RingFloatHeight.localPosition.y);
@@ -96,6 +108,11 @@ public class RingHandler : Handler
         _floating_ring = null;
     }
 
+    private void playResetSFX()
+    {
+        _ring_float_reset_sfx.PlaySFX(_audio_src);
+    }
+
     private void setRingRefs(EventParameters param)
     {
         ringRef = param.GetParameter<Ring>(EventParamKeys.RING, null);
@@ -106,6 +123,15 @@ public class RingHandler : Handler
     public void OnAssetsReset(EventParameters param = null)
     {
         ResetRings();
+    }
+
+    public void FloatToResetRings(EventParameters param = null)
+    {
+        playResetSFX();
+        foreach (Ring r in _rings)
+        {
+            FloatRing(r, _game_vals.RingDespawnHeight);
+        }
     }
 
     public void OnRingSpawn(EventParameters param = null)
@@ -121,8 +147,10 @@ public class RingHandler : Handler
         _ring_refs.RingLifetime.ReleaseRing(ringRef);
         _ring_despawn_count++;
 
-        if (_ring_despawn_count == GameManager.Instance.RingAmount)
-            EventBroadcaster.Instance.PostEvent(EventKeys.ASSETS_DESPAWNED, null);
+        if (_ring_despawn_count != GameManager.Instance.RingAmount)
+            return;
+
+        EventBroadcaster.Instance.PostEvent(EventKeys.ASSETS_DESPAWNED, null);
     }
     
     #endregion

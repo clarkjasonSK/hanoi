@@ -70,6 +70,9 @@ public class AssetManager : SingletonSO<AssetManager>, IInitializable, IEventObs
     }
     public void OnAssetsDespawned(EventParameters param = null)
     {
+        if (!GameManager.Instance.GoalPoleWhole)
+            return;
+        
         EventBroadcaster.Instance.PostEvent(EventKeys.POLE_ADJUST, null);
         EventBroadcaster.Instance.PostEvent(EventKeys.CON_BELT_MOVE, null);
         EventBroadcaster.Instance.PostEvent(EventKeys.PANEL_RISE, null);

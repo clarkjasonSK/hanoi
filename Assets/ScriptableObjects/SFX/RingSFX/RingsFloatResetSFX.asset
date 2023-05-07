@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 546d8e22ca0a58043ba2c0304045ad82, type: 3}
-  m_Name: RingSelect
+  m_Name: RingsFloatResetSFX
   m_EditorClassIdentifier: 
-  AudioClip: {fileID: 8300000, guid: cea3fbb2ad7935443ac420b52e4fd055, type: 3}
+  AudioClip: {fileID: 8300000, guid: 85686fc87e16c1b4c89847470a60e04e, type: 3}
   AudioOverridable: 1
-  Volume: 0.7
-  Pitch: 1.25
+  Volume: 0.4
+  Pitch: 0.75
