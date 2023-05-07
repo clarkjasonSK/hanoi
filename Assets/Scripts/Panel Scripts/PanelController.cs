@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PanelController : MonoBehaviour
 {
+    [SerializeField] private Panel _panel_ref;
+    public Panel PanelRef
+    {
+        set { _panel_ref = value; }
+    }
     [SerializeField] private BoxCollider _panel_collider;
 
     #region IEnumerators
@@ -42,7 +47,7 @@ public class PanelController : MonoBehaviour
             transform.localPosition = new Vector3(transform.localPosition.x, Mathf.MoveTowards(transform.localPosition.y, moveLocation, moveSpeed * Time.deltaTime), transform.localPosition.z);
             yield return null;
         }
-
+        _panel_ref.StopPanelSFX();
         yield break;
     }
 

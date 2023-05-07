@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventBroadcaster : Singleton<EventBroadcaster>, ISingleton
+[CreateAssetMenu(fileName = "EventBroadcaster", menuName = "ScriptableObjects/Managers/EventBroadcaster")]
+public class EventBroadcaster : SingletonSO<EventBroadcaster>, IInitializable, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
-
     public delegate void ObserverAction(EventParameters param);
 
     private Dictionary<string, ObserverAction> _observers;
 
-    public void Initialize()
+    public override void Initialize()
     {
-        _observers = new Dictionary<string, ObserverAction>();
+        if (_observers is null)
+            _observers = new Dictionary<string, ObserverAction>();
+        else
+            ClearEvents();
 
-        isDone = true;
+    }
+    public void ClearEvents()
+    {
+        _observers.Clear();
     }
     public void AddObserver(string eventName, ObserverAction observerAction)
     {

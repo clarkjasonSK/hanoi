@@ -28,12 +28,13 @@ public class Ring : MonoBehaviour
 
     #endregion
 
+    [SerializeField] private GameValues _game_values;
+
+    private IEnumerator _ring_collision_cooldown;
+
     #region Event Parameters
     private EventParameters _ring_param;
     #endregion
-
-
-    [SerializeField] private GameValues _game_values;
 
     void Start()
     {
@@ -42,8 +43,10 @@ public class Ring : MonoBehaviour
 
     public void FloatRing(float floatHeight)
     {
+        stopRingCollisionCooldown();
+
         _ring_float_sfx.PlaySFX(_audio_src);
-        _ring_data.RingEvent = false;
+
         _ring_data.RingStateHandler.SwitchState(RingState.FLOATING);
         _ring_contrlr.ResetForces();
         _ring_contrlr.StartFloating(floatHeight, _game_values.RingFloatSpeed);
@@ -83,13 +86,20 @@ public class Ring : MonoBehaviour
             _ring_contrlr.GameValues = _game_values;
         }
         _ring_param = new EventParameters();
-        _ring_param.AddParameter<Ring>(EventParamKeys.RING, this);
+        _ring_param.AddParameter(EventParamKeys.RING, this);
+
+
+        /*
+        var tempShape = _ring_hit_vfx.shape;
+
+        tempShape.radius = Dictionary.RING_VFX_BASE_RAD - (_ring_data.RingSize * Dictionary.RING_VFX_DECREMENT);*/
+
     }
 
     public void OnActivate()
     {
         gameObject.SetActive(true);
-        transform.localPosition += new Vector3(0, (.5f * _ring_data.RingSize), 0);
+        transform.localPosition += new Vector3(0, (.4f * _ring_data.RingSize), 0);
     }
 
     public void OnDeactivate()
@@ -99,29 +109,59 @@ public class Ring : MonoBehaviour
         _ring_contrlr.Reset();
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
+        if (_ring_data.RingCollision)
+            return;
+
+        startRingCollisionCooldown();
+
+
         _ring_hit_sfx.PlaySFX(_audio_src);
+
+        // attach collision position
+        //_ring_param.AddParameter(EventParamKeys.RING_HIT_VFX, new Vector3(transform.position.x, collision.contacts[0].point.y, transform.position.z ) );
+        //_ring_param.AddParameter(EventParamKeys.RING_HIT_VFX, transform.position );
+
+        EventBroadcaster.Instance.PostEvent(EventKeys.RING_HIT, _ring_param);
 
         if (!_ring_data.IsSmallestRing || collision.gameObject.tag != TagNames.RING)
             return;
 
-        if (!_ring_data.RingEvent)
-        {
-            _ring_data.RingEvent = true;
-            EventBroadcaster.Instance.PostEvent(EventKeys.RING_TOP_STACK, null);
-        }
+        EventBroadcaster.Instance.PostEvent(EventKeys.RING_STACKED_FULL, null);
 
     }
+    private void startRingCollisionCooldown()
+    {
+        if (!this.gameObject.activeInHierarchy)
+            return;
 
+        _ring_data.RingCollision = true;
+        _ring_collision_cooldown = ringCollisionCooldown();
+        StartCoroutine(_ring_collision_cooldown);
+    }
+    private void stopRingCollisionCooldown()
+    {
+        if (_ring_collision_cooldown is null)
+            return;
+
+        StopCoroutine(_ring_collision_cooldown);
+        _ring_data.RingCollision = false;
+    }
+    private IEnumerator ringCollisionCooldown()
+    {
+        yield return new WaitForSeconds(_game_values.RingCollisionCooldown);
+
+        _ring_data.RingCollision = false;
+
+        yield break;
+    }
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag(TagNames.DESPAWN))
         {
-            _ring_param.AddParameter(EventParamKeys.RING_IS_SMALLEST, _ring_data.IsSmallestRing);
-            EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_DESPAWN, _ring_param);
+            EventBroadcaster.Instance.PostEvent(EventKeys.RING_DESPAWN, _ring_param);
         }
     }
 

@@ -7,11 +7,13 @@ TagManager:
   - Ring
   - Pole
   - DespawnArea
+  - LeverHandle
+  - RingParent
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Pole Colliders
+  - PointerColliders
   - Water
   - UI
   - 

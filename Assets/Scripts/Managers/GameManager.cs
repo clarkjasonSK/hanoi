@@ -11,16 +11,9 @@ public enum GameState
     PAUSED
 }
 
-public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
+[CreateAssetMenu(fileName = "GameManager", menuName = "ScriptableObjects/Managers/GameManager")]
+public class GameManager : SingletonSO<GameManager>, IInitializable, IEventObserver
 {
-    #region ISingleton Variables
-    private bool isDone = false;
-    public bool IsDoneInitializing
-    {
-        get { return isDone; }
-    }
-    #endregion
-
     #region StateHandler Variables
     private StateHandler<GameState> _game_state_handler;
     public StateHandler<GameState> GameStateHandler
@@ -33,6 +26,7 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     }
     #endregion
 
+    #region Game Manager Variables
     [SerializeField] private GameValues _game_values;
     public GameValues GameValues
     {
@@ -43,48 +37,68 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     public int RingAmount
     {
         get { return _game_data.RingsAmount; }
-        set { _game_data.RingsAmount = value; }
+    }
+    public int MoveCount
+    {
+        get { return _game_data.MoveCount; }
+        set { _game_data.MoveCount++; }
+    }
+    public bool GoalPoleWhole
+    {
+        get { return _game_data.GoalPoleWhole; }
     }
 
 
-
-    #region Event Paramters
-    private EventParameters _game_params;
+    [SerializeField] private GameObject _game_assistant_prefab;
+    [SerializeField] private GameAssistant _game_assistant;
     #endregion
 
-
-    public void Initialize()
+    public override void Initialize()
     {
+        if(_game_values is null )
+            _game_values = ScriptableObjectsHelper.GetSO<GameValues>(FileNames.GAME_VALUES);
+        if(_game_data is null)
+            _game_data = ScriptableObjectsHelper.GetSO<GameData>(FileNames.GAME_DATA);
+
+        DontDestroyOnLoad(_game_assistant = Instantiate(_game_assistant_prefab).GetComponent<GameAssistant>());
+
         _game_state_handler = new StateHandler<GameState>();
         _game_state_handler.Initialize(GameState.PROGRAM_START);
 
-        _game_values = ScriptableObjectsHelper.GetSO<GameValues>(FileNames.GAME_VALUES);
-        _game_data = ScriptableObjectsHelper.GetSO<GameData>(FileNames.GAME_DATA);
 
         _game_data.RingsAmount = 3;
         _game_data.ResetGame();
-        _game_params = new EventParameters();
         AddEventObservers();
-
-        isDone = true;
     }
-    public void AddEventObservers()
+    public override void AddEventObservers()
     {
-        EventBroadcaster.Instance.AddObserver(EventKeys.MENU_START, OnMenuStart);
+        EventBroadcaster.Instance.AddObserver(EventKeys.SYSTEM_START, OnMenuStart);
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_START, OnGameStart);
         EventBroadcaster.Instance.AddObserver(EventKeys.GAME_PAUSE, OnGamePause);
 
-        EventBroadcaster.Instance.AddObserver(EventKeys.GAME_RESET, OnGameReset);
-        EventBroadcaster.Instance.AddObserver(EventKeys.DESPAWN_DONE, OnDespawnDone);
+        EventBroadcaster.Instance.AddObserver(EventKeys.ASSETS_DESPAWNED, OnAssetsDespawn);
 
-        EventBroadcaster.Instance.AddObserver(EventKeys.RING_MOVE, OnRingMove);
-        EventBroadcaster.Instance.AddObserver(EventKeys.RING_TOP_STACK, OnRingTopStack);
-        EventBroadcaster.Instance.AddObserver(EventKeys.POLE_FULL, OnEndPoleFull);
     }
     
     public void SetRingsAmount(int ringsAmount)
     {
         _game_data.RingsAmount = ringsAmount;
+    }
+    public void EndPoleFull()
+    {
+        _game_data.GoalPoleWhole = true;
+    }
+
+    private void resetGame()
+    {
+        _game_data.ResetGame();
+        EventBroadcaster.Instance.PostEvent(EventKeys.ASSETS_RESET, null);
+        EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_SPAWN, null);
+    }
+
+    public void PlayRoundOverSFX()
+    {
+        _game_assistant.PlayRoundOverSFX();
     }
 
     #region Event Broadcaster Notifications
@@ -96,47 +110,23 @@ public class GameManager : Singleton<GameManager>, ISingleton, IEventObserver
     {
         _game_state_handler.Initialize(GameState.INGAME);
 
-        //EventBroadcaster.Instance.PostEvent(EventKeys.GAME_RESET, param);
-
     }
     public void OnGamePause(EventParameters param = null)
     {
         _game_state_handler.Initialize(GameState.PAUSED);
 
     }
-    public void OnRingMove(EventParameters param = null)
-    {
-        _game_data.MoveCount++;
-        _game_params.AddParameter(EventParamKeys.MOVE_COUNT, _game_data.MoveCount);
-        EventBroadcaster.Instance.PostEvent(EventKeys.COUNT_UPDATE, _game_params);
 
-    }
-    public void OnGameReset(EventParameters param = null)
+    public void OnAssetsDespawn(EventParameters param = null)
     {
-        resetGame();
-    }
-    public void OnEndPoleFull(EventParameters param = null)
-    {
-        _game_data.GoalPoalWhole = true;
-    }
-    public void OnRingTopStack(EventParameters param = null)
-    {
-        if (_game_data.GoalPoalWhole)
+        if (!GoalPoleWhole)
         {
-           
-            EventBroadcaster.Instance.PostEvent(EventKeys.PANEL_DROP, null);
+            _game_assistant.InvokeReset(resetGame, .1f);
         }
-    }
-
-    public void OnDespawnDone(EventParameters param = null)
-    {
-         Invoke("resetGame", _game_values.GameRestartDelay);
-    }
-    private void resetGame()
-    {
-        _game_data.ResetGame();
-        EventBroadcaster.Instance.PostEvent(EventKeys.ASSETS_RESET, null);
-        EventBroadcaster.Instance.PostEvent(EventKeys.RINGS_SPAWN, null);
+        else
+        {
+            _game_assistant.InvokeReset(resetGame, _game_values.GameRestartDelay);
+        }
     }
     
     #endregion

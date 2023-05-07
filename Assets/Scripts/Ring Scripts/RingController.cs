@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RingController : MonoBehaviour
+public class RingController : MonoBehaviour, IResettable
 {
     #region Ring Controller Variables
     [SerializeField] private Rigidbody _rigidbody;

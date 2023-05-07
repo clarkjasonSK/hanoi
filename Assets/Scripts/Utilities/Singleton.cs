@@ -6,7 +6,7 @@ using UnityEngine;
  Inherit from this base class to create a singleton.
  e.g. public class MyClassName : Singleton<MyClassName>{}
 */
-public abstract class Singleton<T> : Singleton where T : MonoBehaviour //abstract singleton with generic T of constraint type monobehavior
+public abstract class Singleton<T> : Singleton where T : MonoBehaviour, IInitializable, IEventObserver //abstract singleton with generic T of constraint type monobehavior
 {
     private static readonly object _lock = new object(); // lock for multithreading safety
     [SerializeField] private bool _persistent = true; // flag for the singleton to be persistent across scenes
@@ -43,7 +43,18 @@ public abstract class Singleton<T> : Singleton where T : MonoBehaviour //abstrac
             }
             
         }
+
     }
+
+    #region ISingleton 
+    public abstract void Initialize();
+
+    #endregion
+
+    #region IEventObserve 
+    public virtual void AddEventObservers() { }
+
+    #endregion
 
     private void Awake()
     {
