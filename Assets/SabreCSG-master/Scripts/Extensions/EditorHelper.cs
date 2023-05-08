@@ -44,6 +44,7 @@ namespace Sabresaurus.SabreCSG
         /// <summary>
         /// DO NOT USE - only here for compatibility with old third party plugins!
         /// </summary>
+        [System.Obsolete]
         public static bool SceneViewHasDelegate(SceneView.OnSceneFunc targetDelegate)
         {
             return HasDelegate(SceneView.onSceneGUIDelegate, targetDelegate);

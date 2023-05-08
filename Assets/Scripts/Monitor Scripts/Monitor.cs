@@ -19,7 +19,6 @@ public class Monitor : MonoBehaviour, IResettable
         if (_monitor_ctrler is null)
             _monitor_ctrler = GetComponent<MonitorController>();
 
-        Reset();
     }
 
     public void Reset()
@@ -49,7 +48,7 @@ public class Monitor : MonoBehaviour, IResettable
 
     public void LeastPossibleSet(int ringAmount)
     {
-        for(int i=1; i<= ringAmount; i++)
+        for (int i=1; i<= ringAmount; i++)
         {
             _monitor_data.MoveLeastPossible *= 2;
         }
