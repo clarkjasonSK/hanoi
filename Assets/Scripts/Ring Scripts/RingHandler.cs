@@ -128,10 +128,17 @@ public class RingHandler : Handler
     public void FloatToResetRings(EventParameters param = null)
     {
         playResetSFX();
+        
+
+        if(_rings.Count < GameManager.Instance.RingAmount)
+        {
+            EventBroadcaster.Instance.PostEvent(EventKeys.ASSETS_DESPAWNED, null);
+        }
         foreach (Ring r in _rings)
         {
             FloatRing(r, _game_vals.RingDespawnHeight);
         }
+
     }
 
     public void OnRingSpawn(EventParameters param = null)

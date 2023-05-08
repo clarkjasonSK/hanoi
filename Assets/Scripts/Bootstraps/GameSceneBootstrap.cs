@@ -6,6 +6,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class GameSceneBootstrap : MonoBehaviour, IBootstrapper
 {
+
     [SerializeField] private AssetLabelReference HanoiScene;
     [SerializeField] private Transform HanoiSceneParent;
 
